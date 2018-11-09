@@ -8,11 +8,11 @@ using StudentRecords.Models.Enums;
 
 namespace StudentRecords.Services
 {
-    class TestUsersService : IUsersService
+    public class TestUsersService : IUsersService
     {
         List<User> usersList = new List<User>();
 
-        TestUsersService()
+        public TestUsersService()
         {
             //INIT TEST USERS
             #region Test users init
@@ -38,6 +38,10 @@ namespace StudentRecords.Services
                 Role = UserRole.Student
             };
             #endregion
+
+            usersList.Add(user1);
+            usersList.Add(user2);
+            usersList.Add(user3);
         }
 
         public void AddUser(User newUser)

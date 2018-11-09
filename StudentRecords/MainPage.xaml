@@ -15,7 +15,8 @@
                         SelectionChanged="mainNavigationDrawer_SelectionChanged"
                         ItemInvoked="mainNavigationDrawer_ItemInvoked"
                         IsTabStop="False"
-                        Header="Welcome to Student Records!">
+                        Header="Welcome to Student Records!"
+                        IsBackButtonVisible="Collapsed">
             <NavigationView.MenuItems>
                 <NavigationViewItem Tag="Home">
                     <TextBlock Tag="Home_Text">Home</TextBlock>

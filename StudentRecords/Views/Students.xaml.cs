@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Autofac;
+using StudentRecords.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,6 +27,13 @@ namespace StudentRecords.Views
         public Students()
         {
             this.InitializeComponent();
+        }
+
+        StudentsViewModel viewModel = App._container.Resolve<StudentsViewModel>();
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

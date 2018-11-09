@@ -5,10 +5,28 @@
     xmlns:local="using:StudentRecords.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:data="using:StudentRecords.Models"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    Loaded="Page_Loaded">
+
+    <Page.Resources>
+        <DataTemplate x:DataType="data:User" x:Key="UserDataTemplate">
+            <StackPanel HorizontalAlignment="Left">
+                <TextBlock FontSize="16" Text="{x:Bind GetFullName()}" HorizontalAlignment="Left"></TextBlock>
+                <TextBlock FontSize="10" Text="{x:Bind UserId}" HorizontalAlignment="Left"></TextBlock>
+            </StackPanel>
+        </DataTemplate>
+    </Page.Resources>
 
     <Grid>
-        <TextBlock>Welcome to the Student page!</TextBlock>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="5*"/>
+        </Grid.ColumnDefinitions>
+        <ListView Grid.Column="0" ItemsSource="{x:Bind viewModel.users}" ItemTemplate="{StaticResource UserDataTemplate}">
+            
+        </ListView>
+        <TextBlock Margin="12,0,0,0" Grid.Column="1">Welcome to the Student page!</TextBlock>
     </Grid>
 </Page>

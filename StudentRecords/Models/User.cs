@@ -14,5 +14,10 @@ namespace StudentRecords.Models
         public string LastName { get; set; }
         
         public UserRole Role { get; set; }
+
+        public string GetFullName()
+        {
+            return FirstName + " " + LastName;
+        }
     }
 }

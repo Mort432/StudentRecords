@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using StudentRecords.Services;
+using StudentRecords.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -108,7 +109,13 @@ namespace StudentRecords
         private static IContainer AutofacConfig()
         {
             var builder = new ContainerBuilder();
+
+            //Services
             builder.RegisterType<TestUsersService>().As<IUsersService>();
+
+            //View models
+            builder.RegisterType<StudentsViewModel>().AsSelf();
+
             return builder.Build();
         }
     }
