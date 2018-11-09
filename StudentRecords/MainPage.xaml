@@ -9,6 +9,28 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-
+        <NavigationView x:Name="mainNavigationDrawer"
+                        Loaded="mainNavigationDrawer_Loaded"
+                        Margin="0,12,0,0"
+                        SelectionChanged="mainNavigationDrawer_SelectionChanged"
+                        ItemInvoked="mainNavigationDrawer_ItemInvoked"
+                        IsTabStop="False"
+                        Header="Welcome to Student Records!">
+            <NavigationView.MenuItems>
+                <NavigationViewItem Tag="Home">
+                    <TextBlock Tag="Home_Text">Home</TextBlock>
+                </NavigationViewItem>
+                <NavigationViewItem Tag="Students">
+                    <NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xE77B;"/>
+                    </NavigationViewItem.Icon>
+                    <TextBlock Tag="Students_Text">Students</TextBlock>
+                </NavigationViewItem>
+                <NavigationViewItem Tag="Lecturers">
+                    <TextBlock Tag="Lecturers_Text">Lecturers</TextBlock>
+                </NavigationViewItem>
+            </NavigationView.MenuItems>
+            <Frame x:Name="contentFrame"></Frame>
+        </NavigationView>
     </Grid>
 </Page>

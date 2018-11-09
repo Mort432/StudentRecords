@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StudentRecords.Views;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -26,5 +27,52 @@ namespace StudentRecords
         {
             this.InitializeComponent();
         }
+
+        #region MainNavBar event handlers
+        private void mainNavigationDrawer_Loaded(object sender, RoutedEventArgs e)
+        {
+            foreach(NavigationViewItemBase item in mainNavigationDrawer.MenuItems)
+            {
+                if(item is NavigationViewItem && item.Tag.ToString() == "Home")
+                {
+                    mainNavigationDrawer.SelectedItem = item;
+                    break;
+                }
+            }
+            contentFrame.Navigate(typeof(Home));
+        }
+
+        private void mainNavigationDrawer_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
+        {
+
+        }
+
+        private void mainNavigationDrawer_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
+        {
+            TextBlock itemContent = args.InvokedItem as TextBlock;
+            if (args.IsSettingsInvoked)
+            {
+                contentFrame.Navigate(typeof(Settings));
+            }
+            else if (itemContent.Tag != null)
+            {
+                switch (itemContent.Tag)
+                {
+                    case "Home_Text":
+                        contentFrame.Navigate(typeof(Home));
+                        mainNavigationDrawer.Header = "Welcome";
+                        break;
+                    case "Students_Text":
+                        contentFrame.Navigate(typeof(Students));
+                        mainNavigationDrawer.Header = "Students";
+                        break;
+                    case "Lecturers_Text":
+                        contentFrame.Navigate(typeof(Lecturers));
+                        mainNavigationDrawer.Header = "Lecturers";
+                        break;
+                }
+            }
+        }
+        #endregion
     }
 }
