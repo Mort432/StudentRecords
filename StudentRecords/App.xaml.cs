@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Autofac;
+using StudentRecords.Services;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -32,6 +34,9 @@ namespace StudentRecords
             this.Suspending += OnSuspending;
         }
 
+        //Autofac DI container
+        public static IContainer _container { get; set; }
+
         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points
         /// will be used such as when the application is launched to open a specific file.
@@ -54,6 +59,9 @@ namespace StudentRecords
                 {
                     //TODO: Load state from previously suspended application
                 }
+
+                //Init Autofac DI container
+                _container = AutofacConfig();
 
                 // Place the frame in the current Window
                 Window.Current.Content = rootFrame;
@@ -95,6 +103,13 @@ namespace StudentRecords
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
             deferral.Complete();
+        }
+
+        private static IContainer AutofacConfig()
+        {
+            var builder = new ContainerBuilder();
+            builder.RegisterType<TestUsersService>().As<IUsersService>();
+            return builder.Build();
         }
     }
 }
