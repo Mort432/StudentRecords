@@ -1,6 +1,6 @@
 ﻿using Autofac;
-using StudentRecords.Services;
-using StudentRecords.ViewModels;
+using StudentRecordsServices.Services;
+using StudentRecordsServices.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -18,7 +18,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-namespace StudentRecords
+namespace StudentRecordsServices
 {
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.

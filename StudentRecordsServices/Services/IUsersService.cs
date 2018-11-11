@@ -1,13 +1,13 @@
-﻿using StudentRecords.Models;
+﻿using StudentRecordsServices.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StudentRecords.Services
+namespace StudentRecordsServices.Services
 {
-    interface IUsersService
+    public interface IUsersService
     {
         User GetUser(string UserId);
 

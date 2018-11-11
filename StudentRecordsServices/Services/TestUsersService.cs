@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using StudentRecords.Models;
-using StudentRecords.Models.Enums;
+using StudentRecordsServices.Models;
+using StudentRecordsServices.Models.Enums;
 
-namespace StudentRecords.Services
+namespace StudentRecordsServices.Services
 {
     public class TestUsersService : IUsersService
     {

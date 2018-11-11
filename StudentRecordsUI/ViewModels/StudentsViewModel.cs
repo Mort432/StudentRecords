@@ -1,16 +1,17 @@
-﻿using StudentRecords.Models;
-using StudentRecords.Services;
+﻿using StudentRecordsServices.Models;
+using StudentRecordsServices.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StudentRecords.ViewModels
+namespace StudentRecordsServices.ViewModels
 {
     class StudentsViewModel
     {
         public List<User> users = new List<User>();
+        public User selectedUser;
 
         private IUsersService _usersService;
 
@@ -21,6 +22,9 @@ namespace StudentRecords.ViewModels
             users = _usersService.GetAllUsers().ToList();
         }
 
-
+        public void UserSelected(int selectionIndex)
+        {
+            selectedUser = users[selectionIndex];
+        }
     }
 }
