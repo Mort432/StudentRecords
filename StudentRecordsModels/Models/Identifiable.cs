@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StudentRecordsServices.Models.Enums
+namespace StudentRecordsModels.Models
 {
-    public enum UserRole
+    public class Identifiable
     {
-        Student,
-        Lecturer,
-        Admin
+        public object Id { get; set; }
     }
 }

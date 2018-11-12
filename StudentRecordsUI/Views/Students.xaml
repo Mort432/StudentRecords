@@ -5,7 +5,7 @@
     xmlns:local="using:StudentRecordsServices.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:data="using:StudentRecordsServices.Models"
+    xmlns:data="using:StudentRecordsModels.Models"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     Loaded="Page_Loaded">
@@ -14,7 +14,7 @@
         <DataTemplate x:DataType="data:User" x:Key="UserDataTemplate">
             <StackPanel HorizontalAlignment="Left">
                 <TextBlock FontSize="16" Text="{x:Bind GetFullName()}" HorizontalAlignment="Left"></TextBlock>
-                <TextBlock FontSize="10" Text="{x:Bind UserId}" HorizontalAlignment="Left"></TextBlock>
+                <TextBlock FontSize="10" Text="{x:Bind UniversityId}" HorizontalAlignment="Left"></TextBlock>
             </StackPanel>
         </DataTemplate>
     </Page.Resources>
@@ -35,6 +35,23 @@
             
         </ListView>
 
-        <TextBlock x:Name="studentNameField" FontSize="32" Margin="12,0,0,0" Grid.Column="1" Text="{x:Bind viewModel.selectedUser.GetFullName(), FallbackValue='Student Name'}"></TextBlock>
+        <Grid Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="5*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="3*"/>
+            </Grid.RowDefinitions>
+
+            <Image Source="/Images/defaultprofile.png" Margin="12,-21,0,0"></Image>
+            <TextBlock x:Name="studentNameField" FontSize="32" Margin="12,0,0,0" Grid.Column="1" Text="{x:Bind viewModel.selectedUser.GetFullName(), FallbackValue='Student Name'}">Student Name</TextBlock>
+
+            <TextBlock Margin="12,0,0,0" FontSize="32" Grid.Column="1" Grid.Row="2">Enrollments and Results</TextBlock>
+            
+        </Grid>
+
+        
     </Grid>
 </Page>

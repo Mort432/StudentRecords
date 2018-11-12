@@ -1,4 +1,4 @@
-﻿using StudentRecordsServices.Models;
+﻿using StudentRecordsModels.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ namespace StudentRecordsServices.Services
 {
     public interface IUsersService
     {
-        User GetUser(string UserId);
+        User GetUserById(object Id);
 
         IEnumerable<User> GetAllUsers();
 

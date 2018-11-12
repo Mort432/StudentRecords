@@ -1,15 +1,15 @@
-﻿using StudentRecordsServices.Models.Enums;
+﻿using StudentRecordsModels.Models.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StudentRecordsServices.Models
+namespace StudentRecordsModels.Models
 {
-    public class User
+    public class User : Identifiable
     {
-        public string UserId { get; set; }
+        public string UniversityId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         

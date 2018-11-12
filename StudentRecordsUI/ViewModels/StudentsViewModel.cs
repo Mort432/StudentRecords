@@ -1,4 +1,4 @@
-﻿using StudentRecordsServices.Models;
+﻿using StudentRecordsModels.Models;
 using StudentRecordsServices.Services;
 using System;
 using System.Collections.Generic;
