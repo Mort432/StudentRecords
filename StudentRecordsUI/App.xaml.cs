@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using StudentRecordsServices.Services;
 using StudentRecordsServices.ViewModels;
+using StudentRecordsRepositories.Repos;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -111,10 +112,13 @@ namespace StudentRecordsServices
             var builder = new ContainerBuilder();
 
             //Services
-            builder.RegisterType<TestUsersService>().As<IUsersService>();
+            builder.RegisterType<UsersService>().As<IUsersService>();
 
             //View models
             builder.RegisterType<StudentsViewModel>().AsSelf();
+
+            //Repos
+            builder.RegisterType<MockUserRepo>().As<IUserRepo>();
 
             return builder.Build();
         }

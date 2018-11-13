@@ -33,7 +33,7 @@ namespace StudentRecordsServices.Views
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-
+            
         }
 
         private void studentsList_SelectionChanged(object sender, SelectionChangedEventArgs e)

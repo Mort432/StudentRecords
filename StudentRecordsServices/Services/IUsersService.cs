@@ -9,9 +9,9 @@ namespace StudentRecordsServices.Services
 {
     public interface IUsersService
     {
-        User GetUserById(object Id);
+        Task<User> GetUserById(object Id);
 
-        IEnumerable<User> GetAllUsers();
+        Task<IEnumerable<User>> GetAllUsers();
 
         void AddUser(User newUser);
     }
