@@ -19,7 +19,7 @@ namespace StudentRecordsServices.ViewModels
         {
             _usersService = usersService;
 
-            users = _usersService.GetAllUsers().Result.ToList();
+            users = _usersService.GetAllStudents().Result.ToList();
         }
 
         public void UserSelected(int selectionIndex)

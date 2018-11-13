@@ -13,6 +13,10 @@ namespace StudentRecordsServices.Services
 
         Task<IEnumerable<User>> GetAllUsers();
 
+        Task<IEnumerable<User>> GetAllStudents();
+
+        Task<IEnumerable<User>> GetAllLecturers();
+
         void AddUser(User newUser);
     }
 }

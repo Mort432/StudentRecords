@@ -34,7 +34,7 @@ namespace StudentRecordsRepositories.Repos
                 UniversityId = "s0000003",
                 FirstName = "Abu",
                 LastName = "Alam",
-                Role = UserRole.Student
+                Role = UserRole.Lecturer
             };
 
             Insert(user1);

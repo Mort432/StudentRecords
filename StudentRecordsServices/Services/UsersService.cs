@@ -28,6 +28,15 @@ namespace StudentRecordsServices.Services
             return await _userRepo.SelectAll();
         }
 
+        public async Task<IEnumerable<User>> GetAllStudents(){
+            return await _userRepo.Select(x => x.Role == UserRole.Student);
+        }
+
+        public async Task<IEnumerable<User>> GetAllLecturers()
+        {
+            return await _userRepo.Select(x => x.Role == UserRole.Lecturer);
+        }
+
         public async Task<User> GetUserById(object UserId)
         {
             return await _userRepo.SelectById(UserId);
