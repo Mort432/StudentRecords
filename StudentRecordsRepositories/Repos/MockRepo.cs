@@ -14,38 +14,48 @@ namespace StudentRecordsRepositories.Repos
         {
         }
 
-        List<T> dataProvider = new List<T>();
-        int dataProviderIdentityTracker = 1;
+        protected MockRepoData data = new MockRepoData();
+
+        List<T> Items = new List<T>();
+        int mockIdentityTracker = 1;
 
         public void Delete(T item)
         {
-            dataProvider.Remove(item);
+            Items.Remove(item);
         }
 
         public void Insert(T item)
         {
-            item.Id = dataProviderIdentityTracker++;
-            dataProvider.Add(item);
+            item.Id = mockIdentityTracker++;
+            Items.Add(item);
+        }
+
+        public void InsertSet(IEnumerable<T> items)
+        {
+            foreach(T item in items)
+            {
+                Insert(item);
+            }
         }
 
         public async Task<IEnumerable<T>> Select(Expression<Func<T, bool>> predicate)
         {
-            return await Task.FromResult(dataProvider.Where(predicate.Compile()));
+            return await Task.FromResult(Items.Where(predicate.Compile()));
         }
 
         public async Task<IEnumerable<T>> SelectAll()
         {
-            return await Task.FromResult(dataProvider);
+            return await Task.FromResult(Items);
         }
 
         public async Task<T> SelectById(object id)
         {
-            return await Task.FromResult(dataProvider.Where(x => x.Id == id).SingleOrDefault());
+            return await Task.FromResult(Items.Where(x => x.Id == id).SingleOrDefault());
         }
 
         public void Update(T item)
         {
-            dataProvider.Where(t => t.Id == item.Id)
+            Items.Where(t => t.Id == item.Id)
                 .Select(x => { x = item; return x; })
                 .ToList();
         }
