@@ -44,12 +44,53 @@ namespace StudentRecordsRepositories.Repos
                 Role = UserRole.Lecturer
             };
 
+            Module module1 = new Module
+            {
+                ModuleTitle = "Applied Ass Kicking",
+                ModuleCode = "CT1337"
+            };
+
+            ModuleRun moduleRun1 = new ModuleRun
+            {
+                Lecturer = user3,
+                Module = module1
+            };
+
+            module1.ModuleRuns = new List<ModuleRun>() { moduleRun1 };
+
+            Assignment assignment1 = new Assignment
+            {
+                AssignmentName = "1. Chew Bubblegum",
+                ModuleRun = moduleRun1
+            };
+
+            moduleRun1.Assignments = new List<Assignment>() { assignment1 };
+
+            Result result1 = new Result()
+            {
+                Assignment = assignment1,
+                Grade = 74,
+                Student = user1
+            };
+
+            assignment1.Results = new List<Result>() { result1 };
+
+            user3.Enrollments = new List<ModuleRun>() { moduleRun1 };
+
             UsersCollection.Add(user1);
             UsersCollection.Add(user2);
             UsersCollection.Add(user3);
+            ModulesCollection.Add(module1);
+            ModuleRunsCollection.Add(moduleRun1);
+            AssignmentsCollection.Add(assignment1);
+            ResultsCollection.Add(result1);
         }
         
 
         public List<User> UsersCollection = new List<User>();
+        public List<Module> ModulesCollection = new List<Module>();
+        public List<ModuleRun> ModuleRunsCollection = new List<ModuleRun>();
+        public List<Assignment> AssignmentsCollection = new List<Assignment>();
+        public List<Result> ResultsCollection = new List<Result>();
     }
 }

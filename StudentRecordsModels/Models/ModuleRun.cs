@@ -8,8 +8,9 @@ namespace StudentRecordsModels.Models
 {
     public class ModuleRun : Identifiable
     {
-        public User lecturer { get; set; }
-        public Module module { get; set; }
-        public IEnumerable<User> students { get; set; }
+        public User Lecturer { get; set; }
+        public Module Module { get; set; }
+        public IEnumerable<User> Students { get; set; }
+        public IEnumerable<Assignment> Assignments { get; set; }
     }
 }
