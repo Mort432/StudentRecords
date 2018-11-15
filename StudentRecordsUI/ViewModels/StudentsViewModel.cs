@@ -10,8 +10,8 @@ namespace StudentRecordsServices.ViewModels
 {
     class StudentsViewModel
     {
-        public List<User> users = new List<User>();
-        public User selectedUser;
+        public List<User> students = new List<User>();
+        public User selectedStudent;
 
         private IUsersService _usersService;
 
@@ -19,12 +19,12 @@ namespace StudentRecordsServices.ViewModels
         {
             _usersService = usersService;
 
-            users = _usersService.GetAllStudents().Result.ToList();
+            students = _usersService.GetAllStudents().Result.ToList();
         }
 
         public void UserSelected(int selectionIndex)
         {
-            selectedUser = users[selectionIndex];
+            selectedStudent = students[selectionIndex];
         }
     }
 }

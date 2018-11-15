@@ -28,7 +28,7 @@
         <ListView
             x:Name="studentsListView"
             Grid.Column="0" 
-            ItemsSource="{x:Bind viewModel.users}" 
+            ItemsSource="{x:Bind viewModel.students}" 
             ItemTemplate="{StaticResource UserDataTemplate}"
             SelectionChanged="studentsList_SelectionChanged"
             SelectionMode="Single">
@@ -46,7 +46,13 @@
             </Grid.RowDefinitions>
 
             <Image Source="/Images/defaultprofile.png" Margin="12,-21,0,0"></Image>
-            <TextBlock x:Name="studentNameField" FontSize="32" Margin="12,0,0,0" Grid.Column="1" Text="{x:Bind viewModel.selectedUser.GetFullName(), FallbackValue='Student Name'}">Student Name</TextBlock>
+            <StackPanel Grid.Column="1">
+                <TextBlock x:Name="studentNameField" FontSize="32" Margin="12,0,0,0" Text="{x:Bind viewModel.selectedStudent.GetFullName(), FallbackValue='Student Name'}">Student Name</TextBlock>
+                <TextBlock x:Name="studentEmailField" FontSize="18" Margin="12,0,0,0" Text="{x:Bind viewModel.selectedStudent.Email, FallbackValue='Student Email'}">Student Email</TextBlock>
+                <TextBlock x:Name="studentPhoneField" FontSize="18" Margin="12,0,0,0" Text="{x:Bind viewModel.selectedStudent.PhoneNumber, FallbackValue='Student Phone'}">Student Phone</TextBlock>
+                <TextBlock x:Name="studentDOBField" FontSize="18" Margin="12,0,0,0" Text="{x:Bind viewModel.selectedStudent.DateOfBirth.ToShortDateString(), FallbackValue='Student DOB'}">Student DOB</TextBlock>
+            </StackPanel>
+            
 
             <TextBlock Margin="12,0,0,0" FontSize="32" Grid.Column="1" Grid.Row="2">Enrollments and Results</TextBlock>
             
