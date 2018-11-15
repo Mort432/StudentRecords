@@ -1,19 +1,17 @@
 ﻿using StudentRecordsModels.Models;
-using StudentRecordsModels.Models.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace StudentRecordsRepositories.Repos
 {
-    public class MockUserRepo : MockRepo<User>, IUserRepo
+    class MockAssignmentRepo : MockRepo<Assignment>, IAssignmentRepo
     {
-        public MockUserRepo()
+        public MockAssignmentRepo()
         {
-            InsertSet(data.UsersCollection);
+            InsertSet(data.AssignmentsCollection);
         }
     }
 }

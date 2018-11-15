@@ -107,11 +107,19 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repos\IAssignmentRepo.cs" />
+    <Compile Include="Repos\IModuleRepo.cs" />
+    <Compile Include="Repos\IModuleRunRepo.cs" />
     <Compile Include="Repos\IRepo.cs" />
+    <Compile Include="Repos\IResultRepo.cs" />
     <Compile Include="Repos\IUserRepo.cs" />
+    <Compile Include="Repos\MockAssignmentRepo.cs" />
+    <Compile Include="Repos\MockModuleRepo.cs" />
     <Compile Include="Repos\MockRepoData.cs" />
+    <Compile Include="Repos\MockResultRepo.cs" />
     <Compile Include="Repos\MockUserRepo.cs" />
     <Compile Include="Repos\MockRepo.cs" />
+    <Compile Include="Repos\MockModuleRunRepo.cs" />
     <EmbeddedResource Include="Properties\StudentRecordsRepositories.rd.xml" />
   </ItemGroup>
   <ItemGroup>
