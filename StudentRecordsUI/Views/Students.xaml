@@ -1,20 +1,29 @@
 ﻿<Page
-    x:Class="StudentRecordsServices.Views.Students"
+    x:Class="StudentRecordsUI.Views.Students"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:StudentRecordsServices.Views"
+    xmlns:local="using:StudentRecordsUI.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:data="using:StudentRecordsModels.Models"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     Loaded="Page_Loaded">
+    <!-- The data line above allows the view to reference the application models. -->
 
     <Page.Resources>
         <DataTemplate x:DataType="data:User" x:Key="UserDataTemplate">
             <StackPanel HorizontalAlignment="Left">
                 <TextBlock FontSize="16" Text="{x:Bind GetFullName()}" HorizontalAlignment="Left"></TextBlock>
                 <TextBlock FontSize="10" Text="{x:Bind UniversityId}" HorizontalAlignment="Left"></TextBlock>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:DataType="data:ModuleRun" x:Key="StudentEnrollmentTemplate">
+            <StackPanel Orientation="Horizontal">
+                <StackPanel HorizontalAlignment="Left">
+                    <TextBlock FontSize="16" Text="{x:Bind Module.GetCodeAndName()}" HorizontalAlignment="Left"></TextBlock>
+                    <TextBlock FontSize="10" Text="{x:Bind Lecturer.GetFullName()}" HorizontalAlignment="Left"></TextBlock>
+                </StackPanel>
             </StackPanel>
         </DataTemplate>
     </Page.Resources>
@@ -24,7 +33,7 @@
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="5*"/>
         </Grid.ColumnDefinitions>
-        
+
         <ListView
             x:Name="studentsListView"
             Grid.Column="0" 
@@ -32,7 +41,6 @@
             ItemTemplate="{StaticResource UserDataTemplate}"
             SelectionChanged="studentsList_SelectionChanged"
             SelectionMode="Single">
-            
         </ListView>
 
         <Grid Grid.Column="1">
@@ -52,12 +60,19 @@
                 <TextBlock x:Name="studentPhoneField" FontSize="18" Margin="12,0,0,0" Text="{x:Bind viewModel.selectedStudent.PhoneNumber, FallbackValue='Student Phone'}">Student Phone</TextBlock>
                 <TextBlock x:Name="studentDOBField" FontSize="18" Margin="12,0,0,0" Text="{x:Bind viewModel.selectedStudent.DateOfBirth.ToShortDateString(), FallbackValue='Student DOB'}">Student DOB</TextBlock>
             </StackPanel>
-            
 
-            <TextBlock Margin="12,0,0,0" FontSize="32" Grid.Column="1" Grid.Row="2">Enrollments and Results</TextBlock>
-            
+            <StackPanel Grid.Column="1" Grid.Row="2">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="12,0,0,0" FontSize="32">Enrollments and Results</TextBlock>
+                </StackPanel>
+
+                <ListView
+                    x:Name="studentEnrollmentsListView"
+                    ItemsSource="{x:Bind viewModel.selectedStudent.Enrollments}" 
+                    ItemTemplate="{StaticResource StudentEnrollmentTemplate}"
+                    SelectionMode="None">
+                </ListView>
+            </StackPanel>
         </Grid>
-
-        
     </Grid>
 </Page>

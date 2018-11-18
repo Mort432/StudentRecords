@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StudentRecordsServices.ViewModels
+namespace StudentRecordsUI.ViewModels
 {
-    class StudentsViewModel
+    public class StudentsViewModel
     {
         public List<User> students = new List<User>();
         public User selectedStudent;

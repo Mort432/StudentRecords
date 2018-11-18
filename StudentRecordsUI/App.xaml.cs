@@ -1,6 +1,6 @@
 ﻿using Autofac;
 using StudentRecordsServices.Services;
-using StudentRecordsServices.ViewModels;
+using StudentRecordsUI.ViewModels;
 using StudentRecordsRepositories.Repos;
 using System;
 using System.Collections.Generic;
@@ -19,7 +19,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-namespace StudentRecordsServices
+namespace StudentRecordsUI
 {
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
@@ -113,12 +113,15 @@ namespace StudentRecordsServices
 
             //Services
             builder.RegisterType<UsersService>().As<IUsersService>();
+            builder.RegisterType<ModulesService>().As<IModulesService>();
 
             //View models
             builder.RegisterType<StudentsViewModel>().AsSelf();
 
             //Repos
             builder.RegisterType<MockUserRepo>().As<IUserRepo>();
+            builder.RegisterType<MockModuleRepo>().As<IModuleRepo>();
+            builder.RegisterType<MockModuleRunRepo>().As<IModuleRunRepo>();
 
             return builder.Build();
         }

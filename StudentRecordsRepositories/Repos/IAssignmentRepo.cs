@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace StudentRecordsRepositories.Repos
 {
-    interface IAssignmentRepo : IRepo<Assignment>
+    public interface IAssignmentRepo : IRepo<Assignment>
     {
     }
 }

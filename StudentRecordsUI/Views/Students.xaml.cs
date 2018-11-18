@@ -1,5 +1,6 @@
 ﻿using Autofac;
-using StudentRecordsServices.ViewModels;
+using StudentRecordsModels.Models;
+using StudentRecordsUI.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -17,7 +18,7 @@ using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace StudentRecordsServices.Views
+namespace StudentRecordsUI.Views
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
@@ -41,7 +42,5 @@ namespace StudentRecordsServices.Views
             viewModel.UserSelected(studentsListView.SelectedIndex);
             this.Bindings.Update();
         }
-
-
     }
 }

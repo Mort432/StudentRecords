@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace StudentRecordsRepositories.Repos
 {
-    interface IResultRepo : IRepo<Result>
+    public interface IResultRepo : IRepo<Result>
     {
     }
 }

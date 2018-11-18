@@ -11,5 +11,10 @@ namespace StudentRecordsModels.Models
         public string ModuleTitle { get; set; }
         public string ModuleCode { get; set; }
         public IEnumerable<ModuleRun> ModuleRuns { get; set; }
+
+        public string GetCodeAndName()
+        {
+            return ModuleCode + ": " + ModuleTitle;
+        }
     }
 }

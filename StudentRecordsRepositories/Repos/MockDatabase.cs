@@ -82,6 +82,7 @@ namespace StudentRecordsRepositories.Repos
 
             assignment1.Results = new List<Result>() { result1 };
 
+            user1.Enrollments = new List<ModuleRun>() { moduleRun1 };
             user3.Enrollments = new List<ModuleRun>() { moduleRun1 };
 
             UsersCollection.Add(user1);

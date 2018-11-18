@@ -18,7 +18,7 @@ namespace StudentRecordsModels.Models
         public string PhoneNumber { get; set; }
 
         //Represents modules taken as a student, or modules taught as a lecturer
-        public IEnumerable<ModuleRun> Enrollments { get; set; }
+        public List<ModuleRun> Enrollments { get; set; }
         
         public UserRole Role { get; set; }
 
