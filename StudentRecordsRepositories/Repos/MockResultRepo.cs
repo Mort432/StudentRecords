@@ -11,7 +11,8 @@ namespace StudentRecordsRepositories.Repos
     {
         public MockResultRepo()
         {
-            InsertSet(data.ResultsCollection);
+            Items = data.ResultsCollection;
+            mockIdentityTracker = Items.Count + 1;
         }
     }
 }

@@ -115,7 +115,7 @@
     <Compile Include="Repos\IUserRepo.cs" />
     <Compile Include="Repos\MockAssignmentRepo.cs" />
     <Compile Include="Repos\MockModuleRepo.cs" />
-    <Compile Include="Repos\MockRepoData.cs" />
+    <Compile Include="Repos\MockDatabase.cs" />
     <Compile Include="Repos\MockResultRepo.cs" />
     <Compile Include="Repos\MockUserRepo.cs" />
     <Compile Include="Repos\MockRepo.cs" />

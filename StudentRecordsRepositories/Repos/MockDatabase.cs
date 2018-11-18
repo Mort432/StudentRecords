@@ -8,13 +8,14 @@ using System.Threading.Tasks;
 
 namespace StudentRecordsRepositories.Repos
 {
-    public class MockRepoData
+    public class MockDatabase
     {
 
-        public MockRepoData()
+        public MockDatabase()
         {
             User user1 = new User
             {
+                Id = 1,
                 UniversityId = "s0000001",
                 FirstName = "Connagh",
                 LastName = "Muldoon",
@@ -25,6 +26,7 @@ namespace StudentRecordsRepositories.Repos
             };
             User user2 = new User
             {
+                Id = 2,
                 UniversityId = "s0000002",
                 FirstName = "Thomas",
                 LastName = "Clark",
@@ -35,6 +37,7 @@ namespace StudentRecordsRepositories.Repos
             };
             User user3 = new User
             {
+                Id = 3,
                 UniversityId = "s0000003",
                 FirstName = "Abu",
                 LastName = "Alam",
@@ -46,12 +49,14 @@ namespace StudentRecordsRepositories.Repos
 
             Module module1 = new Module
             {
+                Id = 1,
                 ModuleTitle = "Applied Ass Kicking",
                 ModuleCode = "CT1337"
             };
 
             ModuleRun moduleRun1 = new ModuleRun
             {
+                Id = 1,
                 Lecturer = user3,
                 Module = module1
             };
@@ -60,6 +65,7 @@ namespace StudentRecordsRepositories.Repos
 
             Assignment assignment1 = new Assignment
             {
+                Id = 1,
                 AssignmentName = "1. Chew Bubblegum",
                 ModuleRun = moduleRun1
             };
@@ -68,6 +74,7 @@ namespace StudentRecordsRepositories.Repos
 
             Result result1 = new Result()
             {
+                Id = 1,
                 Assignment = assignment1,
                 Grade = 74,
                 Student = user1

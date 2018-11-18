@@ -14,10 +14,10 @@ namespace StudentRecordsRepositories.Repos
         {
         }
 
-        protected MockRepoData data = new MockRepoData();
+        protected MockDatabase data = new MockDatabase();
 
-        List<T> Items = new List<T>();
-        int mockIdentityTracker = 1;
+        public List<T> Items = new List<T>();
+        public int mockIdentityTracker = 1;
 
         public void Delete(T item)
         {
