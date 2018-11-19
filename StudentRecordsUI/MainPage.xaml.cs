@@ -70,6 +70,10 @@ namespace StudentRecordsUI
                         contentFrame.Navigate(typeof(Lecturers));
                         mainNavigationDrawer.Header = "Lecturers";
                         break;
+                    case "Modules_Text":
+                        contentFrame.Navigate(typeof(Modules));
+                        mainNavigationDrawer.Header = "Modules";
+                        break;
                 }
             }
         }

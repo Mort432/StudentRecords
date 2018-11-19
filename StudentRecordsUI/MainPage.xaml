@@ -29,6 +29,9 @@
                 <NavigationViewItem Tag="Lecturers">
                     <TextBlock Tag="Lecturers_Text">Lecturers</TextBlock>
                 </NavigationViewItem>
+                <NavigationViewItem Tag="Modules">
+                    <TextBlock Tag="Modules_Text">Modules</TextBlock>
+                </NavigationViewItem>
             </NavigationView.MenuItems>
             <Frame x:Name="contentFrame"></Frame>
         </NavigationView>

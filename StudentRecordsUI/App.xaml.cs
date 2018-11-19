@@ -117,6 +117,7 @@ namespace StudentRecordsUI
 
             //View models
             builder.RegisterType<StudentsViewModel>().AsSelf();
+            builder.RegisterType<ModulesViewModel>().AsSelf();
 
             //Repos
             builder.RegisterType<MockUserRepo>().As<IUserRepo>();
