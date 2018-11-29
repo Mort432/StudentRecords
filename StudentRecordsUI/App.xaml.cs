@@ -18,6 +18,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using StudentRecords.Views;
 
 namespace StudentRecordsUI
 {
@@ -76,7 +77,7 @@ namespace StudentRecordsUI
                     // When the navigation stack isn't restored navigate to the first page,
                     // configuring the new page by passing required information as a navigation
                     // parameter
-                    rootFrame.Navigate(typeof(MainPage), e.Arguments);
+                    rootFrame.Navigate(typeof(Login), e.Arguments);
                 }
                 // Ensure the current window is active
                 Window.Current.Activate();
@@ -114,10 +115,12 @@ namespace StudentRecordsUI
             //Services
             builder.RegisterType<UsersService>().As<IUsersService>();
             builder.RegisterType<ModulesService>().As<IModulesService>();
+            builder.RegisterType<AuthService>().As<IAuthService>();
 
             //View models
             builder.RegisterType<StudentsViewModel>().AsSelf();
             builder.RegisterType<ModulesViewModel>().AsSelf();
+            builder.RegisterType<LoginViewModel>().AsSelf();
 
             //Repos
             builder.RegisterType<MockUserRepo>().As<IUserRepo>();
