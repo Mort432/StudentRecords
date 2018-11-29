@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using StudentRecordsModels.Models;
 using StudentRecordsUI;
 using StudentRecordsUI.ViewModels;
 using System;
@@ -36,6 +37,13 @@ namespace StudentRecordsUI.Views
         {
             viewModel.UserSelected(usersListView.SelectedIndex);
             this.Bindings.Update();
+        }
+
+        private void enrollButton_Click(object sender, RoutedEventArgs e)
+        {
+            var item = (sender as FrameworkElement).Tag as ModuleRun;
+
+            item = item;
         }
     }
 }

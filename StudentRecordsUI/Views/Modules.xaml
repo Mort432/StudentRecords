@@ -21,6 +21,7 @@
                 <StackPanel HorizontalAlignment="Left">
                     <TextBlock FontSize="16" Text="{x:Bind Module.GetCodeAndName()}" HorizontalAlignment="Left"></TextBlock>
                     <TextBlock FontSize="10" Text="{x:Bind Lecturer.GetFullName()}" HorizontalAlignment="Left"></TextBlock>
+                    <Button Width="100" Content="Enroll" Tag="{Binding}" Click="enrollButton_Click"></Button>
                 </StackPanel>
             </StackPanel>
         </DataTemplate>
