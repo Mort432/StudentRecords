@@ -1,8 +1,8 @@
 ﻿<Page
-    x:Class="StudentRecords.Views.Login"
+    x:Class="StudentRecordsUI.Views.Login"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:StudentRecords.Views"
+    xmlns:local="using:StudentRecordsUI.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
@@ -24,8 +24,8 @@
 
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="500" Grid.Row="1">
             <TextBlock HorizontalAlignment="Center" FontSize="21">Student Records - Login</TextBlock>
-            <ComboBox ItemsSource="{x:Bind viewMo}" HorizontalAlignment="Stretch" FontSize="21" x:Name="usersDropDown"/>
-            <Button HorizontalAlignment="Stretch" x:Name="loginButton" Content="Login" FontSize="21"/>
+            <ComboBox DisplayMemberPath="GetFullNameWithRole" ItemsSource="{x:Bind viewModel.AvailableUsers}" HorizontalAlignment="Stretch" FontSize="21" x:Name="usersDropDown" PlaceholderText="Available users"/>
+            <Button HorizontalAlignment="Stretch" x:Name="loginButton" Content="Login" FontSize="21" Click="loginButton_Clicked"/>
         </StackPanel>
     </Grid>
 </Page>

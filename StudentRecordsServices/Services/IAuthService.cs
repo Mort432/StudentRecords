@@ -10,5 +10,8 @@ namespace StudentRecordsServices.Services
     public interface IAuthService
     {
         User authorisedUser { get; set; }
+
+        void Login(User user);
+        void Logout();
     }
 }

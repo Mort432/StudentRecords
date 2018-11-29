@@ -26,5 +26,7 @@ namespace StudentRecordsModels.Models
         {
             return FirstName + " " + LastName;
         }
+
+        public string GetFullNameWithRole { get { return FirstName + " " + LastName + " " + "(" + Role.ToString() + ")"; } }
     }
 }

@@ -22,5 +22,10 @@ namespace StudentRecordsUI.ViewModels
 
             AvailableUsers = _usersService.GetAllUsers().Result.ToList();
         }
+
+        public void Login(User user)
+        {
+            _authService.Login(user);
+        }
     }
 }
