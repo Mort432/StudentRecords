@@ -10,21 +10,15 @@ namespace StudentRecordsUI.ViewModels
 {
     public class StudentsViewModel
     {
-        public List<User> students = new List<User>();
         public User selectedStudent;
 
-        private IUsersService _usersService;
+        private IAuthService _authService;
 
-        public StudentsViewModel(IUsersService usersService)
+        public StudentsViewModel(IAuthService authService)
         {
-            _usersService = usersService;
+            _authService = authService;
 
-            students = _usersService.GetAllStudents().Result.ToList();
-        }
-
-        public void UserSelected(int selectionIndex)
-        {
-            selectedStudent = students[selectionIndex];
+            selectedStudent = _authService.authorisedUser;
         }
     }
 }

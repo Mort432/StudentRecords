@@ -36,11 +36,5 @@ namespace StudentRecordsUI.Views
         {
             
         }
-
-        private void studentsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            viewModel.UserSelected(studentsListView.SelectedIndex);
-            this.Bindings.Update();
-        }
     }
 }

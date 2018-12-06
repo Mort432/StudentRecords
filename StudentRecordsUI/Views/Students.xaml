@@ -12,12 +12,6 @@
     <!-- The data line above allows the view to reference the application models. -->
 
     <Page.Resources>
-        <DataTemplate x:DataType="data:User" x:Key="UserDataTemplate">
-            <StackPanel HorizontalAlignment="Left">
-                <TextBlock FontSize="16" Text="{x:Bind GetFullName()}" HorizontalAlignment="Left"></TextBlock>
-                <TextBlock FontSize="10" Text="{x:Bind UniversityId}" HorizontalAlignment="Left"></TextBlock>
-            </StackPanel>
-        </DataTemplate>
         <DataTemplate x:DataType="data:ModuleRun" x:Key="StudentEnrollmentTemplate">
             <StackPanel Orientation="Horizontal">
                 <StackPanel HorizontalAlignment="Left">
@@ -31,19 +25,9 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="5*"/>
         </Grid.ColumnDefinitions>
 
-        <ListView
-            x:Name="studentsListView"
-            Grid.Column="0" 
-            ItemsSource="{x:Bind viewModel.students}" 
-            ItemTemplate="{StaticResource UserDataTemplate}"
-            SelectionChanged="studentsList_SelectionChanged"
-            SelectionMode="Single">
-        </ListView>
-
-        <Grid Grid.Column="1">
+        <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="5*"/>
@@ -63,7 +47,7 @@
 
             <StackPanel Grid.Column="1" Grid.Row="2">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Margin="12,0,0,0" FontSize="32">Enrollments and Results</TextBlock>
+                    <TextBlock Margin="12,0,0,0" FontSize="32">My Courses</TextBlock>
                 </StackPanel>
 
                 <ListView

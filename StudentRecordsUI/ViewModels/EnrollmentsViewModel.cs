@@ -8,44 +8,28 @@ using System.Threading.Tasks;
 
 namespace StudentRecordsUI.ViewModels
 {
-    public class ModulesViewModel
+    public class EnrollmentsViewModel
     {
-        public List<User> users = new List<User>();
         public User selectedUser;
 
         public List<ModuleRun> allModuleRuns = new List<ModuleRun>();
 
-        private IUsersService _usersService;
+        private IAuthService _authService;
         private IModulesService _modulesService;
 
-        public ModulesViewModel(IUsersService usersService, IModulesService modulesService)
+        public EnrollmentsViewModel(IAuthService authService, IModulesService modulesService)
         {
-            _usersService = usersService;
+            _authService = authService;
             _modulesService = modulesService;
 
-            users = _usersService.GetAllUsers().Result.ToList();
+            selectedUser = _authService.authorisedUser;
             allModuleRuns = _modulesService.GetAllModuleRuns().Result.ToList();
         }
 
         public List<ModuleRun> GetAvailableModules()
         {
-            if(selectedUser == null)
-            {
-                return new List<ModuleRun>();
-            }
-
             var returnVal = allModuleRuns.Where(p => !selectedUser.Enrollments.Any(x => x.Id != p.Id)).ToList();
             return returnVal;
-        }
-
-        public void UserSelected(int selectionIndex)
-        {
-            selectedUser = users[selectionIndex];
-            if(selectedUser.Enrollments == null)
-            {
-                selectedUser.Enrollments = new List<ModuleRun>();
-            }
-            GetAvailableModules();
         }
     }
 }

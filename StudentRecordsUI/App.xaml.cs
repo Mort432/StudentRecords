@@ -119,7 +119,7 @@ namespace StudentRecordsUI
 
             //View models
             builder.RegisterType<StudentsViewModel>().AsSelf();
-            builder.RegisterType<ModulesViewModel>().AsSelf();
+            builder.RegisterType<EnrollmentsViewModel>().AsSelf();
             builder.RegisterType<LoginViewModel>().AsSelf();
             builder.RegisterType<MainPageViewModel>().AsSelf();
 

@@ -107,8 +107,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Models\Assignment.cs" />
+    <Compile Include="Models\Course.cs" />
     <Compile Include="Models\Enums\UserRole.cs" />
     <Compile Include="Models\Identifiable.cs" />
+    <Compile Include="Models\Identifier.cs" />
     <Compile Include="Models\Module.cs" />
     <Compile Include="Models\ModuleRun.cs" />
     <Compile Include="Models\NavigationMenuItemModel.cs" />

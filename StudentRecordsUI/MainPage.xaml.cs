@@ -54,34 +54,11 @@ namespace StudentRecordsUI
 
         private void mainNavigationDrawer_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {
-            //TextBlock itemContent = args.InvokedItem as TextBlock;
             var test = args.InvokedItem as NavigationMenuItemModel;
             if (args.IsSettingsInvoked)
             {
                 contentFrame.Navigate(typeof(Settings));
             }
-            //else if (itemContent.Tag != null)
-            //{
-            //    switch (itemContent.Tag)
-            //    {
-            //        case "Home_Text":
-            //            contentFrame.Navigate(typeof(Home));
-            //            mainNavigationDrawer.Header = "Welcome";
-            //            break;
-            //        case "Students_Text":
-            //            contentFrame.Navigate(typeof(Students));
-            //            mainNavigationDrawer.Header = "Students";
-            //            break;
-            //        case "Lecturers_Text":
-            //            contentFrame.Navigate(typeof(Lecturers));
-            //            mainNavigationDrawer.Header = "Lecturers";
-            //            break;
-            //        case "Modules_Text":
-            //            contentFrame.Navigate(typeof(Modules));
-            //            mainNavigationDrawer.Header = "Modules";
-            //            break;
-            //    }
-            //}
             contentFrame.Navigate(test.ViewType);
             mainNavigationDrawer.Header = test.Content;
         }

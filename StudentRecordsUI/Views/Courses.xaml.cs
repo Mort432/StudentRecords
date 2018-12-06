@@ -24,20 +24,14 @@ namespace StudentRecordsUI.Views
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class Modules : Page
+    public sealed partial class Courses : Page
     {
-        public Modules()
+        public Courses()
         {
             this.InitializeComponent();
         }
 
-        ModulesViewModel viewModel = App._container.Resolve<ModulesViewModel>();
-
-        private void usersList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            viewModel.UserSelected(usersListView.SelectedIndex);
-            this.Bindings.Update();
-        }
+        EnrollmentsViewModel viewModel = App._container.Resolve<EnrollmentsViewModel>();
 
         private void enrollButton_Click(object sender, RoutedEventArgs e)
         {

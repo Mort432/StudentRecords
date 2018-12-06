@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="StudentRecordsUI.Views.Modules"
+    x:Class="StudentRecordsUI.Views.Courses"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:StudentRecordUI.Views"
@@ -30,19 +30,9 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="5*"/>
         </Grid.ColumnDefinitions>
 
-        <ListView
-        x:Name="usersListView"
-        Grid.Column="0" 
-        ItemsSource="{x:Bind viewModel.users}" 
-        ItemTemplate="{StaticResource UserDataTemplate}"
-        SelectionChanged="usersList_SelectionChanged"
-        SelectionMode="Single">
-        </ListView>
-
-        <Grid Grid.Column="1">
+        <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="5*"/>

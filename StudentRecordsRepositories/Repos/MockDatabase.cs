@@ -72,6 +72,14 @@ namespace StudentRecordsRepositories.Repos
 
             moduleRun1.Assignments = new List<Assignment>() { assignment1 };
 
+            Course course1 = new Course
+            {
+                Id = 1,
+                CourseLeader = user3,
+                ModuleRuns = new List<ModuleRun>() { moduleRun1 },
+                Students = new List<User>()
+            };
+
             Result result1 = new Result()
             {
                 Id = 1,
@@ -98,6 +106,7 @@ namespace StudentRecordsRepositories.Repos
         public List<User> UsersCollection = new List<User>();
         public List<Module> ModulesCollection = new List<Module>();
         public List<ModuleRun> ModuleRunsCollection = new List<ModuleRun>();
+        public List<Course> CoursesCollection = new List<Course>();
         public List<Assignment> AssignmentsCollection = new List<Assignment>();
         public List<Result> ResultsCollection = new List<Result>();
     }
