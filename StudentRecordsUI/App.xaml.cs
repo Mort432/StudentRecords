@@ -115,12 +115,13 @@ namespace StudentRecordsUI
             //Services
             builder.RegisterType<UsersService>().As<IUsersService>();
             builder.RegisterType<ModulesService>().As<IModulesService>();
-            builder.RegisterType<AuthService>().As<IAuthService>();
+            builder.RegisterType<AuthService>().As<IAuthService>().SingleInstance();
 
             //View models
             builder.RegisterType<StudentsViewModel>().AsSelf();
             builder.RegisterType<ModulesViewModel>().AsSelf();
             builder.RegisterType<LoginViewModel>().AsSelf();
+            builder.RegisterType<MainPageViewModel>().AsSelf();
 
             //Repos
             builder.RegisterType<MockUserRepo>().As<IUserRepo>();

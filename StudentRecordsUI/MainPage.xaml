@@ -5,34 +5,50 @@
     xmlns:local="using:StudentRecordsUI"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="using:StudentRecordsModels.Models"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+    <Page.Resources>
+        <DataTemplate
+            x:DataType="models:NavigationMenuItemModel"
+            x:Key="MenuItemTemplate">
+
+            <Grid
+                HorizontalAlignment="Left"
+                Height="40"
+                Margin="-16,0,0,0">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="48" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Viewbox
+                    Grid.Column="0"
+                    Margin="16,12">
+
+                    <FontIcon Glyph="{x:Bind Glyph}" />
+                </Viewbox>
+
+                <ContentPresenter
+                    Content="{x:Bind Content}"
+                    Grid.Column="1"
+                    VerticalAlignment="Center" />
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
+
     <Grid>
         <NavigationView x:Name="mainNavigationDrawer"
+                        MenuItemTemplate="{StaticResource MenuItemTemplate}"
+                        MenuItemsSource="{x:Bind ViewModel.MenuItems, Mode=OneWay}"
                         Loaded="mainNavigationDrawer_Loaded"
                         Margin="0,12,0,0"
                         SelectionChanged="mainNavigationDrawer_SelectionChanged"
                         ItemInvoked="mainNavigationDrawer_ItemInvoked"
                         IsTabStop="False"
                         Header="Welcome to Student Records!">
-            <NavigationView.MenuItems>
-                <NavigationViewItem Tag="Home">
-                    <TextBlock Tag="Home_Text">Home</TextBlock>
-                </NavigationViewItem>
-                <NavigationViewItem Tag="Students">
-                    <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE77B;"/>
-                    </NavigationViewItem.Icon>
-                    <TextBlock Tag="Students_Text">Students</TextBlock>
-                </NavigationViewItem>
-                <NavigationViewItem Tag="Lecturers">
-                    <TextBlock Tag="Lecturers_Text">Lecturers</TextBlock>
-                </NavigationViewItem>
-                <NavigationViewItem Tag="Modules">
-                    <TextBlock Tag="Modules_Text">Modules</TextBlock>
-                </NavigationViewItem>
-            </NavigationView.MenuItems>
             <Frame x:Name="contentFrame"></Frame>
         </NavigationView>
     </Grid>

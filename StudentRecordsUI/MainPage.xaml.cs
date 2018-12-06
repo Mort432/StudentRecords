@@ -1,4 +1,7 @@
-﻿using StudentRecordsUI.Views;
+﻿using Autofac;
+using StudentRecordsModels.Models;
+using StudentRecordsUI.ViewModels;
+using StudentRecordsUI.Views;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -28,12 +31,14 @@ namespace StudentRecordsUI
             this.InitializeComponent();
         }
 
+        MainPageViewModel ViewModel = App._container.Resolve<MainPageViewModel>();
+
         #region MainNavBar event handlers
         private void mainNavigationDrawer_Loaded(object sender, RoutedEventArgs e)
         {
-            foreach(NavigationViewItemBase item in mainNavigationDrawer.MenuItems)
+            foreach(NavigationMenuItemModel item in mainNavigationDrawer.MenuItems)
             {
-                if(item is NavigationViewItem && item.Tag.ToString() == "Home")
+                if(item.Content == "Home")
                 {
                     mainNavigationDrawer.SelectedItem = item;
                     break;
@@ -49,33 +54,36 @@ namespace StudentRecordsUI
 
         private void mainNavigationDrawer_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {
-            TextBlock itemContent = args.InvokedItem as TextBlock;
+            //TextBlock itemContent = args.InvokedItem as TextBlock;
+            var test = args.InvokedItem as NavigationMenuItemModel;
             if (args.IsSettingsInvoked)
             {
                 contentFrame.Navigate(typeof(Settings));
             }
-            else if (itemContent.Tag != null)
-            {
-                switch (itemContent.Tag)
-                {
-                    case "Home_Text":
-                        contentFrame.Navigate(typeof(Home));
-                        mainNavigationDrawer.Header = "Welcome";
-                        break;
-                    case "Students_Text":
-                        contentFrame.Navigate(typeof(Students));
-                        mainNavigationDrawer.Header = "Students";
-                        break;
-                    case "Lecturers_Text":
-                        contentFrame.Navigate(typeof(Lecturers));
-                        mainNavigationDrawer.Header = "Lecturers";
-                        break;
-                    case "Modules_Text":
-                        contentFrame.Navigate(typeof(Modules));
-                        mainNavigationDrawer.Header = "Modules";
-                        break;
-                }
-            }
+            //else if (itemContent.Tag != null)
+            //{
+            //    switch (itemContent.Tag)
+            //    {
+            //        case "Home_Text":
+            //            contentFrame.Navigate(typeof(Home));
+            //            mainNavigationDrawer.Header = "Welcome";
+            //            break;
+            //        case "Students_Text":
+            //            contentFrame.Navigate(typeof(Students));
+            //            mainNavigationDrawer.Header = "Students";
+            //            break;
+            //        case "Lecturers_Text":
+            //            contentFrame.Navigate(typeof(Lecturers));
+            //            mainNavigationDrawer.Header = "Lecturers";
+            //            break;
+            //        case "Modules_Text":
+            //            contentFrame.Navigate(typeof(Modules));
+            //            mainNavigationDrawer.Header = "Modules";
+            //            break;
+            //    }
+            //}
+            contentFrame.Navigate(test.ViewType);
+            mainNavigationDrawer.Header = test.Content;
         }
         #endregion
     }
