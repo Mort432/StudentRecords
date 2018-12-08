@@ -118,8 +118,8 @@
     <Compile Include="Views\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Students.xaml.cs">
-      <DependentUpon>Students.xaml</DependentUpon>
+    <Compile Include="Views\StudentProfile.xaml.cs">
+      <DependentUpon>StudentProfile.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -168,7 +168,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Students.xaml">
+    <Page Include="Views\StudentProfile.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

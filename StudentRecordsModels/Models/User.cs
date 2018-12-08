@@ -19,6 +19,7 @@ namespace StudentRecordsModels.Models
 
         //Represents modules taken as a student, or modules taught as a lecturer
         public List<ModuleRun> Enrollments { get; set; }
+        public Identifier Course { get; set; }
         
         public UserRole Role { get; set; }
 

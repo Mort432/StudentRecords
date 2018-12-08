@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StudentRecordsModels.Models
 {
-    class Identifier : IEquatable<Identifier>
+    public class Identifier : IEquatable<Identifier>
     {
         public object Id;
         public string Value;

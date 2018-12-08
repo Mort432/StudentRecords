@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="StudentRecordsUI.Views.Students"
+    x:Class="StudentRecordsUI.Views.StudentProfile"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:StudentRecordsUI.Views"
@@ -37,7 +37,7 @@
                 <RowDefinition Height="3*"/>
             </Grid.RowDefinitions>
 
-            <Image Source="/Images/defaultprofile.png" Margin="12,-21,0,0"></Image>
+            <Image Source="/Images/defaultprofile.png" Margin="12,12,0,0"></Image>
             <StackPanel Grid.Column="1">
                 <TextBlock x:Name="studentNameField" FontSize="32" Margin="12,0,0,0" Text="{x:Bind viewModel.selectedStudent.GetFullName(), FallbackValue='Student Name'}">Student Name</TextBlock>
                 <TextBlock x:Name="studentEmailField" FontSize="18" Margin="12,0,0,0" Text="{x:Bind viewModel.selectedStudent.Email, FallbackValue='Student Email'}">Student Email</TextBlock>
@@ -47,7 +47,8 @@
 
             <StackPanel Grid.Column="1" Grid.Row="2">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Margin="12,0,0,0" FontSize="32">My Courses</TextBlock>
+                    <TextBlock Margin="12,0,0,0" FontSize="32">My Modules</TextBlock>
+                    <TextBlock Margin="24,0,0,0 " FontSize="32" Foreground="DarkGray" Text="{x:Bind viewModel.StudentCourseFormattedString}"/>
                 </StackPanel>
 
                 <ListView

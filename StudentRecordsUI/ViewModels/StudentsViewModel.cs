@@ -11,6 +11,7 @@ namespace StudentRecordsUI.ViewModels
     public class StudentsViewModel
     {
         public User selectedStudent;
+        public string StudentCourseFormattedString { get { return "(" + selectedStudent.Course + ")"; } }
 
         private IAuthService _authService;
 

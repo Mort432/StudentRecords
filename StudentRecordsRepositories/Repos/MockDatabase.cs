@@ -75,9 +75,10 @@ namespace StudentRecordsRepositories.Repos
             Course course1 = new Course
             {
                 Id = 1,
+                Title = "Computing - BSc W/Hons",
                 CourseLeader = user3,
                 ModuleRuns = new List<ModuleRun>() { moduleRun1 },
-                Students = new List<User>()
+                Students = new List<User>() { user1 }
             };
 
             Result result1 = new Result()
@@ -91,6 +92,7 @@ namespace StudentRecordsRepositories.Repos
             assignment1.Results = new List<Result>() { result1 };
 
             user1.Enrollments = new List<ModuleRun>() { moduleRun1 };
+            user1.Course = new Identifier(course1);
             user3.Enrollments = new List<ModuleRun>() { moduleRun1 };
 
             UsersCollection.Add(user1);
@@ -100,6 +102,7 @@ namespace StudentRecordsRepositories.Repos
             ModuleRunsCollection.Add(moduleRun1);
             AssignmentsCollection.Add(assignment1);
             ResultsCollection.Add(result1);
+            CoursesCollection.Add(course1);
         }
         
 

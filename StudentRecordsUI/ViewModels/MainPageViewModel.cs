@@ -40,9 +40,9 @@ namespace StudentRecordsUI.ViewModels
                 case UserRole.Student:
                     menuItems.Add(new NavigationMenuItemModel()
                     {
-                        Content = "Students",
+                        Content = "Student Profile",
                         Glyph = char.ConvertFromUtf32(0xE77B).ToString(),
-                        ViewType = typeof(Students)
+                        ViewType = typeof(StudentProfile)
                     });
                     break;
                 case UserRole.Lecturer:

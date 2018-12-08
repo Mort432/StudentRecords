@@ -13,5 +13,10 @@ namespace StudentRecordsModels.Models
 
         public IEnumerable<ModuleRun> ModuleRuns { get; set; }
         public IEnumerable<User> Students { get; set; }
+
+        public override string ToString()
+        {
+            return Title;
+        }
     }
 }
