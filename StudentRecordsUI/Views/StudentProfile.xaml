@@ -12,11 +12,10 @@
     <!-- The data line above allows the view to reference the application models. -->
 
     <Page.Resources>
-        <DataTemplate x:DataType="data:ModuleRun" x:Key="StudentEnrollmentTemplate">
+        <DataTemplate x:DataType="data:Identifier" x:Key="StudentModulesTemplate">
             <StackPanel Orientation="Horizontal">
                 <StackPanel HorizontalAlignment="Left">
-                    <TextBlock FontSize="16" Text="{x:Bind Module.GetCodeAndName()}" HorizontalAlignment="Left"></TextBlock>
-                    <TextBlock FontSize="10" Text="{x:Bind Lecturer.GetFullName()}" HorizontalAlignment="Left"></TextBlock>
+                    <TextBlock FontSize="16" Text="{x:Bind ToString()}" HorizontalAlignment="Left"></TextBlock>
                 </StackPanel>
             </StackPanel>
         </DataTemplate>
@@ -54,7 +53,7 @@
                 <ListView
                     x:Name="studentEnrollmentsListView"
                     ItemsSource="{x:Bind viewModel.selectedStudent.Enrollments}" 
-                    ItemTemplate="{StaticResource StudentEnrollmentTemplate}"
+                    ItemTemplate="{StaticResource StudentModulesTemplate}"
                     SelectionMode="None">
                 </ListView>
             </StackPanel>

@@ -15,7 +15,7 @@ namespace StudentRecordsModels.Models
 
         public override string ToString()
         {
-            return Module.GetCodeAndName();
+            return Module.GetCodeAndName() + " (" + Lecturer.GetFullName() + ")";
         }
     }
 }

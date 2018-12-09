@@ -55,6 +55,14 @@
                 <TextBlock x:Name="studentEmailField" FontSize="18" Margin="12,0,0,0" Text="{x:Bind viewModel.selectedUser.Email, FallbackValue='User Email'}">User Email</TextBlock>
                 <TextBlock x:Name="studentPhoneField" FontSize="18" Margin="12,0,0,0" Text="{x:Bind viewModel.selectedUser.PhoneNumber, FallbackValue='User Phone'}">User Phone</TextBlock>
                 <TextBlock x:Name="studentDOBField" FontSize="18" Margin="12,0,0,0" Text="{x:Bind viewModel.selectedUser.DateOfBirth.ToShortDateString(), FallbackValue='User DOB'}">User DOB</TextBlock>
+                <ComboBox 
+                    SelectedItem="{x:Bind viewModel.selectedUser.Course}"
+                    Margin="24,0,0,0"
+                    x:Name="courseComboBox" 
+                    PlaceholderText="Course" 
+                    Width="200" 
+                    ItemsSource="{x:Bind viewModel.allCourses}"
+                    SelectionChanged="courseComboBox_SelectionChanged"/>
             </StackPanel>
 
             <StackPanel Grid.Column="1" Grid.Row="2">

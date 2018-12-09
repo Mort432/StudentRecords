@@ -48,5 +48,12 @@ namespace StudentRecordsUI.Views
             viewModel.UnenrollUserFromModule(item);
             this.Bindings.Update();
         }
+
+        private void courseComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var item = ((sender as ComboBox).SelectedItem as Identifier);
+
+            viewModel.ChangeUserCourse(item);
+        }
     }
 }

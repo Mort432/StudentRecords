@@ -54,5 +54,11 @@ namespace StudentRecordsUI.ViewModels
             selectedUser.Enrollments.Remove(module);
             _usersService.UpdateUser(selectedUser);
         }
+
+        public void ChangeUserCourse(Identifier course)
+        {
+            selectedUser.Course = course;
+            _usersService.UpdateUser(selectedUser);
+        }
     }
 }
