@@ -116,10 +116,11 @@ namespace StudentRecordsUI
             builder.RegisterType<UsersService>().As<IUsersService>();
             builder.RegisterType<ModulesService>().As<IModulesService>();
             builder.RegisterType<AuthService>().As<IAuthService>().SingleInstance();
+            builder.RegisterType<CoursesService>().As<ICoursesService>();
 
             //View models
             builder.RegisterType<StudentsViewModel>().AsSelf();
-            builder.RegisterType<EnrollmentsViewModel>().AsSelf();
+            builder.RegisterType<StudentEnrollmentsViewModel>().AsSelf();
             builder.RegisterType<LoginViewModel>().AsSelf();
             builder.RegisterType<MainPageViewModel>().AsSelf();
 
@@ -127,6 +128,7 @@ namespace StudentRecordsUI
             builder.RegisterType<MockUserRepo>().As<IUserRepo>();
             builder.RegisterType<MockModuleRepo>().As<IModuleRepo>();
             builder.RegisterType<MockModuleRunRepo>().As<IModuleRunRepo>();
+            builder.RegisterType<MockCourseRepo>().As<ICourseRepo>();
 
             return builder.Build();
         }

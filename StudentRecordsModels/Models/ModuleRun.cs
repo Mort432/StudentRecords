@@ -12,5 +12,10 @@ namespace StudentRecordsModels.Models
         public Module Module { get; set; }
         public IEnumerable<User> Students { get; set; }
         public IEnumerable<Assignment> Assignments { get; set; }
+
+        public override string ToString()
+        {
+            return Module.GetCodeAndName();
+        }
     }
 }

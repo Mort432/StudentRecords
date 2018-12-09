@@ -44,6 +44,12 @@ namespace StudentRecordsUI.ViewModels
                         Glyph = char.ConvertFromUtf32(0xE77B).ToString(),
                         ViewType = typeof(StudentProfile)
                     });
+                    menuItems.Add(new NavigationMenuItemModel()
+                    {
+                        Content = "Student Enrollments",
+                        Glyph = char.ConvertFromUtf32(0xE70F).ToString(),
+                        ViewType = typeof(StudentEnrollments)
+                    });
                     break;
                 case UserRole.Lecturer:
                     break;

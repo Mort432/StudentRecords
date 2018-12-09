@@ -41,5 +41,10 @@ namespace StudentRecordsServices.Services
         {
             return await _userRepo.SelectById(UserId);
         }
+
+        public void UpdateUser(User user)
+        {
+            _userRepo.Update(user);
+        }
     }
 }

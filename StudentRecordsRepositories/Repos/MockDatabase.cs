@@ -33,7 +33,8 @@ namespace StudentRecordsRepositories.Repos
                 Email = "s0000002@glos.ac.uk",
                 PhoneNumber = "01452234765",
                 DateOfBirth = new DateTime(1995, 02, 23),
-                Role = UserRole.Student
+                Role = UserRole.Student,
+                Enrollments = new List<Identifier>()
             };
             User user3 = new User
             {
@@ -91,9 +92,9 @@ namespace StudentRecordsRepositories.Repos
 
             assignment1.Results = new List<Result>() { result1 };
 
-            user1.Enrollments = new List<ModuleRun>() { moduleRun1 };
+            user1.Enrollments = new List<Identifier>() { moduleRun1.ToIdentifier() };
             user1.Course = new Identifier(course1);
-            user3.Enrollments = new List<ModuleRun>() { moduleRun1 };
+            user3.Enrollments = new List<Identifier>() { moduleRun1.ToIdentifier() };
 
             UsersCollection.Add(user1);
             UsersCollection.Add(user2);

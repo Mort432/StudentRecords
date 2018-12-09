@@ -9,5 +9,10 @@ namespace StudentRecordsModels.Models
     public class Identifiable
     {
         public object Id { get; set; }
+
+        public Identifier ToIdentifier()
+        {
+            return new Identifier(this);
+        }
     }
 }

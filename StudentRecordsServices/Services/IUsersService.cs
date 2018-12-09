@@ -18,5 +18,7 @@ namespace StudentRecordsServices.Services
         Task<IEnumerable<User>> GetAllLecturers();
 
         void AddUser(User newUser);
+
+        void UpdateUser(User user);
     }
 }

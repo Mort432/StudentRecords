@@ -55,9 +55,8 @@ namespace StudentRecordsRepositories.Repos
 
         public void Update(T item)
         {
-            Items.Where(t => t.Id == item.Id)
-                .Select(x => { x = item; return x; })
-                .ToList();
+            int index = Items.IndexOf(Items.Where(x => x.Id.Equals(item.Id)).FirstOrDefault());
+            Items[index] = item;
         }
     }
 }

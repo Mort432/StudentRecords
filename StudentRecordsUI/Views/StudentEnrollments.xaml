@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="StudentRecordsUI.Views.Courses"
+    x:Class="StudentRecordsUI.Views.StudentEnrollments"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:StudentRecordUI.Views"
@@ -16,12 +16,19 @@
                 <TextBlock FontSize="10" Text="{x:Bind UniversityId}" HorizontalAlignment="Left"></TextBlock>
             </StackPanel>
         </DataTemplate>
-        <DataTemplate x:DataType="data:ModuleRun" x:Key="StudentEnrollmentTemplate">
+        <DataTemplate x:DataType="data:Identifier" x:Key="StudentEnrollmentTemplate">
             <StackPanel Orientation="Horizontal">
                 <StackPanel HorizontalAlignment="Left">
-                    <TextBlock FontSize="16" Text="{x:Bind Module.GetCodeAndName()}" HorizontalAlignment="Left"></TextBlock>
-                    <TextBlock FontSize="10" Text="{x:Bind Lecturer.GetFullName()}" HorizontalAlignment="Left"></TextBlock>
+                    <TextBlock FontSize="16" Text="{x:Bind ToString()}" HorizontalAlignment="Left"></TextBlock>
                     <Button Width="100" Content="Enroll" Tag="{Binding}" Click="enrollButton_Click"></Button>
+                </StackPanel>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:DataType="data:Identifier" x:Key="StudentUnenrollmentTemplate">
+            <StackPanel Orientation="Horizontal">
+                <StackPanel HorizontalAlignment="Left">
+                    <TextBlock FontSize="16" Text="{x:Bind ToString()}" HorizontalAlignment="Left"></TextBlock>
+                    <Button Width="100" Content="Unenroll" Tag="{Binding}" Click="unenrollButton_Click"></Button>
                 </StackPanel>
             </StackPanel>
         </DataTemplate>
@@ -51,16 +58,37 @@
             </StackPanel>
 
             <StackPanel Grid.Column="1" Grid.Row="2">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Margin="12,0,0,0" FontSize="32">Available Modules</TextBlock>
-                </StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
 
-                <ListView
-                    x:Name="studentEnrollmentsListView"
-                    ItemsSource="{x:Bind viewModel.GetAvailableModules()}" 
-                    ItemTemplate="{StaticResource StudentEnrollmentTemplate}"
-                    SelectionMode="None">
-                </ListView>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Margin="12,0,0,0" FontSize="32">Available Modules</TextBlock>
+
+                        <ListView
+                            x:Name="studentEnrollmentsListView"
+                            ItemsSource="{x:Bind viewModel.GetAvailableModules()}" 
+                            ItemTemplate="{StaticResource StudentEnrollmentTemplate}"
+                            SelectionMode="None">
+                        </ListView>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Vertical" Grid.Column="1">
+                        <TextBlock Margin="12,0,0,0" FontSize="32">Current Modules</TextBlock>
+                    
+                        <ListView
+                            Grid.Column="1"
+                            x:Name="studentUnenrollmentsListView"
+                            ItemsSource="{x:Bind viewModel.GetCurrentModules()}" 
+                            ItemTemplate="{StaticResource StudentUnenrollmentTemplate}"
+                            SelectionMode="None">
+                        </ListView>
+                    </StackPanel>
+                </Grid>
+                
+
             </StackPanel>
         </Grid>
     </Grid>
