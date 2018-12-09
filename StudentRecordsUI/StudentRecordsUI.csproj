@@ -102,7 +102,7 @@
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="ViewModels\StudentEnrollmentsViewModel.cs" />
-    <Compile Include="ViewModels\StudentsViewModel.cs" />
+    <Compile Include="ViewModels\StudentProfileViewModel.cs" />
     <Compile Include="Views\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>

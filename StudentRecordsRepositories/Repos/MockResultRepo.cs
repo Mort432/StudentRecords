@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace StudentRecordsRepositories.Repos
 {
-    class MockResultRepo : MockRepo<Result>, IResultRepo
+    public class MockResultRepo : MockRepo<Result>, IResultRepo
     {
         public MockResultRepo()
         {

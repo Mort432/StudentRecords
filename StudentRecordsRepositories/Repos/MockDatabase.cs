@@ -58,39 +58,39 @@ namespace StudentRecordsRepositories.Repos
             ModuleRun moduleRun1 = new ModuleRun
             {
                 Id = 1,
-                Lecturer = user3,
-                Module = module1
+                Lecturer = user3.ToIdentifier(),
+                Module = module1.ToIdentifier()
             };
 
-            module1.ModuleRuns = new List<ModuleRun>() { moduleRun1 };
+            module1.ModuleRuns = new List<Identifier>() { moduleRun1.ToIdentifier() };
 
             Assignment assignment1 = new Assignment
             {
                 Id = 1,
                 AssignmentName = "1. Chew Bubblegum",
-                ModuleRun = moduleRun1
+                ModuleRun = moduleRun1.ToIdentifier()
             };
 
-            moduleRun1.Assignments = new List<Assignment>() { assignment1 };
+            moduleRun1.Assignments = new List<Identifier>() { assignment1.ToIdentifier() };
 
             Course course1 = new Course
             {
                 Id = 1,
                 Title = "Computing - BSc W/Hons",
-                CourseLeader = user3,
-                ModuleRuns = new List<ModuleRun>() { moduleRun1 },
-                Students = new List<User>() { user1 }
+                CourseLeader = user3.ToIdentifier(),
+                ModuleRuns = new List<Identifier>() { moduleRun1.ToIdentifier() },
+                Students = new List<Identifier>() { user1.ToIdentifier() }
             };
 
             Result result1 = new Result()
             {
                 Id = 1,
-                Assignment = assignment1,
+                Assignment = assignment1.ToIdentifier(),
                 Grade = 74,
-                Student = user1
+                Student = user1.ToIdentifier()
             };
 
-            assignment1.Results = new List<Result>() { result1 };
+            assignment1.Results = new List<Identifier>() { result1.ToIdentifier() };
 
             user1.Enrollments = new List<Identifier>() { moduleRun1.ToIdentifier() };
             user1.Course = new Identifier(course1);

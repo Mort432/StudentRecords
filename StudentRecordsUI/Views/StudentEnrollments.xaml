@@ -49,7 +49,7 @@
                 <RowDefinition Height="3*"/>
             </Grid.RowDefinitions>
 
-            <Image Source="/Images/defaultprofile.png" Margin="12,-21,0,0"></Image>
+            <Image Source="/Images/defaultprofile.png" Margin="12,12,0,0"></Image>
             <StackPanel Grid.Column="1">
                 <TextBlock x:Name="studentNameField" FontSize="32" Margin="12,0,0,0" Text="{x:Bind viewModel.selectedUser.GetFullName(), FallbackValue='User Name'}">User Name</TextBlock>
                 <TextBlock x:Name="studentEmailField" FontSize="18" Margin="12,0,0,0" Text="{x:Bind viewModel.selectedUser.Email, FallbackValue='User Email'}">User Email</TextBlock>

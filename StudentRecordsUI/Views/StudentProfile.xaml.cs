@@ -30,7 +30,7 @@ namespace StudentRecordsUI.Views
             this.InitializeComponent();
         }
 
-        StudentsViewModel viewModel = App._container.Resolve<StudentsViewModel>();
+        StudentProfileViewModel viewModel = App._container.Resolve<StudentProfileViewModel>();
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {

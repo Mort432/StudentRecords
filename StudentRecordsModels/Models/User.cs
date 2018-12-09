@@ -23,6 +23,11 @@ namespace StudentRecordsModels.Models
         
         public UserRole Role { get; set; }
 
+        public override string ToString()
+        {
+            return GetFullName();
+        }
+
         public string GetFullName()
         {
             return FirstName + " " + LastName;

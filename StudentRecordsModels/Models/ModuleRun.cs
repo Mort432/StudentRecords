@@ -8,14 +8,14 @@ namespace StudentRecordsModels.Models
 {
     public class ModuleRun : Identifiable
     {
-        public User Lecturer { get; set; }
-        public Module Module { get; set; }
-        public IEnumerable<User> Students { get; set; }
-        public IEnumerable<Assignment> Assignments { get; set; }
+        public Identifier Lecturer { get; set; }
+        public Identifier Module { get; set; }
+        public IEnumerable<Identifier> Students { get; set; }
+        public IEnumerable<Identifier> Assignments { get; set; }
 
         public override string ToString()
         {
-            return Module.GetCodeAndName() + " (" + Lecturer.GetFullName() + ")";
+            return Module.ToString() + " (" + Lecturer.ToString() + ")";
         }
     }
 }

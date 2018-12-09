@@ -9,7 +9,12 @@ namespace StudentRecordsModels.Models
     public class Assignment : Identifiable
     {
         public string AssignmentName { get; set; }
-        public IEnumerable<Result> Results { get; set; }
-        public ModuleRun ModuleRun { get; set; }
+        public IEnumerable<Identifier> Results { get; set; }
+        public Identifier ModuleRun { get; set; }
+
+        public override string ToString()
+        {
+            return AssignmentName;
+        }
     }
 }

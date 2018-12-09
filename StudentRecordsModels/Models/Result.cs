@@ -8,8 +8,13 @@ namespace StudentRecordsModels.Models
 {
     public class Result : Identifiable
     {
-        public Assignment Assignment { get; set; }
-        public User Student { get; set; }
+        public Identifier Assignment { get; set; }
+        public Identifier Student { get; set; }
         public int Grade { get; set; }
+
+        public override string ToString()
+        {
+            return Grade.ToString();
+        }
     }
 }

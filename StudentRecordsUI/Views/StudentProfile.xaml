@@ -12,10 +12,15 @@
     <!-- The data line above allows the view to reference the application models. -->
 
     <Page.Resources>
-        <DataTemplate x:DataType="data:Identifier" x:Key="StudentModulesTemplate">
+        <DataTemplate x:DataType="data:Assignment" x:Key="StudentOverviewTemplate">
             <StackPanel Orientation="Horizontal">
                 <StackPanel HorizontalAlignment="Left">
-                    <TextBlock FontSize="16" Text="{x:Bind ToString()}" HorizontalAlignment="Left"></TextBlock>
+                    <TextBlock FontSize="16" Text="{x:Bind ModuleRun.ToString()}" HorizontalAlignment="Left"></TextBlock>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Foreground="DarkGray" FontSize="16" HorizontalAlignment="Left"><Run Text="Assignment: "/><Run Text="{x:Bind ToString()}" /></TextBlock>
+                        <TextBlock Foreground="DarkGray" FontSize="16" HorizontalAlignment="Left"><Run Text=" - Grade: "/><Run Text="{Binding Results[0], FallbackValue='Ungraded'}" /></TextBlock>
+                    </StackPanel>
+                    
                 </StackPanel>
             </StackPanel>
         </DataTemplate>
@@ -46,14 +51,14 @@
 
             <StackPanel Grid.Column="1" Grid.Row="2">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Margin="12,0,0,0" FontSize="32">My Modules</TextBlock>
+                    <TextBlock Margin="12,0,0,0" FontSize="32">My Modules and Results</TextBlock>
                     <TextBlock Margin="24,0,0,0 " FontSize="32" Foreground="DarkGray" Text="{x:Bind viewModel.StudentCourseFormattedString}"/>
                 </StackPanel>
 
                 <ListView
-                    x:Name="studentEnrollmentsListView"
-                    ItemsSource="{x:Bind viewModel.selectedStudent.Enrollments}" 
-                    ItemTemplate="{StaticResource StudentModulesTemplate}"
+                    x:Name="studentOverviewListView"
+                    ItemsSource="{x:Bind viewModel.GetStudentAssignments}" 
+                    ItemTemplate="{StaticResource StudentOverviewTemplate}"
                     SelectionMode="None">
                 </ListView>
             </StackPanel>
