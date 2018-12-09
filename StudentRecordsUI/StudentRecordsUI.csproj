@@ -7,8 +7,8 @@
     <ProjectGuid>{899E5D73-2F01-48BD-8021-ACD81B5E9A76}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>StudentRecords</RootNamespace>
-    <AssemblyName>StudentRecords</AssemblyName>
+    <RootNamespace>StudentRecordsUI</RootNamespace>
+    <AssemblyName>StudentRecordsUI</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.16299.0</TargetPlatformVersion>
@@ -126,6 +126,7 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <None Include="Properties\ServiceReferences.Designer.ClientConfig" />
     <None Include="StudentRecords_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
@@ -194,6 +195,9 @@
       <Project>{727d78dd-7cff-49a2-b213-f4ff045aab60}</Project>
       <Name>StudentRecordsServices</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
