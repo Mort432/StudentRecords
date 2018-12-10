@@ -26,10 +26,36 @@
     </Page.Resources>
     
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="5*"/>
+        </Grid.ColumnDefinitions>
         <ListView
-            ItemsSource="{x:Bind viewModel.GetLecturerStudents()}"
+            Grid.Column="0"
+            ItemsSource="{x:Bind viewModel.lecturerStudents}"
             ItemTemplate="{StaticResource LecturerStudentListViewTemplate}"
+            SelectionChanged="lecturerStudentsList_SelectionChanged"
         />
+
+        <Grid Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="5*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="5*"/>
+            </Grid.RowDefinitions>
+            
+            <Image Source="/Images/defaultprofile.png" Margin="12,-60,0,0"></Image>
+            <StackPanel Grid.Column="1">
+                <TextBlock x:Name="studentNameField" FontSize="32" Margin="12,0,0,0" Text="{x:Bind viewModel.selectedStudent.GetFullName(), FallbackValue='Student Name'}">Student Name</TextBlock>
+                <TextBlock x:Name="studentEmailField" FontSize="18" Margin="12,0,0,0" Text="{x:Bind viewModel.selectedStudent.Email, FallbackValue='Student Email'}">Student Email</TextBlock>
+                <TextBlock x:Name="studentPhoneField" FontSize="18" Margin="12,0,0,0" Text="{x:Bind viewModel.selectedStudent.PhoneNumber, FallbackValue='Student Phone'}">Student Phone</TextBlock>
+                <TextBlock x:Name="studentDOBField" FontSize="18" Margin="12,0,0,0" Text="{x:Bind viewModel.selectedStudent.DateOfBirth.ToShortDateString(), FallbackValue='Student DOB'}">Student DOB</TextBlock>
+                <TextBlock x:Name="studentCourseField" FontSize="18" Margin="12,0,0,0"><Run Text="Course: "/><Run Text="{x:Bind viewModel.selectedStudent.Course, FallbackValue='N/A'}"/></TextBlock>
+            </StackPanel>
+        </Grid>
         
     </Grid>
 </Page>

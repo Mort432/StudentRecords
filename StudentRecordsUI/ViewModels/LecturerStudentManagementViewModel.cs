@@ -11,6 +11,9 @@ namespace StudentRecordsUI.ViewModels
     public class LecturerStudentManagementViewModel
     {
         public User selectedLecturer;
+        public User selectedStudent;
+
+        public List<User> lecturerStudents;
 
         private IAuthService _authService;
         private ILecturerService _lecturerService;
@@ -21,6 +24,7 @@ namespace StudentRecordsUI.ViewModels
             _lecturerService = lecturerService;
 
             selectedLecturer = _authService.authorisedUser;
+            lecturerStudents = GetLecturerStudents();
         }
 
         public List<User> GetLecturerStudents()

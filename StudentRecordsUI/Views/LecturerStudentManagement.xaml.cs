@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using StudentRecordsModels.Models;
 using StudentRecordsUI.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -30,5 +31,13 @@ namespace StudentRecordsUI.Views
         }
 
         public LecturerStudentManagementViewModel viewModel = App._container.Resolve<LecturerStudentManagementViewModel>();
+
+        private void lecturerStudentsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            User selectedUser = (sender as ListView).SelectedItem as User;
+            viewModel.selectedStudent = selectedUser;
+
+            this.Bindings.Update();
+        }
     }
 }
