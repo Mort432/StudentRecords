@@ -1,0 +1,30 @@
+﻿<Page
+    x:Class="StudentRecordsUI.Views.LecturerProfile"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:StudentRecordsUI.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="5*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="3*"/>
+        </Grid.RowDefinitions>
+        
+        <Image Source="/Images/defaultprofile.png" Margin="12,12,0,0"></Image>
+        <StackPanel Grid.Column="1">
+            <TextBlock x:Name="lecturerNameField" FontSize="32" Margin="12,0,0,0" Text="{x:Bind viewModel.selectedLecturer.GetFullName(), FallbackValue='Lecturer Name'}">Lecturer Name</TextBlock>
+            <TextBlock x:Name="lecturerEmailField" FontSize="18" Margin="12,0,0,0" Text="{x:Bind viewModel.selectedLecturer.Email, FallbackValue='Lecturer Email'}">Lecturer Email</TextBlock>
+            <TextBlock x:Name="lecturerPhoneField" FontSize="18" Margin="12,0,0,0" Text="{x:Bind viewModel.selectedLecturer.PhoneNumber, FallbackValue='Lecturer Phone'}">Lecturer Phone</TextBlock>
+            <TextBlock x:Name="lecturerDOBField" FontSize="18" Margin="12,0,0,0" Text="{x:Bind viewModel.selectedLecturer.DateOfBirth.ToShortDateString(), FallbackValue='Lecturer DOB'}">Lecturer DOB</TextBlock>
+            <TextBlock x:Name="lecturerCourseField" FontSize="18" Margin="12,0,0,0"><Run Text="Course Leader for: "/><Run Text="{x:Bind viewModel.selectedLecturer.Course, FallbackValue='N/A'}"/></TextBlock>
+        </StackPanel>
+    </Grid>
+</Page>

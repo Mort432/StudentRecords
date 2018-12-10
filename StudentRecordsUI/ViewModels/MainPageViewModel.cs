@@ -52,6 +52,12 @@ namespace StudentRecordsUI.ViewModels
                     });
                     break;
                 case UserRole.Lecturer:
+                    menuItems.Add(new NavigationMenuItemModel()
+                    {
+                        Content = "Lecturer Profile",
+                        Glyph = char.ConvertFromUtf32(0xE77B).ToString(),
+                        ViewType = typeof(LecturerProfile)
+                    });
                     break;
                 case UserRole.Admin:
                     break;
