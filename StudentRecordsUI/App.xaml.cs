@@ -119,6 +119,7 @@ namespace StudentRecordsUI
             builder.RegisterType<CoursesService>().As<ICoursesService>();
             builder.RegisterType<ResultsService>().As<IResultsService>();
             builder.RegisterType<AssignmentsService>().As<IAssignmentsService>();
+            builder.RegisterType<LecturerService>().As<ILecturerService>();
 
             //View models
             builder.RegisterType<StudentProfileViewModel>().AsSelf();
@@ -126,6 +127,7 @@ namespace StudentRecordsUI
             builder.RegisterType<LoginViewModel>().AsSelf();
             builder.RegisterType<MainPageViewModel>().AsSelf();
             builder.RegisterType<LecturerProfileViewModel>().AsSelf();
+            builder.RegisterType<LecturerStudentManagementViewModel>().AsSelf();
 
             //Repos
             builder.RegisterType<MockUserRepo>().As<IUserRepo>();

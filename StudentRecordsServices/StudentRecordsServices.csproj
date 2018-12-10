@@ -113,9 +113,11 @@
     <Compile Include="Services\IAssignmentsService.cs" />
     <Compile Include="Services\IAuthService.cs" />
     <Compile Include="Services\ICoursesService.cs" />
+    <Compile Include="Services\ILecturerService.cs" />
     <Compile Include="Services\IModulesService.cs" />
     <Compile Include="Services\IResultsService.cs" />
     <Compile Include="Services\IUsersService.cs" />
+    <Compile Include="Services\LecturerService.cs" />
     <Compile Include="Services\ModulesService.cs" />
     <Compile Include="Services\ResultsService.cs" />
     <Compile Include="Services\UsersService.cs" />

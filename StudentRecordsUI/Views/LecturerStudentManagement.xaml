@@ -1,0 +1,35 @@
+﻿<Page
+    x:Class="StudentRecordsUI.Views.LecturerStudentManagement"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:StudentRecordsUI.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:data="using:StudentRecordsModels.Models"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.Resources>
+        <DataTemplate x:DataType="data:User" x:Key="UserDataTemplate">
+            <StackPanel HorizontalAlignment="Left">
+                <TextBlock FontSize="16" Text="{x:Bind GetFullName()}" HorizontalAlignment="Left"></TextBlock>
+                <TextBlock FontSize="10" Text="{x:Bind UniversityId}" HorizontalAlignment="Left"></TextBlock>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:DataType="data:User" x:Key="LecturerStudentListViewTemplate">
+            <StackPanel Orientation="Horizontal">
+                <StackPanel HorizontalAlignment="Left">
+                    <TextBlock FontSize="16" Text="{x:Bind ToString()}" HorizontalAlignment="Left"></TextBlock>
+                </StackPanel>
+            </StackPanel>
+        </DataTemplate>
+    </Page.Resources>
+    
+    <Grid>
+        <ListView
+            ItemsSource="{x:Bind viewModel.GetLecturerStudents()}"
+            ItemTemplate="{StaticResource LecturerStudentListViewTemplate}"
+        />
+        
+    </Grid>
+</Page>
