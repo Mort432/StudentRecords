@@ -21,5 +21,11 @@ namespace StudentRecordsServices.Services
         {
             return _resultRepo.Select(x => x.Student.Id.Equals(user.Id)).Result.ToList();
         }
+
+        public void DeleteResultByIdentifier(Identifier result)
+        {
+            var resultObj = _resultRepo.SelectById(result.Id).Result;
+            _resultRepo.Delete(resultObj);
+        }
     }
 }

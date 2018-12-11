@@ -16,7 +16,7 @@ namespace StudentRecordsModels.Models
 
         public override string ToString()
         {
-            return Title;
+            return Title + " (" + CourseLeader + ")";
         }
     }
 }

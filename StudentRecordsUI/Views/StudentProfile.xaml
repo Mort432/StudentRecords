@@ -20,7 +20,6 @@
                         <TextBlock Foreground="DarkGray" FontSize="16" HorizontalAlignment="Left"><Run Text="Assignment: "/><Run Text="{x:Bind ToString()}" /></TextBlock>
                         <TextBlock Foreground="DarkGray" FontSize="16" HorizontalAlignment="Left"><Run Text=" - Grade: "/><Run Text="{Binding Results[0], FallbackValue='Ungraded'}" /></TextBlock>
                     </StackPanel>
-                    
                 </StackPanel>
             </StackPanel>
         </DataTemplate>
@@ -51,7 +50,7 @@
 
             <StackPanel Grid.Column="1" Grid.Row="2">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Margin="12,0,0,0" FontSize="32">My Modules and Results</TextBlock>
+                    <TextBlock Margin="12,0,0,0" FontSize="32">My Assignments and Results</TextBlock>
                     <TextBlock Margin="24,0,0,0 " FontSize="32" Foreground="DarkGray" Text="{x:Bind viewModel.StudentCourseFormattedString}"/>
                 </StackPanel>
 

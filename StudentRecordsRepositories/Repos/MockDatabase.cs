@@ -22,7 +22,8 @@ namespace StudentRecordsRepositories.Repos
                 Email = "s0000001@glos.ac.uk",
                 PhoneNumber = "01452699316",
                 DateOfBirth = new DateTime(1995, 06, 01),
-                Role = UserRole.Student
+                Role = UserRole.Student,
+                Graduated = false
             };
             User user2 = new User
             {

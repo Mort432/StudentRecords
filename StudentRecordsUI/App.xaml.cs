@@ -130,12 +130,12 @@ namespace StudentRecordsUI
             builder.RegisterType<LecturerStudentManagementViewModel>().AsSelf();
 
             //Repos
-            builder.RegisterType<MockUserRepo>().As<IUserRepo>();
-            builder.RegisterType<MockModuleRepo>().As<IModuleRepo>();
-            builder.RegisterType<MockModuleRunRepo>().As<IModuleRunRepo>();
-            builder.RegisterType<MockCourseRepo>().As<ICourseRepo>();
-            builder.RegisterType<MockResultRepo>().As<IResultRepo>();
-            builder.RegisterType<MockAssignmentRepo>().As<IAssignmentRepo>();
+            builder.RegisterType<MockUserRepo>().As<IUserRepo>().SingleInstance();
+            builder.RegisterType<MockModuleRepo>().As<IModuleRepo>().SingleInstance();
+            builder.RegisterType<MockModuleRunRepo>().As<IModuleRunRepo>().SingleInstance();
+            builder.RegisterType<MockCourseRepo>().As<ICourseRepo>().SingleInstance();
+            builder.RegisterType<MockResultRepo>().As<IResultRepo>().SingleInstance();
+            builder.RegisterType<MockAssignmentRepo>().As<IAssignmentRepo>().SingleInstance();
 
             return builder.Build();
         }

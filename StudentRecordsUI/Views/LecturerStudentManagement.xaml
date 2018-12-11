@@ -7,9 +7,12 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     xmlns:data="using:StudentRecordsModels.Models"
+    xmlns:converters="using:StudentRecordsUI.Converters"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Page.Resources>
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+
         <DataTemplate x:DataType="data:User" x:Key="UserDataTemplate">
             <StackPanel HorizontalAlignment="Left">
                 <TextBlock FontSize="16" Text="{x:Bind GetFullName()}" HorizontalAlignment="Left"></TextBlock>
@@ -20,6 +23,19 @@
             <StackPanel Orientation="Horizontal">
                 <StackPanel HorizontalAlignment="Left">
                     <TextBlock FontSize="16" Text="{x:Bind ToString()}" HorizontalAlignment="Left"></TextBlock>
+                </StackPanel>
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:DataType="data:Assignment" x:Key="StudentGradingTemplate">
+            <StackPanel Orientation="Horizontal">
+                <StackPanel HorizontalAlignment="Left">
+                    <TextBlock FontSize="16" Text="{x:Bind ModuleRun.ToString()}" HorizontalAlignment="Left"></TextBlock>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Foreground="DarkGray" FontSize="16" HorizontalAlignment="Left"><Run Text="Assignment: "/><Run Text="{x:Bind ToString()}" /></TextBlock>
+                        <TextBlock Foreground="DarkGray" FontSize="16" HorizontalAlignment="Left"><Run Text=" - Grade: "/><Run Text="{Binding Results[0], FallbackValue='Ungraded'}" /></TextBlock>
+                        <Button x:Name="studentAssignmentGradingButton" Click="gradingButton_Clicked" Content="Assign Grade" Tag="{Binding}"/>
+                    </StackPanel>
                 </StackPanel>
             </StackPanel>
         </DataTemplate>
@@ -46,7 +62,7 @@
                 <RowDefinition Height="2*"/>
                 <RowDefinition Height="5*"/>
             </Grid.RowDefinitions>
-            
+
             <Image Source="/Images/defaultprofile.png" Margin="12,-60,0,0"></Image>
             <StackPanel Grid.Column="1">
                 <TextBlock x:Name="studentNameField" FontSize="32" Margin="12,0,0,0" Text="{x:Bind viewModel.selectedStudent.GetFullName(), FallbackValue='Student Name'}">Student Name</TextBlock>
@@ -54,8 +70,26 @@
                 <TextBlock x:Name="studentPhoneField" FontSize="18" Margin="12,0,0,0" Text="{x:Bind viewModel.selectedStudent.PhoneNumber, FallbackValue='Student Phone'}">Student Phone</TextBlock>
                 <TextBlock x:Name="studentDOBField" FontSize="18" Margin="12,0,0,0" Text="{x:Bind viewModel.selectedStudent.DateOfBirth.ToShortDateString(), FallbackValue='Student DOB'}">Student DOB</TextBlock>
                 <TextBlock x:Name="studentCourseField" FontSize="18" Margin="12,0,0,0"><Run Text="Course: "/><Run Text="{x:Bind viewModel.selectedStudent.Course, FallbackValue='N/A'}"/></TextBlock>
+                <CheckBox
+                    Margin="12,0,0,0"
+                    x:Name="studentGraduatedCheckBox"
+                    Content="Graduated?"
+                    IsChecked="{x:Bind viewModel.selectedStudent.Graduated}"
+                    IsEnabled="{x:Bind viewModel.StudentOnLecturerCourse(viewModel.selectedStudent)}"
+                    Checked="studentGraduatedCheckBox_Graduate"
+                    Unchecked="studentGraduatedCheckBox_Ungraduate"
+                    />
+            </StackPanel>
+            <StackPanel Grid.Row="1" Grid.Column="1">
+                <TextBlock Grid.Column="1" Grid.Row="1" Margin="12,0,0,0" FontSize="32">Assignments and Grade</TextBlock>
+
+                <ListView
+                    x:Name="studentOverviewListView"
+                    ItemsSource="{x:Bind viewModel.GetStudentAssignments}" 
+                    ItemTemplate="{StaticResource StudentGradingTemplate}"
+                    SelectionMode="None">
+                </ListView>
             </StackPanel>
         </Grid>
-        
     </Grid>
 </Page>

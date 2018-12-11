@@ -10,5 +10,6 @@ namespace StudentRecordsServices.Services
     public interface IResultsService
     {
         IEnumerable<Result> GetUserResults(User user);
+        void DeleteResultByIdentifier(Identifier result);
     }
 }
