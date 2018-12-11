@@ -192,21 +192,21 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\StudentRecordsModels\StudentRecordsModels.csproj">
-      <Project>{791cf96c-a42b-4413-b85b-9b4759d3367e}</Project>
+      <Project>{025fa187-9c42-4e87-b570-4fbacfda0f10}</Project>
       <Name>StudentRecordsModels</Name>
     </ProjectReference>
     <ProjectReference Include="..\StudentRecordsRepositories\StudentRecordsRepositories.csproj">
-      <Project>{e55bde4c-e5d3-44f3-a755-2bc805a6b993}</Project>
+      <Project>{fa65dabb-e33f-4ecb-8bc4-ec0f5d2f618c}</Project>
       <Name>StudentRecordsRepositories</Name>
     </ProjectReference>
     <ProjectReference Include="..\StudentRecordsServices\StudentRecordsServices.csproj">
-      <Project>{727d78dd-7cff-49a2-b213-f4ff045aab60}</Project>
+      <Project>{198cfbfc-6758-4b73-bbc6-fc7bf28a6009}</Project>
       <Name>StudentRecordsServices</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
