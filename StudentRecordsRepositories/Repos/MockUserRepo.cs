@@ -16,5 +16,10 @@ namespace StudentRecordsRepositories.Repos
             Items = data.UsersCollection;
             mockIdentityTracker = Items.Count + 1;
         }
+
+        public List<User> GetUsersFromCourse(Course course)
+        {
+            return Select(x => course.Students.Any(z => z.Id.Equals(x.Id))).Result.ToList();
+        }
     }
 }

@@ -9,5 +9,6 @@ namespace StudentRecordsRepositories.Repos
 {
     public interface IUserRepo : IRepo<User>
     {
+        List<User> GetUsersFromCourse(Course course);
     }
 }

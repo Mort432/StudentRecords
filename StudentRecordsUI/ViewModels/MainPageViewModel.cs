@@ -64,6 +64,12 @@ namespace StudentRecordsUI.ViewModels
                         Glyph = char.ConvertFromUtf32(0xE70F).ToString(),
                         ViewType = typeof(LecturerStudentManagement)
                     });
+                    menuItems.Add(new NavigationMenuItemModel()
+                    {
+                        Content = "Analytics",
+                        Glyph = char.ConvertFromUtf32(0xE9D2).ToString(),
+                        ViewType = typeof(LecturerStudentAnalytics)
+                    });
                     break;
                 case UserRole.Admin:
                     break;

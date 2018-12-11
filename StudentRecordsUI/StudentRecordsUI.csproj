@@ -101,6 +101,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\LecturerProfileViewModel.cs" />
+    <Compile Include="ViewModels\LecturerStudentAnalyticsViewModel.cs" />
     <Compile Include="ViewModels\LecturerStudentManagementViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
@@ -111,6 +112,9 @@
     </Compile>
     <Compile Include="Views\LecturerProfile.xaml.cs">
       <DependentUpon>LecturerProfile.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LecturerStudentAnalytics.xaml.cs">
+      <DependentUpon>LecturerStudentAnalytics.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LecturerStudentManagement.xaml.cs">
       <DependentUpon>LecturerStudentManagement.xaml</DependentUpon>
@@ -161,6 +165,10 @@
     <Page Include="Views\LecturerProfile.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\LecturerStudentAnalytics.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\LecturerStudentManagement.xaml">
       <SubType>Designer</SubType>

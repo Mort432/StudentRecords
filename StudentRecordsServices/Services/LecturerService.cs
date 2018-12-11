@@ -12,10 +12,12 @@ namespace StudentRecordsServices.Services
     public class LecturerService : ILecturerService
     {
         private IUserRepo _userRepo;
+        private ICourseRepo _courseRepo;
 
-        public LecturerService(IUserRepo userRepo)
+        public LecturerService(IUserRepo userRepo, ICourseRepo courseRepo)
         {
             _userRepo = userRepo;
+            _courseRepo = courseRepo;
         }
 
         public List<User> GetLecturerStudents(User lecturer)
@@ -25,6 +27,13 @@ namespace StudentRecordsServices.Services
             var myStudents = courseStudents.Result.ToList().Union(moduleStudents.Result.ToList()).ToList();
 
             return myStudents;
+        }
+
+        public int GetGraduatedStudents(Identifier courseIdentifier)
+        {
+            Course course = _courseRepo.SelectById(courseIdentifier.Id).Result;
+            List<User> users = _userRepo.GetUsersFromCourse(course);
+            return users.Count();
         }
     }
 }

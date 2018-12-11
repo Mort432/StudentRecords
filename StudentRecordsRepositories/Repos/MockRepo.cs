@@ -50,7 +50,7 @@ namespace StudentRecordsRepositories.Repos
 
         public async Task<T> SelectById(object id)
         {
-            return await Task.FromResult(Items.Where(x => x.Id == id).SingleOrDefault());
+            return await Task.FromResult(Items.Where(x => x.Id.Equals(id)).SingleOrDefault());
         }
 
         public void Update(T item)

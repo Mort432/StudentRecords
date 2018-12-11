@@ -10,5 +10,6 @@ namespace StudentRecordsServices.Services
     public interface ILecturerService
     {
         List<User> GetLecturerStudents(User lecturer);
+        int GetGraduatedStudents(Identifier courseIdentifier);
     }
 }
