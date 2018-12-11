@@ -11,5 +11,6 @@ namespace StudentRecordsServices.Services
     {
         IEnumerable<Result> GetUserResults(User user);
         void DeleteResultByIdentifier(Identifier result);
+        void AssignResult(User student, Assignment assignment, int grade);
     }
 }

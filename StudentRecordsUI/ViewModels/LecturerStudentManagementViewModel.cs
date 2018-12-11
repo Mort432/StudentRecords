@@ -81,9 +81,10 @@ namespace StudentRecordsUI.ViewModels
             _resultsService.DeleteResultByIdentifier(assignment.Results.ElementAt(0));
         }
 
-        public void AssignResult()
+        public void AssignResult(Assignment assignment, int grade)
         {
-
+            
+            _resultsService.AssignResult(selectedStudent, assignment, grade);
         }
     }
 }

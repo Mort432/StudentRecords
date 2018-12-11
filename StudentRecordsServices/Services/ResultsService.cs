@@ -27,5 +27,37 @@ namespace StudentRecordsServices.Services
             var resultObj = _resultRepo.SelectById(result.Id).Result;
             _resultRepo.Delete(resultObj);
         }
+
+        public void AssignResult(User student, Assignment assignment, int grade)
+        {
+            //Build new result
+            Result result = new Result();
+            result.Assignment = assignment.ToIdentifier();
+            result.Grade = grade;
+            result.Student = student.ToIdentifier();
+
+            //Check if we need to insert or update a result
+            var existingResult = GetExistingResult(assignment, student);
+            if(existingResult == null)
+            {
+                _resultRepo.Insert(result);
+                return;
+            }
+            //Otherwise, just update the existing one.
+            result.Id = existingResult.Id;
+            _resultRepo.Update(result);
+        }
+
+        public Identifier GetExistingResult(Assignment assignment, User student)
+        {
+            var results = GetUserResults(student);
+            //Find matches
+            var linqQuery =
+                from result1 in assignment.Results
+                join result2 in results on result1.Id equals result2.Id
+                select result1;
+
+            return linqQuery.FirstOrDefault();
+        }
     }
 }

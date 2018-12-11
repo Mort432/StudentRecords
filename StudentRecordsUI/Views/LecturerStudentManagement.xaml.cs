@@ -59,8 +59,10 @@ namespace StudentRecordsUI.Views
             var item = (sender as FrameworkElement).Tag as Assignment;
             
             string gradeInput = await InputGradeDialog();
+            int grade;
             if (gradeInput == "Cancel")
             {
+                //Do nothing if cancelled
                 return;
             }
             else if (string.IsNullOrEmpty(gradeInput))
@@ -70,11 +72,13 @@ namespace StudentRecordsUI.Views
                     //If there isn't a result yet, don't do anything.
                     return;
                 }
+                //If the submitted string was empty, delete their grade.
                 viewModel.DeleteResult(item);
             }
-            else if (!gradeInput.All(char.IsDigit))
+            else if (int.TryParse(gradeInput, out grade)) //Ensure input parses to integer before proceeding
             {
-                //Assign result
+                //Assign result given
+                viewModel.AssignResult(item, grade);
             }
             this.Bindings.Update();
         }
