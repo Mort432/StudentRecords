@@ -6,9 +6,32 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    xmlns:data="using:StudentRecordsModels.Models"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+    <Page.Resources>
+        <DataTemplate x:DataType="data:Result" x:Key="ResultTemplate">
+            <StackPanel Orientation="Vertical">
+                <TextBlock FontSize="16" Text="{x:Bind Assignment}"/>
+                <TextBlock Foreground="DarkGray" FontSize="16" Text="{x:Bind Student}"/>
+                <TextBlock Foreground="DarkGray" FontSize="16">
+                    <Run Text="Grade: "></Run>
+                    <Run Text="{Binding}"></Run>
+                </TextBlock>
+            </StackPanel>
+        </DataTemplate>
+    </Page.Resources>
+
     <Grid>
-        <TextBlock Margin="12,0,0,0" FontSize="32"><Run Text="Graduated Students: "/><Run Text="{x:Bind viewModel.GetGraduatedStudents()}"/></TextBlock>
+        <StackPanel>
+            <TextBlock Margin="12,0,0,0" FontSize="32"><Run Text="Graduated Students: "/><Run Text="{x:Bind viewModel.GetGraduatedStudents()}"/></TextBlock>
+            <TextBlock Margin="24,0,0,0" FontSize="32">Student Results</TextBlock>
+            <ListView
+                x:Name="lecturerResultsListView"
+                ItemsSource="{x:Bind viewModel.GetLecturerResults()}"
+                ItemTemplate="{StaticResource ResultTemplate}"
+            />
+        </StackPanel>
+        
     </Grid>
 </Page>

@@ -11,5 +11,6 @@ namespace StudentRecordsServices.Services
     {
         List<User> GetLecturerStudents(User lecturer);
         int GetGraduatedStudents(Identifier courseIdentifier);
+        List<Result> GetLecturerResults(User lecturer);
     }
 }

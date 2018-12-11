@@ -14,7 +14,7 @@ namespace StudentRecordsModels.Models
 
         public override string ToString()
         {
-            return AssignmentName;
+            return "[" + ModuleRun + "] - " + AssignmentName;
         }
     }
 }

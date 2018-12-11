@@ -30,5 +30,10 @@ namespace StudentRecordsUI.ViewModels
 
             return _lecturerService.GetGraduatedStudents(selectedLecturer.Course).ToString();
         }
+
+        public List<Result> GetLecturerResults()
+        {
+            return _lecturerService.GetLecturerResults(selectedLecturer);
+        }
     }
 }
