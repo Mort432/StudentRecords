@@ -24,11 +24,7 @@ namespace StudentRecordsServices.Services
 
         public List<User> GetLecturerStudents(User lecturer)
         {
-            var courseStudents = _userRepo.Select(x => (x.Course != null) && lecturer.Course.Id.Equals(x.Course.Id) && x.Role == UserRole.Student);
-            var moduleStudents = _userRepo.Select(x => lecturer.Enrollments.Any(z => z.Id.Equals(x.Id)));
-            var myStudents = courseStudents.Result.ToList().Union(moduleStudents.Result.ToList()).ToList();
-
-            return myStudents;
+            return _userRepo.GetLecturerStudents(lecturer);
         }
 
         public int GetGraduatedStudents(Identifier courseIdentifier)
