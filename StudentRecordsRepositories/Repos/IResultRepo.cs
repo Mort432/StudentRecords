@@ -10,5 +10,9 @@ namespace StudentRecordsRepositories.Repos
     public interface IResultRepo : IRepo<Result>
     {
         List<Result> GetLecturerResults(User lecturer);
+
+        IEnumerable<Result> GetUserResults(User user);
+
+        Identifier GetExistingResult(Assignment assignment, User student);
     }
 }

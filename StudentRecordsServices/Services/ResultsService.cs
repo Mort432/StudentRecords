@@ -19,7 +19,7 @@ namespace StudentRecordsServices.Services
 
         public IEnumerable<Result> GetUserResults(User user)
         {
-            return _resultRepo.Select(x => x.Student.Id.Equals(user.Id)).Result.ToList();
+            return _resultRepo.GetUserResults(user);
         }
 
         public void DeleteResultByIdentifier(Identifier result)
@@ -50,14 +50,8 @@ namespace StudentRecordsServices.Services
 
         public Identifier GetExistingResult(Assignment assignment, User student)
         {
-            var results = GetUserResults(student);
-            //Find matches
-            var linqQuery =
-                from result1 in assignment.Results
-                join result2 in results on result1.Id equals result2.Id
-                select result1;
-
-            return linqQuery.FirstOrDefault();
+            return _resultRepo.GetExistingResult(assignment, student);
+            
         }
     }
 }
