@@ -17,6 +17,16 @@ namespace StudentRecordsRepositories.Repos
             mockIdentityTracker = Items.Count + 1;
         }
 
+        public Task<IEnumerable<User>> GetAllLecturers()
+        {
+            return Select(x => x.Role == UserRole.Lecturer);
+        }
+
+        public Task<IEnumerable<User>> GetAllStudents()
+        {
+            return Select(x => x.Role == UserRole.Student);
+        }
+
         public List<User> GetUsersFromCourse(Course course)
         {
             return Select(x => course.Students.Any(z => z.Id.Equals(x.Id))).Result.ToList();
