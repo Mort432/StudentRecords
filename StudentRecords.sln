@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentRecordsRepositories"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentRecordsModels", "StudentRecordsModels\StudentRecordsModels.csproj", "{025FA187-9C42-4E87-B570-4FBACFDA0F10}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentRecordsViewModels", "StudentRecordsViewModels\StudentRecordsViewModels.csproj", "{5E6389C2-DBC0-4D20-AD57-A67DB5D70C15}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentRecordsViewModels", "StudentRecordsViewModels\StudentRecordsViewModels.csproj", "{5E6389C2-DBC0-4D20-AD57-A67DB5D70C15}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentRecordsWPFUI", "StudentRecordsWPFUI\StudentRecordsWPFUI.csproj", "{7F648CDF-AED1-4173-966E-7F70C9B50610}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -109,6 +111,22 @@ Global
 		{5E6389C2-DBC0-4D20-AD57-A67DB5D70C15}.Release|x64.Build.0 = Release|Any CPU
 		{5E6389C2-DBC0-4D20-AD57-A67DB5D70C15}.Release|x86.ActiveCfg = Release|Any CPU
 		{5E6389C2-DBC0-4D20-AD57-A67DB5D70C15}.Release|x86.Build.0 = Release|Any CPU
+		{7F648CDF-AED1-4173-966E-7F70C9B50610}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F648CDF-AED1-4173-966E-7F70C9B50610}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F648CDF-AED1-4173-966E-7F70C9B50610}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{7F648CDF-AED1-4173-966E-7F70C9B50610}.Debug|ARM.Build.0 = Debug|Any CPU
+		{7F648CDF-AED1-4173-966E-7F70C9B50610}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7F648CDF-AED1-4173-966E-7F70C9B50610}.Debug|x64.Build.0 = Debug|Any CPU
+		{7F648CDF-AED1-4173-966E-7F70C9B50610}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7F648CDF-AED1-4173-966E-7F70C9B50610}.Debug|x86.Build.0 = Debug|Any CPU
+		{7F648CDF-AED1-4173-966E-7F70C9B50610}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F648CDF-AED1-4173-966E-7F70C9B50610}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F648CDF-AED1-4173-966E-7F70C9B50610}.Release|ARM.ActiveCfg = Release|Any CPU
+		{7F648CDF-AED1-4173-966E-7F70C9B50610}.Release|ARM.Build.0 = Release|Any CPU
+		{7F648CDF-AED1-4173-966E-7F70C9B50610}.Release|x64.ActiveCfg = Release|Any CPU
+		{7F648CDF-AED1-4173-966E-7F70C9B50610}.Release|x64.Build.0 = Release|Any CPU
+		{7F648CDF-AED1-4173-966E-7F70C9B50610}.Release|x86.ActiveCfg = Release|Any CPU
+		{7F648CDF-AED1-4173-966E-7F70C9B50610}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

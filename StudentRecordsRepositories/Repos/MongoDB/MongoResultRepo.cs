@@ -33,5 +33,34 @@ namespace StudentRecordsRepositories.Repos.Mongo
         {
             return Select(x => x.Student.Id.Equals(user.Id)).Result.ToList();
         }
+
+        public override void Delete(Result item)
+        {
+            var result = item.ToIdentifier();
+
+            var assignmentIdFilter = Builders<Assignment>.Filter.Eq(i => i.Id, item.Assignment.Id);
+            var assignmentResultsUpdate = Builders<Assignment>.Update.Pull(a => a.Results, result);
+
+            Assignments.UpdateOne(assignmentIdFilter, assignmentResultsUpdate);
+
+            base.Delete(item);
+        }
+
+        public override void Update(Result item)
+        {
+            Delete(item);
+            Insert(item);
+        }
+
+        public override void Insert(Result item)
+        {
+            var assignmentIdFilter = Builders<Assignment>.Filter.Eq(a => a.Id, item.Assignment.Id);
+            var assignmentResultsUpdate = Builders<Assignment>.Update.Push(a => a.Results, item.ToIdentifier());
+
+            // Insert child result to assignment
+            Assignments.UpdateOneAsync(assignmentIdFilter, assignmentResultsUpdate);
+
+            base.Insert(item);
+        }
     }
 }

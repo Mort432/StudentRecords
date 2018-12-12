@@ -4,20 +4,10 @@ using StudentRecordsUI.ViewModels;
 using StudentRecordsViewModels.ViewModels;
 using StudentRecordsRepositories.Repos.Mock;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using StudentRecordsUI.Views;
 using StudentRecordsRepositories.Repos;
@@ -115,22 +105,22 @@ namespace StudentRecordsUI
             var builder = new ContainerBuilder();
 
             //Services
-            builder.RegisterType<UsersService>().As<IUsersService>();
-            builder.RegisterType<ModulesService>().As<IModulesService>();
+            builder.RegisterType<UsersService>().As<IUsersService>().SingleInstance();
+            builder.RegisterType<ModulesService>().As<IModulesService>().SingleInstance();
             builder.RegisterType<AuthService>().As<IAuthService>().SingleInstance();
-            builder.RegisterType<CoursesService>().As<ICoursesService>();
-            builder.RegisterType<ResultsService>().As<IResultsService>();
-            builder.RegisterType<AssignmentsService>().As<IAssignmentsService>();
-            builder.RegisterType<LecturerService>().As<ILecturerService>();
+            builder.RegisterType<CoursesService>().As<ICoursesService>().SingleInstance();
+            builder.RegisterType<ResultsService>().As<IResultsService>().SingleInstance();
+            builder.RegisterType<AssignmentsService>().As<IAssignmentsService>().SingleInstance();
+            builder.RegisterType<LecturerService>().As<ILecturerService>().SingleInstance();
 
             //View models
-            builder.RegisterType<StudentProfileViewModel>().AsSelf();
-            builder.RegisterType<StudentEnrollmentsViewModel>().AsSelf();
-            builder.RegisterType<LoginViewModel>().AsSelf();
-            builder.RegisterType<MainPageViewModel>().AsSelf();
-            builder.RegisterType<LecturerProfileViewModel>().AsSelf();
-            builder.RegisterType<LecturerStudentManagementViewModel>().AsSelf();
-            builder.RegisterType<LecturerStudentAnalyticsViewModel>().AsSelf();
+            builder.RegisterType<StudentProfileViewModel>().InstancePerDependency();
+            builder.RegisterType<StudentEnrollmentsViewModel>().InstancePerDependency();
+            builder.RegisterType<LoginViewModel>().InstancePerDependency();
+            builder.RegisterType<MainPageViewModel>().InstancePerDependency();
+            builder.RegisterType<LecturerProfileViewModel>().InstancePerDependency();
+            builder.RegisterType<LecturerStudentManagementViewModel>().InstancePerDependency();
+            builder.RegisterType<LecturerStudentAnalyticsViewModel>().InstancePerDependency();
 
             //Repos
             builder.RegisterType<MockUserRepo>().As<IUserRepo>().SingleInstance();

@@ -44,7 +44,7 @@ namespace StudentRecordsRepositories.Repos.Mongo
             return (await SelectAll()).Where(x => x.Id.Equals(id)).ToList().FirstOrDefault();
         }
 
-        public async void Update(T item)
+        public virtual async void Update(T item)
         {
             var itemIdFilter = Builders<T>.Filter.Eq(i => i.Id, item.Id);
             var options = new FindOneAndReplaceOptions<T> { ReturnDocument = ReturnDocument.After };
@@ -52,14 +52,14 @@ namespace StudentRecordsRepositories.Repos.Mongo
             await Collection.FindOneAndReplaceAsync(itemIdFilter, item, options);
         }
 
-        public async void Delete(T item)
+        public virtual async void Delete(T item)
         {
             var itemIdFilter = Builders<T>.Filter.Eq(i => i.Id, item.Id);
 
             await Collection.DeleteOneAsync(itemIdFilter);
         }
 
-        public async void Insert(T item)
+        public virtual async void Insert(T item)
         {
             if (item.Id == null) item.Id = ObjectId.GenerateNewId();
 

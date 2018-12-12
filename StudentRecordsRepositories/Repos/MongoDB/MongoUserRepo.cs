@@ -40,8 +40,73 @@ namespace StudentRecordsRepositories.Repos.Mongo
 
         public int CountGraduatedCourseUsers(Course course)
         {
-            var users = GetUsersFromCourse(course).Where(x => x.Graduated == true).ToList();
-            return users.Count();
+            return GetUsersFromCourse(course).Where(x => x.Graduated).Count();
+        }
+
+        public override void Update(User item)
+        {
+            base.Update(item);
+
+            UpdateEnrollmentsStudents(item);
+
+            UpdateCourseStudents(item);
+        }
+
+        private void UpdateEnrollmentsStudents(User student)
+        {
+            var identifier = student.ToIdentifier();
+
+            var moduleRunStudentsFilter = Builders<ModuleRun>.Filter.AnyEq(x => x.Students, identifier);
+            var oldIds = ModuleRuns.Find(moduleRunStudentsFilter).Project(x => x.Id).ToList();
+
+            var studentEnrollmentsFilter = Builders<ModuleRun>.Filter.In(x => x.Id, student.Enrollments.Select(x => x.Id));
+            var newIds = ModuleRuns.Find(studentEnrollmentsFilter).Project(x => x.Id).ToList();
+
+            oldIds.Except(newIds).ToList().ForEach(runId =>
+            {
+                var moduleRunIdFilter = Builders<ModuleRun>.Filter.Eq(x => x.Id, runId);
+                var moduleRunStudentsUpdate = Builders<ModuleRun>.Update.Pull(x => x.Students, identifier);
+                ModuleRuns.UpdateOne(moduleRunIdFilter, moduleRunStudentsUpdate);
+            });
+
+            newIds.Except(oldIds).ToList().ForEach(runId =>
+            {
+                var moduleRunIdFilter = Builders<ModuleRun>.Filter.Eq(x => x.Id, runId);
+                var moduleRunStudentsUpdate = Builders<ModuleRun>.Update.Push(x => x.Students, identifier);
+                ModuleRuns.UpdateOne(moduleRunIdFilter, moduleRunStudentsUpdate);
+            });
+        }
+
+        private void UpdateCourseStudents(User student)
+        {
+            var identifier = student.ToIdentifier();
+
+            var courseStudentsFilter = Builders<Course>.Filter.AnyEq(x => x.Students, identifier);
+            var oldId = Courses.Find(courseUsersFilter).Project(x => x.Id).SingleOrDefault();
+
+            var newId = user.Course?.Id;
+
+            if (oldId != null && newId != null && oldId.Equals(newId))
+            {
+                var courseStudentsUpdate = Builders<Course>.Update.Set(x => x.Students[-1], identifier);
+                Courses.UpdateOne(courseStudentsFilter, courseStudentsUpdate);
+            }
+            else
+            {
+                if (oldId != null)
+                {
+                    var courseIdFilter = Builders<Course>.Filter.Eq(x => x.Id, oldId);
+                    var courseStudentsUpdate = Builders<Course>.Update.Pull(x => x.Students, identifier);
+                    Courses.UpdateOne(courseIdFilter, courseStudentsUpdate);
+                }
+
+                if (newId != null)
+                {
+                    var courseIdFilter = Builders<Course>.Filter.Eq(x => x.Id, newId);
+                    var courseStudentsUpdate = Builders<Course>.Update.Push(x => x.Students, identifier);
+                    Courses.UpdateOne(courseIdFilter, courseStudentsUpdate);
+                }
+            }
         }
     }
 }
