@@ -18,11 +18,6 @@ namespace StudentRecordsServices.Services
             _userRepo = userRepo;
         }
 
-        public void AddUser(User newUser)
-        {
-            _userRepo.Insert(newUser);
-        }
-
         public async Task<IEnumerable<User>> GetAllUsers()
         {
             return await _userRepo.SelectAll();
