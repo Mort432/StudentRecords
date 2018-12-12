@@ -75,7 +75,19 @@ namespace StudentRecordsUI.ViewModels
                     break;
             }
 
+            menuItems.Add(new NavigationMenuItemModel()
+            {
+                Content = "Log Out",
+                Glyph = char.ConvertFromUtf32(0xE748).ToString(),
+                ViewType = typeof(Login)
+            });
+
             return menuItems;
+        }
+
+        public void LogOut()
+        {
+            _authService.Logout();
         }
     }
 }

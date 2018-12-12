@@ -54,13 +54,20 @@ namespace StudentRecordsUI
 
         private void mainNavigationDrawer_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {
-            var test = args.InvokedItem as NavigationMenuItemModel;
+            var navItem = args.InvokedItem as NavigationMenuItemModel;
             if (args.IsSettingsInvoked)
             {
                 contentFrame.Navigate(typeof(Settings));
             }
-            contentFrame.Navigate(test.ViewType);
-            mainNavigationDrawer.Header = test.Content;
+            if (navItem.Content == "Log Out")
+            {
+                ViewModel.LogOut();
+                Frame.Navigate(typeof(Login));
+                return;
+            }
+
+            contentFrame.Navigate(navItem.ViewType);
+            mainNavigationDrawer.Header = navItem.Content;
         }
         #endregion
     }

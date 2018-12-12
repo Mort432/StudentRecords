@@ -96,7 +96,7 @@ namespace StudentRecordsRepositories.Repos
             user1.Enrollments = new List<Identifier>() { moduleRun1.ToIdentifier() };
             user1.Course = new Identifier(course1);
             user3.Enrollments = new List<Identifier>() { moduleRun1.ToIdentifier() };
-            //user3.Course = new Identifier(course1);
+            user3.Course = new Identifier(course1);
 
             UsersCollection.Add(user1);
             UsersCollection.Add(user2);
