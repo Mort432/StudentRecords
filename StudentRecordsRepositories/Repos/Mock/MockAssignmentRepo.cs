@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StudentRecordsRepositories.Repos
+namespace StudentRecordsRepositories.Repos.Mock
 {
     public class MockAssignmentRepo : MockRepo<Assignment>, IAssignmentRepo
     {

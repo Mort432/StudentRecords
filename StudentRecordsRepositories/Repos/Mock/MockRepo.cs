@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StudentRecordsRepositories.Repos
+namespace StudentRecordsRepositories.Repos.Mock
 {
     public class MockRepo<T> : IRepo<T> where T : Identifiable
     {

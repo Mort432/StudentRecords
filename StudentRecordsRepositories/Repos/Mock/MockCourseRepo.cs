@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StudentRecordsRepositories.Repos
+namespace StudentRecordsRepositories.Repos.Mock
 {
-    public class MockModuleRunRepo : MockRepo<ModuleRun>, IModuleRunRepo
+    public class MockCourseRepo : MockRepo<Course>, ICourseRepo
     {
-        public MockModuleRunRepo()
+        public MockCourseRepo()
         {
-            Items = data.ModuleRunsCollection;
+            Items = data.CoursesCollection;
             mockIdentityTracker = Items.Count + 1;
         }
     }

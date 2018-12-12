@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StudentRecordsRepositories.Repos
+namespace StudentRecordsRepositories.Repos.Mock
 {
     public class MockUserRepo : MockRepo<User>, IUserRepo
     {
@@ -39,6 +39,12 @@ namespace StudentRecordsRepositories.Repos
         public List<User> GetUsersFromCourse(Course course)
         {
             return Select(x => course.Students.Any(z => z.Id.Equals(x.Id))).Result.ToList();
+        }
+
+        public int CountGraduatedCourseUsers(Course course)
+        {
+            var users = GetUsersFromCourse(course).Where(x => x.Graduated == true).ToList();
+            return users.Count();
         }
     }
 }

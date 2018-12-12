@@ -2,7 +2,7 @@
 using StudentRecordsServices.Services;
 using StudentRecordsUI.ViewModels;
 using StudentRecordsViewModels.ViewModels;
-using StudentRecordsRepositories.Repos;
+using StudentRecordsRepositories.Repos.Mock;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -20,6 +20,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using StudentRecordsUI.Views;
+using StudentRecordsRepositories.Repos;
 
 namespace StudentRecordsUI
 {

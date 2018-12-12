@@ -30,8 +30,7 @@ namespace StudentRecordsServices.Services
         public int GetGraduatedStudents(Identifier courseIdentifier)
         {
             Course course = _courseRepo.SelectById(courseIdentifier.Id).Result;
-            List<User> users = _userRepo.GetUsersFromCourse(course);
-            return users.Count();
+            return _userRepo.CountGraduatedCourseUsers(course);
         }
 
         public List<Result> GetLecturerResults(User lecturer)

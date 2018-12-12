@@ -8,4 +8,12 @@
     <ProjectReference Include="..\StudentRecordsModels\StudentRecordsModels.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Repos\MongoDB\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MongoDB.Driver" Version="2.7.2" />
+  </ItemGroup>
+
 </Project>
