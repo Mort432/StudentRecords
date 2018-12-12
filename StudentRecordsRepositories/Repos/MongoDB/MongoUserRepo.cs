@@ -16,27 +16,32 @@ namespace StudentRecordsRepositories.Repos.Mongo
 
         public Task<IEnumerable<User>> GetAllLecturers()
         {
-            throw new NotImplementedException();
+            return Select(x => x.Role == UserRole.Lecturer);
         }
 
         public Task<IEnumerable<User>> GetAllStudents()
         {
-            throw new NotImplementedException();
+            return Select(x => x.Role == UserRole.Student);
         }
 
         public List<User> GetLecturerStudents(User lecturer)
         {
-            throw new NotImplementedException();
+            var courseStudents = Select(x => (x.Course != null) && lecturer.Course.Id.Equals(x.Course.Id) && x.Role == UserRole.Student);
+            var moduleStudents = Select(x => lecturer.Enrollments.Any(z => z.Id.Equals(x.Id)));
+            var myStudents = courseStudents.Result.ToList().Union(moduleStudents.Result.ToList()).ToList();
+
+            return myStudents;
         }
 
         public List<User> GetUsersFromCourse(Course course)
         {
-            throw new NotImplementedException();
+            return Select(x => course.Students.Any(z => z.Id.Equals(x.Id))).Result.ToList();
         }
 
         public int CountGraduatedCourseUsers(Course course)
         {
-            throw new NotImplementedException();
+            var users = GetUsersFromCourse(course).Where(x => x.Graduated == true).ToList();
+            return users.Count();
         }
     }
 }
