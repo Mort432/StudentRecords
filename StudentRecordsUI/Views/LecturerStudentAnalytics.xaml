@@ -7,9 +7,12 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     xmlns:data="using:StudentRecordsModels.Models"
+    xmlns:converters="using:StudentRecordsUI.Converters"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Page.Resources>
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+        
         <DataTemplate x:DataType="data:Result" x:Key="ResultTemplate">
             <StackPanel Orientation="Vertical">
                 <TextBlock FontSize="16" Text="{x:Bind Assignment}"/>
@@ -24,7 +27,14 @@
 
     <Grid>
         <StackPanel>
-            <TextBlock Margin="12,0,0,0" FontSize="32"><Run Text="Graduated Students: "/><Run Text="{x:Bind viewModel.GetGraduatedStudents()}"/></TextBlock>
+            <TextBlock
+                Visibility="{x:Bind viewModel.LecturerHasCourse, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}"
+                Margin="12,0,0,0" 
+                FontSize="32">
+                <Run Text="Graduated Students: "/>
+                <Run Text="{x:Bind viewModel.GetGraduatedStudents()}"/>
+            </TextBlock>
+            
             <TextBlock Margin="12,48,0,0" FontSize="32">Student Results</TextBlock>
             <ListView
                 x:Name="lecturerResultsListView"

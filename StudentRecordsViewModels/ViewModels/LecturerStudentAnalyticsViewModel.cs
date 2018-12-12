@@ -35,5 +35,17 @@ namespace StudentRecordsViewModels.ViewModels
         {
             return _lecturerService.GetLecturerResults(selectedLecturer);
         }
+
+        public bool LecturerHasCourse
+        {
+            get {
+                if (selectedLecturer.Course == null)
+                {
+                    return false;
+                }
+                return true;
+            }
+            
+        }
     }
 }

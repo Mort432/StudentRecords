@@ -7,12 +7,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     xmlns:data="using:StudentRecordsModels.Models"
-    xmlns:converters="using:StudentRecordsUI.Converters"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Page.Resources>
-        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
-
         <DataTemplate x:DataType="data:User" x:Key="UserDataTemplate">
             <StackPanel HorizontalAlignment="Left">
                 <TextBlock FontSize="16" Text="{x:Bind GetFullName()}" HorizontalAlignment="Left"></TextBlock>
