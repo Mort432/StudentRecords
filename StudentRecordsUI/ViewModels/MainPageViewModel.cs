@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace StudentRecordsUI.ViewModels
 {
-    class MainPageViewModel
+    public class MainPageViewModel
     {
         public IEnumerable<NavigationMenuItemModel> MenuItems { get; set; }
 

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StudentRecordsUI.ViewModels
+namespace StudentRecordsViewModels.ViewModels
 {
     public class LecturerStudentAnalyticsViewModel
     {

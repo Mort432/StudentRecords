@@ -11,7 +11,7 @@
     <Grid>
         <TextBlock Margin="12,0,0,0">Here at Student Services, students can enroll on to courses and check their results. <LineBreak/>
         In addition, Lecturers can grade students. <LineBreak/><LineBreak/>
-        Student Services was developed by Connagh Muldoon, and the source code is available at github.com/Mort432. <LineBreak/>
+        Student Services was developed by Connagh Muldoon, and the source code is available at github.com/Mort432/StudentRecords. <LineBreak/>
         The source code is under the MIT License.</TextBlock>
     </Grid>
 </Page>

@@ -1,5 +1,5 @@
 ﻿using Autofac;
-using StudentRecordsUI.ViewModels;
+using StudentRecordsViewModels.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO;

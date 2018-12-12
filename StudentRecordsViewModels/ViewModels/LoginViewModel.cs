@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StudentRecordsUI.ViewModels
+namespace StudentRecordsViewModels.ViewModels
 {
-    class LoginViewModel
+    public class LoginViewModel
     {
         public List<User> AvailableUsers { get; set; }
 

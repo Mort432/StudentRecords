@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using StudentRecordsServices.Services;
 using StudentRecordsUI.ViewModels;
+using StudentRecordsViewModels.ViewModels;
 using StudentRecordsRepositories.Repos;
 using System;
 using System.Collections.Generic;

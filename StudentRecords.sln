@@ -7,9 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentRecordsUI", "Student
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentRecordsServices", "StudentRecordsServices\StudentRecordsServices.csproj", "{198CFBFC-6758-4B73-BBC6-FC7BF28A6009}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentRecordsRepositories", "StudentRecordsRepositories\StudentRecordsRepositories.csproj", "{FA65DABB-E33F-4ECB-8BC4-EC0F5D2F618C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentRecordsRepositories", "StudentRecordsRepositories\StudentRecordsRepositories.csproj", "{FA65DABB-E33F-4ECB-8BC4-EC0F5D2F618C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentRecordsModels", "StudentRecordsModels\StudentRecordsModels.csproj", "{025FA187-9C42-4E87-B570-4FBACFDA0F10}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentRecordsModels", "StudentRecordsModels\StudentRecordsModels.csproj", "{025FA187-9C42-4E87-B570-4FBACFDA0F10}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentRecordsViewModels", "StudentRecordsViewModels\StudentRecordsViewModels.csproj", "{5E6389C2-DBC0-4D20-AD57-A67DB5D70C15}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -91,6 +93,22 @@ Global
 		{025FA187-9C42-4E87-B570-4FBACFDA0F10}.Release|x64.Build.0 = Release|Any CPU
 		{025FA187-9C42-4E87-B570-4FBACFDA0F10}.Release|x86.ActiveCfg = Release|Any CPU
 		{025FA187-9C42-4E87-B570-4FBACFDA0F10}.Release|x86.Build.0 = Release|Any CPU
+		{5E6389C2-DBC0-4D20-AD57-A67DB5D70C15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E6389C2-DBC0-4D20-AD57-A67DB5D70C15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E6389C2-DBC0-4D20-AD57-A67DB5D70C15}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{5E6389C2-DBC0-4D20-AD57-A67DB5D70C15}.Debug|ARM.Build.0 = Debug|Any CPU
+		{5E6389C2-DBC0-4D20-AD57-A67DB5D70C15}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{5E6389C2-DBC0-4D20-AD57-A67DB5D70C15}.Debug|x64.Build.0 = Debug|Any CPU
+		{5E6389C2-DBC0-4D20-AD57-A67DB5D70C15}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5E6389C2-DBC0-4D20-AD57-A67DB5D70C15}.Debug|x86.Build.0 = Debug|Any CPU
+		{5E6389C2-DBC0-4D20-AD57-A67DB5D70C15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E6389C2-DBC0-4D20-AD57-A67DB5D70C15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E6389C2-DBC0-4D20-AD57-A67DB5D70C15}.Release|ARM.ActiveCfg = Release|Any CPU
+		{5E6389C2-DBC0-4D20-AD57-A67DB5D70C15}.Release|ARM.Build.0 = Release|Any CPU
+		{5E6389C2-DBC0-4D20-AD57-A67DB5D70C15}.Release|x64.ActiveCfg = Release|Any CPU
+		{5E6389C2-DBC0-4D20-AD57-A67DB5D70C15}.Release|x64.Build.0 = Release|Any CPU
+		{5E6389C2-DBC0-4D20-AD57-A67DB5D70C15}.Release|x86.ActiveCfg = Release|Any CPU
+		{5E6389C2-DBC0-4D20-AD57-A67DB5D70C15}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
