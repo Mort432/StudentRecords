@@ -9,5 +9,6 @@ namespace StudentRecordsRepositories.Repos
 {
     public interface IAssignmentRepo : IRepo<Assignment>
     {
+        List<Assignment> GetUserAssignments(User user);
     }
 }

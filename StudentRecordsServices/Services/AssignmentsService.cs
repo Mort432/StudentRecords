@@ -19,8 +19,7 @@ namespace StudentRecordsServices.Services
 
         public IEnumerable<Assignment> GetUserAssignments(User user)
         {
-
-            return _assignmentRepo.Select(x => user.Enrollments.Contains(x.ModuleRun)).Result.ToList();
+            return _assignmentRepo.GetUserAssignments(user);
         }
     }
 }
