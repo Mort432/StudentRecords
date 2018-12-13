@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <PackageReference Include="MongoDB.Driver" Version="2.7.2" />
+    <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="2.18.3" />
   </ItemGroup>
 
 </Project>
