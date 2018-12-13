@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace StudentRecordsRepositories.Repos.Mongo
 {
-    public class MockCourseRepo : MongoRepo<Course>, ICourseRepo
+    public class MongoCourseRepo : MongoRepo<Course>, ICourseRepo
     {
         protected override IMongoCollection<Course> Collection => Courses;
     }

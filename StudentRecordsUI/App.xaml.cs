@@ -11,6 +11,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using StudentRecordsUI.Views;
 using StudentRecordsRepositories.Repos;
+using StudentRecordsRepositories.Repos.Mongo;
 
 namespace StudentRecordsUI
 {
@@ -123,14 +124,29 @@ namespace StudentRecordsUI
             builder.RegisterType<LecturerStudentAnalyticsViewModel>().InstancePerDependency();
 
             //Repos
+            BuildMockRepos(builder);
+
+            return builder.Build();
+        }
+
+        private static void BuildMockRepos(ContainerBuilder builder)
+        {
             builder.RegisterType<MockUserRepo>().As<IUserRepo>().SingleInstance();
             builder.RegisterType<MockModuleRepo>().As<IModuleRepo>().SingleInstance();
             builder.RegisterType<MockModuleRunRepo>().As<IModuleRunRepo>().SingleInstance();
             builder.RegisterType<MockCourseRepo>().As<ICourseRepo>().SingleInstance();
             builder.RegisterType<MockResultRepo>().As<IResultRepo>().SingleInstance();
             builder.RegisterType<MockAssignmentRepo>().As<IAssignmentRepo>().SingleInstance();
+        }
 
-            return builder.Build();
+        private static void BuildMongoRepos(ContainerBuilder builder)
+        {
+            builder.RegisterType<MongoUserRepo>().As<IUserRepo>().SingleInstance();
+            builder.RegisterType<MongoModuleRepo>().As<IModuleRepo>().SingleInstance();
+            builder.RegisterType<MongoModuleRunRepo>().As<IModuleRunRepo>().SingleInstance();
+            builder.RegisterType<MongoCourseRepo>().As<ICourseRepo>().SingleInstance();
+            builder.RegisterType<MongoResultRepo>().As<IResultRepo>().SingleInstance();
+            builder.RegisterType<MongoAssignmentRepo>().As<IAssignmentRepo>().SingleInstance();
         }
     }
 }

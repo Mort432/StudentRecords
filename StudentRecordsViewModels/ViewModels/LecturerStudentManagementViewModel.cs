@@ -65,6 +65,7 @@ namespace StudentRecordsViewModels.ViewModels
         public bool StudentOnLecturerCourse(User student)
         {
             if (student == null) return false;
+            if (student.Course == null) return false;
             if (student.Course.Equals(selectedLecturer.Course)) return true;
             return false;
         }

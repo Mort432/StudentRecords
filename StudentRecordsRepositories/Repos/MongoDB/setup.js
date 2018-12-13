@@ -8,8 +8,6 @@ let connagh = {
     email: "connagh@glos.ac.uk",
     dateOfBirth: new Date("2000-01-01"),
     phoneNumber: "07000000000",
-    username: "muldoon",
-    password: "password",
     role: "Student"
 };
 
@@ -21,8 +19,6 @@ let thomas = {
     email: "tom@glos.ac.uk",
     dateOfBirth: new Date("2000-01-01"),
     phoneNumber: "07000000000",
-    username: "clark",
-    password: "password",
     role: "Student"
 };
 
@@ -87,7 +83,7 @@ ct1337ModuleRun.assignments = [
 // Courses
 let computing = {
 	_id: new ObjectId(),
-    name: "Computing - BSc W/Hons",
+    title: "Computing - BSc W/Hons",
 };
 
 computing.courseLeader = {
@@ -128,18 +124,11 @@ ct1337Result.student = {
 ct1337Assignment.results = [
     {
         _id: ct1337Result._id,
-        value: 74
+        value: "74"
     }
 ];
 
-connagh.results = [
-    {
-        _id: ct1337Result._id,
-        value: 74
-    }
-];
-
-// Student Enrolments
+// Student Enrollments
 ct1337ModuleRun.students = [
     {
         _id: connagh._id,
@@ -149,24 +138,25 @@ ct1337ModuleRun.students = [
 connagh.enrollments = [
     {
         _id: ct1337ModuleRun._id,
-        _value: ct1337.code + ": " + ct1337.title + " (" + ct1337ModuleRun.lecturer.value + ")"
+        value: ct1337.code + ": " + ct1337.title + " (" + ct1337ModuleRun.lecturer.value + ")"
     }
 ];
+thomas.enrollments = [];
 
-// Lecturer Enrolments
+// Lecturer Enrollments
 ct1337ModuleRun.lecturer = {
     _id: abu._id,
     value: abu.firstName + " " + abu.lastName
 };
-abu.enrolments = [
+abu.enrollments = [
     {
         _id: ct1337ModuleRun._id,
-        value: ct1337.code + ": " + ct1337.title + " (" + abu.firstName + " " + abu.lastName + ")"
+        value: ct1337.code + ": " + ct1337.title + " (" + ct1337.ModuleRun.lecturer.value + ")"
     }
 ];
 
 // Course Users
-abu.course = {
+connagh.course = {
     _id: computing._id,
     value: computing.title + " (" + abu.firstName + " " + abu.lastName + ")"
 }
@@ -180,15 +170,12 @@ ct1337Result.assignment = {
     _id: ct1337Assignment._id,
     value: "[" + ct1337.code + ": " + ct1337.title + " (" + ct1337.lecturer + ")] - " + ct1337Assignment.title
 };
-ct6013Assignment.results = [
+ct1337Assignment.results = [
     {
         _id: ct1337Result._id,
-        value: 80
+        value: "74"
     }
 ];
-
-// Student Results
-
 
 // Database
 db.assignments.drop();
@@ -210,7 +197,7 @@ db.modules.insertMany([
 db.results.insertMany([
     ct1337Result
 ]);
-db.runs.insertMany([
+db.moduleruns.insertMany([
     ct1337ModuleRun
 ]);
 db.users.insertMany([

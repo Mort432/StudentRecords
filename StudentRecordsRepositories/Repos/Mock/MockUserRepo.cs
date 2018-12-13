@@ -30,7 +30,7 @@ namespace StudentRecordsRepositories.Repos.Mock
         public List<User> GetLecturerStudents(User lecturer)
         {
             var courseStudents = Select(x => (x.Course != null) && lecturer.Course.Id.Equals(x.Course.Id) && x.Role == UserRole.Student);
-            var moduleStudents = Select(x => lecturer.Enrollments.Any(z => z.Id.Equals(x.Id)));
+            var moduleStudents = Select(user => user.Enrollments.Any(userEnrollment => lecturer.Enrollments.Contains(userEnrollment)) && user.Role == UserRole.Student);
             var myStudents = courseStudents.Result.ToList().Union(moduleStudents.Result.ToList()).ToList();
 
             return myStudents;
