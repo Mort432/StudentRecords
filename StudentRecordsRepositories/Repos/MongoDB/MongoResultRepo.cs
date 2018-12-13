@@ -24,9 +24,10 @@ namespace StudentRecordsRepositories.Repos.Mongo
             return linqQuery.FirstOrDefault();
         }
 
-        public List<Result> GetLecturerResults(User lecturer)
+        public List<Result> GetModuleRunsResults(List<ModuleRun> moduleRuns)
         {
-            return Select(x => lecturer.Enrollments.Any(y => y.Id.Equals(x.Assignment.Id))).Result.ToList();
+            List<Identifier> assignments = moduleRuns.SelectMany(x => x.Assignments).ToList();
+            return Select(x => assignments.Any(y => y.Id.Equals(x.Assignment.Id))).Result.ToList();
         }
 
         public IEnumerable<Result> GetUserResults(User user)

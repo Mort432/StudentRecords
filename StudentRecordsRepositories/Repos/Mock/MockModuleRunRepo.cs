@@ -14,5 +14,10 @@ namespace StudentRecordsRepositories.Repos.Mock
             Items = data.ModuleRunsCollection;
             mockIdentityTracker = Items.Count + 1;
         }
+
+        public List<ModuleRun> GetLecturerModuleRuns(User lecturer)
+        {
+            return Select(x => x.Lecturer.Id.Equals(lecturer.Id)).Result.ToList();
+        }
     }
 }

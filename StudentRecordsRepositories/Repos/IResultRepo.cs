@@ -9,7 +9,7 @@ namespace StudentRecordsRepositories.Repos
 {
     public interface IResultRepo : IRepo<Result>
     {
-        List<Result> GetLecturerResults(User lecturer);
+        List<Result> GetModuleRunsResults(List<ModuleRun> moduleRuns);
 
         IEnumerable<Result> GetUserResults(User user);
 

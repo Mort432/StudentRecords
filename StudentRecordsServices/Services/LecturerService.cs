@@ -13,13 +13,15 @@ namespace StudentRecordsServices.Services
     {
         private IUserRepo _userRepo;
         private ICourseRepo _courseRepo;
+        private IModuleRunRepo _moduleRunRepo;
         private IResultRepo _resultRepo;
 
-        public LecturerService(IUserRepo userRepo, ICourseRepo courseRepo, IResultRepo resultRepo)
+        public LecturerService(IUserRepo userRepo, ICourseRepo courseRepo, IResultRepo resultRepo, IModuleRunRepo moduleRunRepo)
         {
             _userRepo = userRepo;
             _courseRepo = courseRepo;
             _resultRepo = resultRepo;
+            _moduleRunRepo = moduleRunRepo;
         }
 
         public List<User> GetLecturerStudents(User lecturer)
@@ -35,7 +37,8 @@ namespace StudentRecordsServices.Services
 
         public List<Result> GetLecturerResults(User lecturer)
         {
-            return _resultRepo.GetLecturerResults(lecturer);
+            List<ModuleRun> lecturerModules = _moduleRunRepo.GetLecturerModuleRuns(lecturer);
+            return _resultRepo.GetModuleRunsResults(lecturerModules);
         }
     }
 }

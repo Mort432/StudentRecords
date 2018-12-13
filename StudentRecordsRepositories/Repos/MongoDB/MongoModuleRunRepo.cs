@@ -11,5 +11,10 @@ namespace StudentRecordsRepositories.Repos.Mongo
     public class MongoModuleRunRepo : MongoRepo<ModuleRun>, IModuleRunRepo
     {
         protected override IMongoCollection<ModuleRun> Collection => ModuleRuns;
+
+        public List<ModuleRun> GetLecturerModuleRuns(User lecturer)
+        {
+            return Select(x => x.Lecturer.Id.Equals(lecturer.Id)).Result.ToList();
+        }
     }
 }

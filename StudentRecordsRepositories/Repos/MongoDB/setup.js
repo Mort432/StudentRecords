@@ -168,7 +168,7 @@ abu.course = {
 // Assignment Results
 ct1337Result.assignment = {
     _id: ct1337Assignment._id,
-    value: "[" + ct1337.code + ": " + ct1337.title + " (" + ct1337.lecturer + ")] - " + ct1337Assignment.title
+    value: "[" + ct1337.code + ": " + ct1337.title + " (" + ct1337ModuleRun.lecturer.value + ")] - " + ct1337Assignment.assignmentName
 };
 ct1337Assignment.results = [
     {

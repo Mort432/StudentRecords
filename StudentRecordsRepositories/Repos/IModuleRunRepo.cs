@@ -9,5 +9,6 @@ namespace StudentRecordsRepositories.Repos
 {
     public interface IModuleRunRepo : IRepo<ModuleRun>
     {
+        List<ModuleRun> GetLecturerModuleRuns(User lecturer);
     }
 }
