@@ -45,7 +45,6 @@
                         MenuItemsSource="{x:Bind ViewModel.MenuItems, Mode=OneWay}"
                         Loaded="mainNavigationDrawer_Loaded"
                         Margin="0,12,0,0"
-                        SelectionChanged="mainNavigationDrawer_SelectionChanged"
                         ItemInvoked="mainNavigationDrawer_ItemInvoked"
                         IsTabStop="False"
                         Header="Welcome to Student Records!">

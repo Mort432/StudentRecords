@@ -12,7 +12,7 @@ namespace StudentRecordsWPFUI
     {
         public static IContainer Container { get; private set; }
 
-        protected override OnStartup(StartupEventArgs e)
+        protected override void OnStartup(StartupEventArgs e)
         {
             BuildContainer();
         }

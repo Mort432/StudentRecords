@@ -1,28 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using Autofac;
+using MahApps.Metro.Controls;
+using StudentRecordsWPFUI.Pages;
+using StudentRecordsWPFUI.ViewModels;
+using System;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace StudentRecordsWPFUI
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : MetroWindow
     {
+        public static Frame WindowFrame { get; private set; }
+
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private MainPageViewModel ViewModel = App.Container.Resolve<MainPageViewModel>();
+
+        protected override void OnInitialized(EventArgs e)
+        {
+            WindowFrame = ContentFrame;
+
+            WindowFrame.Navigate(new Login());
+
+            base.OnInitialized(e);
         }
     }
 }

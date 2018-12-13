@@ -1,17 +1,15 @@
 ﻿using StudentRecordsModels.Models;
 using StudentRecordsServices.Services;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StudentRecordsViewModels.ViewModels
 {
     public class StudentProfileViewModel
     {
-        public User selectedStudent;
-        public string StudentCourseFormattedString { get { return "(" + selectedStudent.Course + ")"; } }
+        public User selectedStudent { get; }
+        public string StudentCourseFormattedString => $"({selectedStudent.Course})";
+        public ICollection<Assignment> StudentAssignments { get; }
 
         private IAuthService _authService;
         private IAssignmentsService _assignmentsService;
@@ -24,19 +22,19 @@ namespace StudentRecordsViewModels.ViewModels
             _resultsService = resultsService;
 
             selectedStudent = _authService.authorisedUser;
+            StudentAssignments = GetStudentAssignments();
         }
 
-        public List<Assignment> GetStudentAssignments { get
+        public List<Assignment> GetStudentAssignments()
+        {
+            List<Assignment> assignments = _assignmentsService.GetUserAssignments(selectedStudent).ToList();
+            List<Result> results = _resultsService.GetUserResults(selectedStudent).ToList();
+            foreach(Assignment assignment in assignments)
             {
-                List<Assignment> assignments = _assignmentsService.GetUserAssignments(selectedStudent).ToList();
-                List<Result> results = _resultsService.GetUserResults(selectedStudent).ToList();
-                foreach(Assignment assignment in assignments)
-                {
-                    assignment.Results = new List<Identifier>(results.Where(x => x.Assignment.Id.Equals(assignment.Id)).Select(x => x.ToIdentifier()));
-                }
-
-                return assignments;
+                assignment.Results = new List<Identifier>(results.Where(x => x.Assignment.Id.Equals(assignment.Id)).Select(x => x.ToIdentifier()));
             }
+
+            return assignments;
         }
     }
 }

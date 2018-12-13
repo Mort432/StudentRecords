@@ -2,20 +2,8 @@
 using StudentRecordsModels.Models;
 using StudentRecordsUI.ViewModels;
 using StudentRecordsUI.Views;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -32,8 +20,7 @@ namespace StudentRecordsUI
         }
 
         MainPageViewModel ViewModel = App._container.Resolve<MainPageViewModel>();
-
-        #region MainNavBar event handlers
+        
         private void mainNavigationDrawer_Loaded(object sender, RoutedEventArgs e)
         {
             foreach(NavigationMenuItemModel item in mainNavigationDrawer.MenuItems)
@@ -45,11 +32,6 @@ namespace StudentRecordsUI
                 }
             }
             contentFrame.Navigate(typeof(Home));
-        }
-
-        private void mainNavigationDrawer_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
-        {
-
         }
 
         private void mainNavigationDrawer_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
@@ -69,6 +51,5 @@ namespace StudentRecordsUI
             contentFrame.Navigate(navItem.ViewType);
             mainNavigationDrawer.Header = navItem.Content;
         }
-        #endregion
     }
 }

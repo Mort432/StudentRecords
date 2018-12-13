@@ -12,7 +12,7 @@ namespace StudentRecordsModels.Models
         public Identifier CourseLeader { get; set; }
 
         public IEnumerable<Identifier> ModuleRuns { get; set; }
-        public IEnumerable<Identifier> Students { get; set; }
+        public List<Identifier> Students { get; set; }
 
         public override string ToString()
         {

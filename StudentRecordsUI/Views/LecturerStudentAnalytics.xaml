@@ -19,7 +19,7 @@
                 <TextBlock Foreground="DarkGray" FontSize="16" Text="{x:Bind Student}"/>
                 <TextBlock Foreground="DarkGray" FontSize="16">
                     <Run Text="Grade: "></Run>
-                    <Run Text="{Binding}"></Run>
+                    <Run Text="{Binding Grade}"></Run>
                 </TextBlock>
             </StackPanel>
         </DataTemplate>

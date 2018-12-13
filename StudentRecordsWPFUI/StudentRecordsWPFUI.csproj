@@ -58,6 +58,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Pages\Main.xaml.cs">
+      <DependentUpon>Main.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -70,8 +75,68 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\Home.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\LecturerProfile.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\LecturerStudentAnalytics.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\LecturerStudentManagement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Login.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Main.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Settings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\StudentEnrollments.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\StudentProfile.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Pages\Home.xaml.cs">
+      <DependentUpon>Home.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\LecturerProfile.xaml.cs">
+      <DependentUpon>LecturerProfile.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\LecturerStudentAnalytics.xaml.cs">
+      <DependentUpon>LecturerStudentAnalytics.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\LecturerStudentManagement.xaml.cs">
+      <DependentUpon>LecturerStudentManagement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Settings.xaml.cs">
+      <DependentUpon>Settings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\StudentEnrollments.xaml.cs">
+      <DependentUpon>StudentEnrollments.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\StudentProfile.xaml.cs">
+      <DependentUpon>StudentProfile.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -104,6 +169,24 @@
     <PackageReference Include="MahApps.Metro">
       <Version>1.6.5</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\StudentRecordsModels\StudentRecordsModels.csproj">
+      <Project>{025fa187-9c42-4e87-b570-4fbacfda0f10}</Project>
+      <Name>StudentRecordsModels</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StudentRecordsRepositories\StudentRecordsRepositories.csproj">
+      <Project>{fa65dabb-e33f-4ecb-8bc4-ec0f5d2f618c}</Project>
+      <Name>StudentRecordsRepositories</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StudentRecordsServices\StudentRecordsServices.csproj">
+      <Project>{198cfbfc-6758-4b73-bbc6-fc7bf28a6009}</Project>
+      <Name>StudentRecordsServices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StudentRecordsViewModels\StudentRecordsViewModels.csproj">
+      <Project>{5e6389c2-dbc0-4d20-ad57-a67db5d70c15}</Project>
+      <Name>StudentRecordsViewModels</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

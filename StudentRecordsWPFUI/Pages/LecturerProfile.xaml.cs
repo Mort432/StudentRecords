@@ -1,28 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using Autofac;
+using StudentRecordsViewModels.ViewModels;
+using System;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace StudentRecordsWPFUI.Pages
 {
-    /// <summary>
-    /// Interaction logic for LecturerProfile.xaml
-    /// </summary>
     public partial class LecturerProfile : Page
     {
         public LecturerProfile()
         {
             InitializeComponent();
+        }
+
+        private LecturerProfileViewModel ViewModel = App.Container.Resolve<LecturerProfileViewModel>();
+
+        protected override void OnInitialized(EventArgs e)
+        {
+            DataContext = ViewModel;
+
+            base.OnInitialized(e);
         }
     }
 }

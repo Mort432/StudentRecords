@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StudentRecordsModels.Models
 {
@@ -11,10 +7,8 @@ namespace StudentRecordsModels.Models
         public string Content { get; set; }
         public string Glyph { get; set; }
         public Type ViewType { get; set; }
+        public bool IsEnabled { get; set; } = true;
 
-        public override string ToString()
-        {
-            return Content;
-        }
+        public override string ToString() => Content;
     }
 }

@@ -7,8 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:data="using:StudentRecordsModels.Models"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-    Loaded="Page_Loaded">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <!-- The data line above allows the view to reference the application models. -->
 
     <Page.Resources>
@@ -56,7 +55,7 @@
 
                 <ListView
                     x:Name="studentOverviewListView"
-                    ItemsSource="{x:Bind viewModel.GetStudentAssignments}" 
+                    ItemsSource="{x:Bind viewModel.StudentAssignments}" 
                     ItemTemplate="{StaticResource StudentOverviewTemplate}"
                     SelectionMode="None">
                 </ListView>

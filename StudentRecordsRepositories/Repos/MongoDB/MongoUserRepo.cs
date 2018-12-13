@@ -82,9 +82,9 @@ namespace StudentRecordsRepositories.Repos.Mongo
             var identifier = student.ToIdentifier();
 
             var courseStudentsFilter = Builders<Course>.Filter.AnyEq(x => x.Students, identifier);
-            var oldId = Courses.Find(courseUsersFilter).Project(x => x.Id).SingleOrDefault();
+            var oldId = Courses.Find(courseStudentsFilter).Project(x => x.Id).SingleOrDefault();
 
-            var newId = user.Course?.Id;
+            var newId = student.Course?.Id;
 
             if (oldId != null && newId != null && oldId.Equals(newId))
             {
