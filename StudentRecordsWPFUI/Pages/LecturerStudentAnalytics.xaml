@@ -13,22 +13,19 @@
       Margin="12,0,0,0"
       FontSize="32">
       <Run Text="Graduated Students: "/>
-      <Run Text="{Binding GetGraduatedStudents()}"/>
+      <Run Text="{Binding NoOfGraduatedStudents, Mode=OneWay}"/>
     </TextBlock>
 
     <TextBlock Margin="12,48,0,0" FontSize="32" Text="Student Records"/>
     <ListView
       x:Name="lecturerResultsListView"
-      ItemsSource="{Binding GetLecturerResults()}">
+      ItemsSource="{Binding LecturerResults, Mode=OneWay}">
       <ListView.ItemTemplate>
         <DataTemplate DataType="{x:Type models:Result}">
           <StackPanel>
-            <TextBlock FontSize="16" Text="{Binding Assignment}"/>
-            <TextBlock Foreground="DarkGray" FontSize="16" Text="{Binding Student}"/>
-            <TextBlock Foreground="DarkGray" FontSize="16">
-              <Run Text="Grade: "/>
-              <Run Text="{Binding Grade}"/>
-            </TextBlock>
+            <TextBlock FontSize="16" Text="{Binding Assignment, Mode=OneWay}"/>
+            <TextBlock Foreground="DarkGray" FontSize="16" Text="{Binding Student, Mode=OneWay}"/>
+            <TextBlock Foreground="DarkGray" FontSize="16" Text="{Binding Grade, Mode=OneWay}"/>
           </StackPanel>
         </DataTemplate>
       </ListView.ItemTemplate>

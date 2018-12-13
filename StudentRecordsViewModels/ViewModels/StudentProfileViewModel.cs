@@ -9,7 +9,8 @@ namespace StudentRecordsViewModels.ViewModels
     {
         public User selectedStudent { get; }
         public string StudentCourseFormattedString => $"({selectedStudent.Course})";
-        public ICollection<Assignment> StudentAssignments { get; }
+        public ICollection<Assignment> StudentAssignments { get; private set; }
+        public ICollection<Result> StudentResults { get; private set; }
 
         private IAuthService _authService;
         private IAssignmentsService _assignmentsService;
@@ -27,9 +28,11 @@ namespace StudentRecordsViewModels.ViewModels
 
         public List<Assignment> GetStudentAssignments()
         {
-            List<Assignment> assignments = _assignmentsService.GetUserAssignments(selectedStudent).ToList();
-            List<Result> results = _resultsService.GetUserResults(selectedStudent).ToList();
-            foreach(Assignment assignment in assignments)
+            var results = StudentResults = _resultsService.GetUserResults(selectedStudent).ToList();
+
+            var assignments = _assignmentsService.GetUserAssignments(selectedStudent).ToList();
+
+            foreach (var assignment in assignments)
             {
                 assignment.Results = new List<Identifier>(results.Where(x => x.Assignment.Id.Equals(assignment.Id)).Select(x => x.ToIdentifier()));
             }

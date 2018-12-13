@@ -30,56 +30,25 @@
     <StackPanel Grid.Column="1" Grid.Row="2">
       <StackPanel Orientation="Horizontal">
         <TextBlock Margin="12,0,0,0" FontSize="32" Text="My Assignments and Results"/>
-        <TextBlock Margin="24,0,0,0" FontSize="32" Foreground="DarkGray">
-          <Run Text="("/>
-          <Run Text="{Binding selectedStudent.Course}"/>
-          <Run Text=")"/>
-        </TextBlock>
       </StackPanel>
 
-      <ListView ItemsSource="{Binding StudentAssignments}">
+      <ListView ItemsSource="{Binding StudentResults, Mode=OneWay}">
         <ListView.ItemTemplate>
-          <DataTemplate>
-            <ListView ItemsSource="{Binding Results}">
-              <ListView.ItemTemplate>
-                <DataTemplate>
-                  <TextBlock Text="{Binding Value}"/>
-                </DataTemplate>
-              </ListView.ItemTemplate>
-            </ListView>
-          </DataTemplate>
-        </ListView.ItemTemplate>
-      </ListView>
-
-      <!--<ListView x:Name="studentOverviewListView" ItemsSource="{Binding StudentAssignments}">
-        <ListView.ItemTemplate>
-          <DataTemplate DataType="{x:Type models:Assignment}">
+          <DataTemplate DataType="{x:Type models:Result}">
             <StackPanel Orientation="Horizontal">
-              <TextBlock FontSize="16" HorizontalAlignment="Left" Text="{Binding ModuleRun}"/>
-              
-              <StackPanel Orientation="Horizontal">
-                <TextBlock Foreground="DarkGray" FontSize="16" HorizontalAlignment="Left">
-                  <Run Text="Assignment: "/>
-                  <Run Text="{Binding AssignmentName}"/>
-                </TextBlock>
-                
-                <ListView ItemsSource="{Binding Results}">
-                  <ListView.ItemTemplate>
-                    <DataTemplate DataType="{x:Type models:Identifier}">
-                      <StackPanel Orientation="Horizontal">
-                        <TextBlock Foreground="DarkGray" FontSize="16" HorizontalAlignment="Left">
-                          <Run Text=" - Grade: "/>
-                          <Run Text="{Binding Value}"/>
-                        </TextBlock>
-                      </StackPanel>
-                    </DataTemplate>
-                  </ListView.ItemTemplate>
-                </ListView>
-              </StackPanel>
+              <TextBlock Foreground="DarkGray" FontSize="16" HorizontalAlignment="Left">
+                <Run Text="Assignment:"/>
+                <Run Text="{Binding Assignment, Mode=OneWay}"/>
+              </TextBlock>
+
+              <TextBlock Foreground="DarkGray" FontSize="16" HorizontalAlignment="Left">
+                <Run Text="Grade:"/>
+                <Run Text="{Binding Grade, Mode=OneWay}"/>
+              </TextBlock>
             </StackPanel>
           </DataTemplate>
         </ListView.ItemTemplate>
-      </ListView>-->
+      </ListView>
     </StackPanel>
   </Grid>
 </Page>

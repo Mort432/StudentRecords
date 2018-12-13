@@ -1,16 +1,14 @@
 ﻿using StudentRecordsModels.Models;
 using StudentRecordsServices.Services;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StudentRecordsViewModels.ViewModels
 {
     public class LecturerStudentAnalyticsViewModel
     {
         public User selectedLecturer;
+        public int NoOfGraduatedStudents { get; }
+        public List<Result> LecturerResults { get; }
 
         private IAuthService _authService;
         private ILecturerService _lecturerService;
@@ -21,6 +19,12 @@ namespace StudentRecordsViewModels.ViewModels
             _lecturerService = lecturerService;
 
             selectedLecturer = _authService.authorisedUser;
+
+            NoOfGraduatedStudents = selectedLecturer.Course == null ?
+                0 :
+                _lecturerService.GetGraduatedStudents(selectedLecturer.Course);
+
+            LecturerResults = _lecturerService.GetLecturerResults(selectedLecturer);
         }
 
         public string GetGraduatedStudents()

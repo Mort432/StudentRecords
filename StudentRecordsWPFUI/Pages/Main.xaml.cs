@@ -31,7 +31,7 @@ namespace StudentRecordsWPFUI.Pages
             {
                 ViewModel.LogOut();
 
-                MainWindow.WindowFrame.Navigate(typeof(Login));
+                MainWindow.WindowFrame.Navigate(new Login());
             }
             else
             {
