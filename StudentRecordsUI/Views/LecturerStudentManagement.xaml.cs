@@ -47,29 +47,10 @@ namespace StudentRecordsUI.Views
         private async void gradingButton_Clicked(object sender, RoutedEventArgs e)
         {
             var item = (sender as FrameworkElement).Tag as Assignment;
-            
             string gradeInput = await InputGradeDialog();
-            int grade;
-            if (gradeInput == "Cancel")
-            {
-                //Do nothing if cancelled
-                return;
-            }
-            else if (string.IsNullOrEmpty(gradeInput))
-            {
-                if(item.Results.ElementAt(0) == null)
-                {
-                    //If there isn't a result yet, don't do anything.
-                    return;
-                }
-                //If the submitted string was empty, delete their grade.
-                viewModel.DeleteResult(item);
-            }
-            else if (int.TryParse(gradeInput, out grade)) //Ensure input parses to integer before proceeding
-            {
-                //Assign result given
-                viewModel.AssignResult(item, grade);
-            }
+
+            viewModel.NewResult(item, gradeInput);
+
             this.Bindings.Update();
         }
 

@@ -6,9 +6,89 @@
       xmlns:local="clr-namespace:StudentRecordsWPFUI.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
+      xmlns:data="clr-namespace:StudentRecordsModels.Models;assembly=StudentRecordsModels"
       Title="LecturerStudentManagement">
 
+    <Page.Resources>
+        <DataTemplate DataType="{x:Type data:User}" x:Key="UserDataTemplate">
+            <StackPanel HorizontalAlignment="Left">
+                <TextBlock FontSize="16" HorizontalAlignment="Left">
+                    <Run Text="{Binding FirstName}"/>
+                    <Run Text=" "/>
+                    <Run Text="{Binding LastName}"/>
+                </TextBlock>
+                <TextBlock FontSize="10" Text="{Binding UniversityId}" HorizontalAlignment="Left"></TextBlock>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type data:User}" x:Key="LecturerStudentListViewTemplate">
+            <StackPanel Orientation="Horizontal">
+                <StackPanel HorizontalAlignment="Left">
+                    <TextBlock FontSize="16" Text="{Binding}" HorizontalAlignment="Left"></TextBlock>
+                </StackPanel>
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type data:Assignment}" x:Key="StudentGradingTemplate">
+            <StackPanel Orientation="Horizontal">
+                <StackPanel HorizontalAlignment="Left">
+                    <TextBlock FontSize="16" Text="{Binding ModuleRun, Mode=OneWay}" HorizontalAlignment="Left"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Foreground="DarkGray" FontSize="16" HorizontalAlignment="Left"><Run Text="Assignment: "/><Run Text="{Binding Mode=OneWay}" /></TextBlock>
+                        <TextBlock Foreground="DarkGray" FontSize="16" HorizontalAlignment="Left"><Run Text=" - Grade: "/><Run Text="{Binding Results[0], FallbackValue='Ungraded', Mode=OneWay}" /></TextBlock>
+                        <Button x:Name="studentAssignmentGradingButton" Click="gradingButton_Clicked" Content="Assign Grade" Tag="{Binding Mode=OneWay}"/>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        </DataTemplate>
+    </Page.Resources>
+
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="5*"/>
+        </Grid.ColumnDefinitions>
+        <ListView
+            Grid.Column="0"
+            ItemsSource="{Binding lecturerStudents}"
+            ItemTemplate="{StaticResource LecturerStudentListViewTemplate}"
+            SelectionChanged="lecturerStudentsList_SelectionChanged"
+        />
+
+        <Grid Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="5*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="5*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Column="1">
+                <TextBlock x:Name="studentNameField" FontSize="32" Margin="12,0,0,0" Text="{Binding selectedStudent, Mode=OneWay}"></TextBlock>
+                <TextBlock x:Name="studentEmailField" FontSize="18" Margin="12,0,0,0" Text="{Binding selectedStudent.Email, Mode=OneWay}"></TextBlock>
+                <TextBlock x:Name="studentPhoneField" FontSize="18" Margin="12,0,0,0" Text="{Binding selectedStudent.PhoneNumber, Mode=OneWay}"></TextBlock>
+                <DatePicker IsEnabled="False" x:Name="studentDOBField" FontSize="18" Margin="12,0,0,0" Text="{Binding selectedStudent.DateOfBirth, Mode=OneWay}"></DatePicker>
+                <TextBlock x:Name="studentCourseField" FontSize="18" Margin="12,0,0,0"><Run Text="Course: "/><Run Text="{Binding selectedStudent.Course, Mode=OneWay}"/></TextBlock>
+                <CheckBox
+                    Margin="12,0,0,0"
+                    x:Name="studentGraduatedCheckBox"
+                    Content="Graduated?"
+                    IsChecked="{Binding selectedStudent.Graduated}"
+                    IsEnabled="{Binding StudentOnLecturerCourse, Mode=OneWay}"
+                    Checked="studentGraduatedCheckBox_Graduate"
+                    Unchecked="studentGraduatedCheckBox_Ungraduate"
+                    />
+            </StackPanel>
+            <StackPanel Grid.Row="1" Grid.Column="1">
+                <TextBlock Grid.Column="1" Grid.Row="1" Margin="12,0,0,0" FontSize="32">Assignments and Grade</TextBlock>
+
+                <ListView
+                    x:Name="studentOverviewListView"
+                    ItemsSource="{Binding GetStudentAssignments, Mode=OneWay}"
+                    ItemTemplate="{StaticResource StudentGradingTemplate}">
+                </ListView>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Page>

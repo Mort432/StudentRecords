@@ -72,7 +72,7 @@
                     x:Name="studentGraduatedCheckBox"
                     Content="Graduated?"
                     IsChecked="{x:Bind viewModel.selectedStudent.Graduated}"
-                    IsEnabled="{x:Bind viewModel.StudentOnLecturerCourse(viewModel.selectedStudent)}"
+                    IsEnabled="{x:Bind viewModel.StudentOnLecturerCourse}"
                     Checked="studentGraduatedCheckBox_Graduate"
                     Unchecked="studentGraduatedCheckBox_Ungraduate"
                     />

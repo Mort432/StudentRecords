@@ -11,7 +11,7 @@ namespace StudentRecordsViewModels.ViewModels
     public class LecturerStudentManagementViewModel
     {
         public User selectedLecturer;
-        public User selectedStudent;
+        public User selectedStudent { get; set; }
 
         private IAuthService _authService;
         private ILecturerService _lecturerService;
@@ -62,12 +62,14 @@ namespace StudentRecordsViewModels.ViewModels
             }
         }
 
-        public bool StudentOnLecturerCourse(User student)
+        public bool StudentOnLecturerCourse
         {
-            if (student == null) return false;
-            if (student.Course == null) return false;
-            if (student.Course.Equals(selectedLecturer.Course)) return true;
-            return false;
+            get {
+                if (selectedStudent == null) return false;
+                if (selectedStudent.Course == null) return false;
+                if (selectedStudent.Course.Equals(selectedLecturer.Course)) return true;
+                return false;
+            }
         }
 
         public void UpdateUserGraduation(bool graduation)
@@ -76,13 +78,38 @@ namespace StudentRecordsViewModels.ViewModels
             _usersService.UpdateUser(selectedStudent);
         }
 
-        public void DeleteResult(Assignment assignment)
+        public void NewResult(Assignment assignment, string grade)
         {
-            //Does this need a cascading delete? Double check
+            int gradeValue;
+            if (grade == "Cancel")
+            {
+                //Do nothing if cancelled
+                return;
+            }
+            else if (string.IsNullOrEmpty(grade))
+            {
+                if (assignment.Results.ElementAt(0) == null)
+                {
+                    //If there isn't a result yet, don't do anything.
+                    return;
+                }
+                //If the submitted string was empty, delete their grade.
+                DeleteResult(assignment);
+            }
+            else if (int.TryParse(grade, out gradeValue)) //Ensure input parses to integer before proceeding
+            {
+                //Assign result given
+                AssignResult(assignment, gradeValue);
+            }
+
+        }
+
+        private void DeleteResult(Assignment assignment)
+        {
             _resultsService.DeleteResultByIdentifier(assignment.Results.ElementAt(0));
         }
 
-        public void AssignResult(Assignment assignment, int grade)
+        private void AssignResult(Assignment assignment, int grade)
         {
             
             _resultsService.AssignResult(selectedStudent, assignment, grade);
