@@ -54,7 +54,7 @@
                 </TextBlock>
                 <TextBlock x:Name="studentEmailField" FontSize="18" Margin="12,0,0,0" Text="{Binding selectedUser.Email}"></TextBlock>
                 <TextBlock x:Name="studentPhoneField" FontSize="18" Margin="12,0,0,0" Text="{Binding selectedUser.PhoneNumber}"></TextBlock>
-                <DatePicker IsEnabled="False" x:Name="studentDOBField" FontSize="18" Margin="12,0,0,0" Text="{Binding selectedUser.DateOfBirth}"></DatePicker>
+                <DatePicker IsEnabled="False" x:Name="studentDOBField" FontSize="18" Margin="12,0,0,0" SelectedDate="{Binding selectedUser.DateOfBirth}"></DatePicker>
                 <ComboBox 
                     Margin="12,12,0,0"
                     x:Name="courseComboBox"

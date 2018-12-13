@@ -68,7 +68,7 @@
                 <TextBlock x:Name="studentNameField" FontSize="32" Margin="12,0,0,0" Text="{Binding selectedStudent, Mode=OneWay}"></TextBlock>
                 <TextBlock x:Name="studentEmailField" FontSize="18" Margin="12,0,0,0" Text="{Binding selectedStudent.Email, Mode=OneWay}"></TextBlock>
                 <TextBlock x:Name="studentPhoneField" FontSize="18" Margin="12,0,0,0" Text="{Binding selectedStudent.PhoneNumber, Mode=OneWay}"></TextBlock>
-                <DatePicker IsEnabled="False" x:Name="studentDOBField" FontSize="18" Margin="12,0,0,0" Text="{Binding selectedStudent.DateOfBirth, Mode=OneWay}"></DatePicker>
+                <DatePicker IsEnabled="False" x:Name="studentDOBField" FontSize="18" Margin="12,0,0,0" SelectedDate="{Binding selectedStudent.DateOfBirth, Mode=OneWay}"></DatePicker>
                 <TextBlock x:Name="studentCourseField" FontSize="18" Margin="12,0,0,0"><Run Text="Course: "/><Run Text="{Binding selectedStudent.Course, Mode=OneWay}"/></TextBlock>
                 <CheckBox
                     Margin="12,0,0,0"

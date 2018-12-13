@@ -14,7 +14,7 @@
         </TextBlock>
         <TextBlock x:Name="lecturerEmailField" FontSize="18" Margin="12,0,0,0" Text="{Binding selectedLecturer.Email}"></TextBlock>
         <TextBlock x:Name="lecturerPhoneField" FontSize="18" Margin="12,0,0,0" Text="{Binding selectedLecturer.PhoneNumber}"></TextBlock>
-    <DatePicker x:Name="lecturerDOBField" FontSize="18" Margin="12,0,0,0" Text="{Binding selectedLecturer.DateOfBirth}" IsEnabled="False"/>
+    <DatePicker x:Name="lecturerDOBField" FontSize="18" Margin="12,0,0,0" SelectedDate="{Binding selectedLecturer.DateOfBirth}" IsEnabled="False"/>
     <TextBlock x:Name="lecturerCourseField" FontSize="18" Margin="12,0,0,0">
       <Run Text="Course Leader for: "/>
       <Run Text="{Binding selectedLecturer.Course, Mode=OneWay}"/>
