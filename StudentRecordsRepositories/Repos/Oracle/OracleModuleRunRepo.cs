@@ -9,13 +9,7 @@ namespace StudentRecordsRepositories.Repos.Oracle
 {
     class OracleModuleRunRepo : OracleRepo<ModuleRun>, IModuleRunRepo
     {
-        public override string SelectCommandText => throw new NotImplementedException();
-
-        public override string InsertCommandText => throw new NotImplementedException();
-
-        public override string UpdateCommandText => throw new NotImplementedException();
-
-        public override string Table => throw new NotImplementedException();
+        public override string Table => ModuleRuns;
 
         public List<ModuleRun> GetLecturerModuleRuns(User lecturer)
         {
@@ -31,5 +25,10 @@ namespace StudentRecordsRepositories.Repos.Oracle
         {
             throw new NotImplementedException();
         }
+        public override string SelectCommandText => throw new NotImplementedException();
+
+        public override string InsertCommandText => throw new NotImplementedException();
+
+        public override string UpdateCommandText => throw new NotImplementedException();
     }
 }

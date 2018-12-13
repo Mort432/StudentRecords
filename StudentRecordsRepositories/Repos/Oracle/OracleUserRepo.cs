@@ -10,13 +10,7 @@ namespace StudentRecordsRepositories.Repos.Oracle
 {
     class OracleUserRepo : OracleRepo<User>, IUserRepo
     {
-        public override string SelectCommandText => throw new NotImplementedException();
-
-        public override string InsertCommandText => throw new NotImplementedException();
-
-        public override string UpdateCommandText => throw new NotImplementedException();
-
-        public override string Table => throw new NotImplementedException();
+        public override string Table => Users;
 
         public int CountGraduatedCourseUsers(Course course)
         {
@@ -52,5 +46,11 @@ namespace StudentRecordsRepositories.Repos.Oracle
         {
             throw new NotImplementedException();
         }
+
+        public override string SelectCommandText => throw new NotImplementedException();
+
+        public override string InsertCommandText => throw new NotImplementedException();
+
+        public override string UpdateCommandText => throw new NotImplementedException();
     }
 }

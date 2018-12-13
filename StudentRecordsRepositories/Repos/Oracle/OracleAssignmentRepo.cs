@@ -9,13 +9,7 @@ namespace StudentRecordsRepositories.Repos.Oracle
 {
     class OracleAssignmentRepo : OracleRepo<Assignment>, IAssignmentRepo
     {
-        public override string SelectCommandText => throw new NotImplementedException();
-
-        public override string InsertCommandText => throw new NotImplementedException();
-
-        public override string UpdateCommandText => throw new NotImplementedException();
-
-        public override string Table => throw new NotImplementedException();
+        public override string Table => Assignments;
 
         public List<Assignment> GetUserAssignments(User user)
         {
@@ -31,5 +25,11 @@ namespace StudentRecordsRepositories.Repos.Oracle
         {
             throw new NotImplementedException();
         }
+
+        public override string SelectCommandText => throw new NotImplementedException();
+
+        public override string InsertCommandText => throw new NotImplementedException();
+
+        public override string UpdateCommandText => throw new NotImplementedException();
     }
 }

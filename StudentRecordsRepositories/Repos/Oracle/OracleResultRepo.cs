@@ -9,13 +9,7 @@ namespace StudentRecordsRepositories.Repos.Oracle
 {
     class OracleResultRepo : OracleRepo<Result>, IResultRepo
     {
-        public override string SelectCommandText => throw new NotImplementedException();
-
-        public override string InsertCommandText => throw new NotImplementedException();
-
-        public override string UpdateCommandText => throw new NotImplementedException();
-
-        public override string Table => throw new NotImplementedException();
+        public override string Table => Results;
 
         public Identifier GetExistingResult(Assignment assignment, User student)
         {
@@ -41,5 +35,11 @@ namespace StudentRecordsRepositories.Repos.Oracle
         {
             throw new NotImplementedException();
         }
+
+        public override string SelectCommandText => throw new NotImplementedException();
+
+        public override string InsertCommandText => throw new NotImplementedException();
+
+        public override string UpdateCommandText => throw new NotImplementedException();
     }
 }

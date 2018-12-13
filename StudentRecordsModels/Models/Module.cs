@@ -10,7 +10,7 @@ namespace StudentRecordsModels.Models
     {
         public string ModuleTitle { get; set; }
         public string ModuleCode { get; set; }
-        public IEnumerable<Identifier> ModuleRuns { get; set; }
+        public List<Identifier> ModuleRuns { get; set; }
 
         public string GetCodeAndName()
         {

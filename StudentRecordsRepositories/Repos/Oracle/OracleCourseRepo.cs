@@ -9,13 +9,7 @@ namespace StudentRecordsRepositories.Repos.Oracle
 {
     class OracleCourseRepo : OracleRepo<Course>, ICourseRepo
     {
-        public override string SelectCommandText => throw new NotImplementedException();
-
-        public override string InsertCommandText => throw new NotImplementedException();
-
-        public override string UpdateCommandText => throw new NotImplementedException();
-
-        public override string Table => throw new NotImplementedException();
+        public override string Table => Courses;
 
         public override Course ToModel(DbDataReader reader)
         {
@@ -26,5 +20,11 @@ namespace StudentRecordsRepositories.Repos.Oracle
         {
             throw new NotImplementedException();
         }
+
+        public override string SelectCommandText => throw new NotImplementedException();
+
+        public override string InsertCommandText => throw new NotImplementedException();
+
+        public override string UpdateCommandText => throw new NotImplementedException();
     }
 }
