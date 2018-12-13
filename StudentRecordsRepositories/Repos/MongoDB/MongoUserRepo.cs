@@ -26,11 +26,14 @@ namespace StudentRecordsRepositories.Repos.Mongo
 
         public List<User> GetLecturerStudents(User lecturer)
         {
-            var courseStudents = Select(x => (x.Course != null) && lecturer.Course.Id.Equals(x.Course.Id) && x.Role == UserRole.Student);
-            var moduleStudents = Select(user => user.Enrollments.Any(userEnrollment => lecturer.Enrollments.Contains(userEnrollment)) && user.Role == UserRole.Student);
-            var myStudents = courseStudents.Result.ToList().Union(moduleStudents.Result.ToList()).ToList();
+            var courseStudents = Select(x => (x.Course != null) && lecturer.Course.Id.Equals(x.Course.Id) && x.Role == UserRole.Student).Result.ToList();
+            var moduleStudents = Select(user => user.Enrollments.Any(userEnrollment => lecturer.Enrollments.Contains(userEnrollment)) && user.Role == UserRole.Student).Result;
+            var all = new List<User>();
+            all.AddRange(courseStudents);
+            all.AddRange(moduleStudents);
+            var myStudents = all.GroupBy(x => x.Id).Select(g => g.First());
 
-            return myStudents;
+            return myStudents.ToList();
         }
 
         public List<User> GetUsersFromCourse(Course course)

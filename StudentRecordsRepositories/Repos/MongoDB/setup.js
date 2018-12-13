@@ -151,7 +151,7 @@ ct1337ModuleRun.lecturer = {
 abu.enrollments = [
     {
         _id: ct1337ModuleRun._id,
-        value: ct1337.code + ": " + ct1337.title + " (" + ct1337.ModuleRun.lecturer.value + ")"
+        value: ct1337.code + ": " + ct1337.title + " (" + ct1337ModuleRun.lecturer.value + ")"
     }
 ];
 
