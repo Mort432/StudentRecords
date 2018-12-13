@@ -10,10 +10,10 @@ namespace StudentRecordsViewModels.ViewModels
 {
     public class StudentEnrollmentsViewModel
     {
-        public User selectedUser;
+        public User selectedUser { get; }
 
         public List<Identifier> allModuleRuns = new List<Identifier>();
-        public List<Identifier> allCourses = new List<Identifier>();
+        public List<Identifier> allCourses { get; }
 
         private IAuthService _authService;
         private IUsersService _usersService;
@@ -32,15 +32,21 @@ namespace StudentRecordsViewModels.ViewModels
             allCourses = _coursesService.GetAllCourses().Result.Select(x => x.ToIdentifier()).ToList();
         }
 
-        public List<Identifier> GetAvailableModules()
+        public List<Identifier> GetAvailableModules
         {
-            var returnVal = allModuleRuns.Where(p => !selectedUser.Enrollments.Any(x => x.Id.Equals(p.Id))).ToList();
-            return returnVal;
+            get
+            {
+                var returnVal = allModuleRuns.Where(p => !selectedUser.Enrollments.Any(x => x.Id.Equals(p.Id))).ToList();
+                return returnVal;
+            }
         }
 
-        public List<Identifier> GetCurrentModules()
+        public List<Identifier> GetCurrentModules
         {
-            return new List<Identifier>(selectedUser.Enrollments);
+            get
+            {
+                return new List<Identifier>(selectedUser.Enrollments);
+            }
         }
 
         public void EnrollUserToModule(Identifier module)

@@ -4,11 +4,100 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:StudentRecordsWPFUI.Pages"
+      xmlns:data="clr-namespace:StudentRecordsModels.Models;assembly=StudentRecordsModels"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="StudentEnrollments">
 
+    <Page.Resources>
+        <DataTemplate DataType="{x:Type data:Identifier}" x:Key="StudentCourseTemplate">
+            <TextBlock Text="{Binding}"/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type data:Identifier}" x:Key="StudentEnrollmentTemplate">
+            <StackPanel Orientation="Horizontal">
+                <StackPanel HorizontalAlignment="Left">
+                    <TextBlock FontSize="16" Text="{Binding}" HorizontalAlignment="Left"></TextBlock>
+                    <Button Width="100" Content="Enroll" Tag="{Binding}" Click="enrollButton_Click"></Button>
+                </StackPanel>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type data:Identifier}" x:Key="StudentUnenrollmentTemplate">
+            <StackPanel Orientation="Horizontal">
+                <StackPanel HorizontalAlignment="Left">
+                    <TextBlock FontSize="16" Text="{Binding}" HorizontalAlignment="Left"></TextBlock>
+                    <Button Width="100" Content="Unenroll" Tag="{Binding}" Click="unenrollButton_Click"></Button>
+                </StackPanel>
+            </StackPanel>
+        </DataTemplate>
+    </Page.Resources>
+
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="5*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="3*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Column="1">
+                <TextBlock x:Name="studentNameField" FontSize="32" Margin="12,0,0,0">
+                    <Run Text="{Binding selectedUser.FirstName}"/>
+                    <Run Text=" "/>
+                    <Run Text="{Binding selectedUser.LastName}"/>
+                </TextBlock>
+                <TextBlock x:Name="studentEmailField" FontSize="18" Margin="12,0,0,0" Text="{Binding selectedUser.Email}"></TextBlock>
+                <TextBlock x:Name="studentPhoneField" FontSize="18" Margin="12,0,0,0" Text="{Binding selectedUser.PhoneNumber}"></TextBlock>
+                <DatePicker IsEnabled="False" x:Name="studentDOBField" FontSize="18" Margin="12,0,0,0" Text="{Binding selectedUser.DateOfBirth}"></DatePicker>
+                <ComboBox 
+                    Margin="12,12,0,0"
+                    x:Name="courseComboBox"
+                    ItemTemplate="{StaticResource StudentCourseTemplate}"
+                    Width="200"
+                    SelectedItem="{Binding selectedUser.Course, Mode=TwoWay}"
+                    ItemsSource="{Binding allCourses, Mode=OneWay}"
+                    SelectionChanged="courseComboBox_SelectionChanged"
+                />
+            </StackPanel> 
+
+            <StackPanel Grid.Column="1" Grid.Row="2">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Margin="12,0,0,0" FontSize="32">Available Modules</TextBlock>
+
+                        <ListView
+                        x:Name="studentEnrollmentsListView"
+                        ItemsSource="{Binding GetAvailableModules}" 
+                        ItemTemplate="{StaticResource StudentEnrollmentTemplate}">
+                        </ListView>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Vertical" Grid.Column="1">
+                        <TextBlock Margin="12,0,0,0" FontSize="32">Current Modules</TextBlock>
+
+                        <ListView
+                        Grid.Column="1"
+                        x:Name="studentUnenrollmentsListView"
+                        ItemsSource="{Binding GetCurrentModules}" 
+                        ItemTemplate="{StaticResource StudentUnenrollmentTemplate}">
+                        </ListView>
+                    </StackPanel>
+                </Grid>
+
+
+            </StackPanel>
+        </Grid>
     </Grid>
+
 </Page>

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Autofac;
+using StudentRecordsModels.Models;
+using StudentRecordsViewModels.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +26,42 @@ namespace StudentRecordsWPFUI.Pages
         public StudentEnrollments()
         {
             InitializeComponent();
+        }
+
+        private StudentEnrollmentsViewModel viewModel = App.Container.Resolve<StudentEnrollmentsViewModel>();
+
+        protected override void OnInitialized(EventArgs e)
+        {
+            DataContext = viewModel;
+
+            base.OnInitialized(e);
+        }
+
+        private void enrollButton_Click(object sender, RoutedEventArgs e)
+        {
+            var item = (sender as FrameworkElement).Tag as Identifier;
+
+            viewModel.EnrollUserToModule(item);
+
+            DataContext = null;
+            DataContext = viewModel;
+        }
+
+        private void unenrollButton_Click(object sender, RoutedEventArgs e)
+        {
+            var item = (sender as FrameworkElement).Tag as Identifier;
+
+            viewModel.UnenrollUserFromModule(item);
+
+            DataContext = null;
+            DataContext = viewModel;
+        }
+
+        private void courseComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var item = ((sender as ComboBox).SelectedItem as Identifier);
+
+            viewModel.ChangeUserCourse(item);
         }
     }
 }

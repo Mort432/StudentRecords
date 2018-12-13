@@ -77,7 +77,7 @@
 
                         <ListView
                             x:Name="studentEnrollmentsListView"
-                            ItemsSource="{x:Bind viewModel.GetAvailableModules()}" 
+                            ItemsSource="{x:Bind viewModel.GetAvailableModules}" 
                             ItemTemplate="{StaticResource StudentEnrollmentTemplate}"
                             SelectionMode="None">
                         </ListView>
@@ -89,7 +89,7 @@
                         <ListView
                             Grid.Column="1"
                             x:Name="studentUnenrollmentsListView"
-                            ItemsSource="{x:Bind viewModel.GetCurrentModules()}" 
+                            ItemsSource="{x:Bind viewModel.GetCurrentModules}" 
                             ItemTemplate="{StaticResource StudentUnenrollmentTemplate}"
                             SelectionMode="None">
                         </ListView>
