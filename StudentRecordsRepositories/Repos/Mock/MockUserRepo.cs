@@ -38,7 +38,7 @@ namespace StudentRecordsRepositories.Repos.Mock
 
         public List<User> GetUsersFromCourse(Course course)
         {
-            return Select(x => course.Students.Any(z => z.Id.Equals(x.Id))).Result.ToList();
+            return Select(x => (x.Course != null) && course.Id.Equals(x.Course.Id) && x.Role == UserRole.Student).Result.ToList();
         }
 
         public int CountGraduatedCourseUsers(Course course)

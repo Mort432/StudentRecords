@@ -10,7 +10,7 @@ namespace StudentRecordsViewModels.ViewModels
 {
     public class LecturerProfileViewModel
     {
-        public User selectedLecturer;
+        public User selectedLecturer { get; }
 
         private IAuthService _authService;
 

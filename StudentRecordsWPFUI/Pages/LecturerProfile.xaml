@@ -7,13 +7,17 @@
   mc:Ignorable="d">
 
   <StackPanel>
-    <TextBlock x:Name="lecturerNameField" FontSize="32" Margin="12,0,0,0" Text="{Binding selectedLecturer.GetFullName(), FallbackValue='Lecturer Name'}">Lecturer Name</TextBlock>
-    <TextBlock x:Name="lecturerEmailField" FontSize="18" Margin="12,0,0,0" Text="{Binding selectedLecturer.Email, FallbackValue='Lecturer Email'}">Lecturer Email</TextBlock>
-    <TextBlock x:Name="lecturerPhoneField" FontSize="18" Margin="12,0,0,0" Text="{Binding selectedLecturer.PhoneNumber, FallbackValue='Lecturer Phone'}">Lecturer Phone</TextBlock>
-    <TextBlock x:Name="lecturerDOBField" FontSize="18" Margin="12,0,0,0" Text="{Binding selectedLecturer.DateOfBirth.ToShortDateString(), FallbackValue='Lecturer DOB'}">Lecturer DOB</TextBlock>
+        <TextBlock x:Name="lecturerNameField" FontSize="32" Margin="12,0,0,0">
+            <Run Text="{Binding selectedLecturer.FirstName}"/>
+            <Run Text=" "/>
+            <Run Text="{Binding selectedLecturer.LastName}"/>
+        </TextBlock>
+        <TextBlock x:Name="lecturerEmailField" FontSize="18" Margin="12,0,0,0" Text="{Binding selectedLecturer.Email}"></TextBlock>
+        <TextBlock x:Name="lecturerPhoneField" FontSize="18" Margin="12,0,0,0" Text="{Binding selectedLecturer.PhoneNumber}"></TextBlock>
+    <DatePicker x:Name="lecturerDOBField" FontSize="18" Margin="12,0,0,0" Text="{Binding selectedLecturer.DateOfBirth}" IsEnabled="False"/>
     <TextBlock x:Name="lecturerCourseField" FontSize="18" Margin="12,0,0,0">
       <Run Text="Course Leader for: "/>
-      <Run Text="{Binding selectedLecturer.Course, FallbackValue='N/A'}"/>
+      <Run Text="{Binding selectedLecturer.Course, Mode=OneWay}"/>
     </TextBlock>
   </StackPanel>
 </Page>

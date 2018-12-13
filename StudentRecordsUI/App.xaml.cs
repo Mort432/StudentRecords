@@ -124,7 +124,7 @@ namespace StudentRecordsUI
             builder.RegisterType<LecturerStudentAnalyticsViewModel>().InstancePerDependency();
 
             //Repos
-            BuildMongoRepos(builder);
+            BuildMockRepos(builder);
 
             return builder.Build();
         }
