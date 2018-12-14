@@ -1,6 +1,8 @@
 ﻿using Autofac;
 using StudentRecordsRepositories.Repos;
 using StudentRecordsRepositories.Repos.Mock;
+using StudentRecordsRepositories.Repos.Mongo;
+using StudentRecordsRepositories.Repos.Oracle;
 using StudentRecordsServices.Services;
 using StudentRecordsViewModels.ViewModels;
 using StudentRecordsWPFUI.ViewModels;
@@ -40,14 +42,37 @@ namespace StudentRecordsWPFUI
             builder.RegisterType<LecturerStudentAnalyticsViewModel>().InstancePerDependency();
 
             //Repos
+            BuildMockRepos(builder);
+
+            Container = builder.Build();
+        }
+
+        private void BuildMockRepos(ContainerBuilder builder)
+        {
             builder.RegisterType<MockUserRepo>().As<IUserRepo>().SingleInstance();
             builder.RegisterType<MockModuleRepo>().As<IModuleRepo>().SingleInstance();
             builder.RegisterType<MockModuleRunRepo>().As<IModuleRunRepo>().SingleInstance();
             builder.RegisterType<MockCourseRepo>().As<ICourseRepo>().SingleInstance();
             builder.RegisterType<MockResultRepo>().As<IResultRepo>().SingleInstance();
             builder.RegisterType<MockAssignmentRepo>().As<IAssignmentRepo>().SingleInstance();
-
-            Container = builder.Build();
+        }
+        private void BuildMongoRepos(ContainerBuilder builder)
+        {
+            builder.RegisterType<MongoUserRepo>().As<IUserRepo>().SingleInstance();
+            builder.RegisterType<MongoModuleRepo>().As<IModuleRepo>().SingleInstance();
+            builder.RegisterType<MongoModuleRunRepo>().As<IModuleRunRepo>().SingleInstance();
+            builder.RegisterType<MongoCourseRepo>().As<ICourseRepo>().SingleInstance();
+            builder.RegisterType<MongoResultRepo>().As<IResultRepo>().SingleInstance();
+            builder.RegisterType<MongoAssignmentRepo>().As<IAssignmentRepo>().SingleInstance();
+        }
+        private void BuildOracleRepos(ContainerBuilder builder)
+        {
+            builder.RegisterType<OracleUserRepo>().As<IUserRepo>().SingleInstance();
+            builder.RegisterType<OracleModuleRepo>().As<IModuleRepo>().SingleInstance();
+            builder.RegisterType<OracleModuleRunRepo>().As<IModuleRunRepo>().SingleInstance();
+            builder.RegisterType<OracleCourseRepo>().As<ICourseRepo>().SingleInstance();
+            builder.RegisterType<OracleResultRepo>().As<IResultRepo>().SingleInstance();
+            builder.RegisterType<OracleAssignmentRepo>().As<IAssignmentRepo>().SingleInstance();
         }
     }
 }

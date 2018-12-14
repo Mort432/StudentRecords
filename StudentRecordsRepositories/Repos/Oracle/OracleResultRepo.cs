@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace StudentRecordsRepositories.Repos.Oracle
 {
-    class OracleResultRepo : OracleRepo<Result>, IResultRepo
+    public class OracleResultRepo : OracleRepo<Result>, IResultRepo
     {
         public override string Table => Results;
 

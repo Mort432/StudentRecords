@@ -8,7 +8,7 @@ using StudentRecordsModels.Models;
 
 namespace StudentRecordsRepositories.Repos.Oracle
 {
-    class OracleModuleRepo : OracleRepo<Module>, IModuleRepo
+    public class OracleModuleRepo : OracleRepo<Module>, IModuleRepo
     {
         public override string Table => Modules;
 

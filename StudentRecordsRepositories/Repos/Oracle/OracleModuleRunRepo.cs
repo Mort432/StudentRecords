@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace StudentRecordsRepositories.Repos.Oracle
 {
-    class OracleModuleRunRepo : OracleRepo<ModuleRun>, IModuleRunRepo
+    public class OracleModuleRunRepo : OracleRepo<ModuleRun>, IModuleRunRepo
     {
         public override string Table => ModuleRuns;
 

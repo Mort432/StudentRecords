@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace StudentRecordsRepositories.Repos.Oracle
 {
-    class OracleUserRepo : OracleRepo<User>, IUserRepo
+    public class OracleUserRepo : OracleRepo<User>, IUserRepo
     {
         public override string Table => Users;
 

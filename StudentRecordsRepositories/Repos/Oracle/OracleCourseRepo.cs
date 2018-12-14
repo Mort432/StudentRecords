@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace StudentRecordsRepositories.Repos.Oracle
 {
-    class OracleCourseRepo : OracleRepo<Course>, ICourseRepo
+    public class OracleCourseRepo : OracleRepo<Course>, ICourseRepo
     {
         public override string Table => Courses;
 
