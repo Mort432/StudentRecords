@@ -10,15 +10,18 @@ namespace StudentRecordsUI.ViewModels
     {
         public IEnumerable<NavigationMenuItemModel> MenuItems { get; set; }
 
+        //Inject dependancies
         private IAuthService _authService;
 
         public MainPageViewModel(IAuthService authService)
         {
             _authService = authService;
 
+            //Populate nav bar menu items
             MenuItems = GetMenuItems();
         }
 
+        //Populate nav menu items based on the authed user's role
         public IEnumerable<NavigationMenuItemModel> GetMenuItems()
         {
             User currentUser = _authService.authorisedUser;

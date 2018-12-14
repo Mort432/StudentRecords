@@ -101,6 +101,7 @@ namespace StudentRecordsUI
             deferral.Complete();
         }
 
+        //This configures Autofac's dependency injection.
         private static IContainer AutofacConfig()
         {
             var builder = new ContainerBuilder();
@@ -124,6 +125,8 @@ namespace StudentRecordsUI
             builder.RegisterType<LecturerStudentAnalyticsViewModel>().InstancePerDependency();
 
             //Repos
+            //If you want to try this app with the Mock DB, switch this line for BuildMockRepos.
+            //Unfortunately, UWP does not support Oracle databases at this time.
             BuildMongoRepos(builder);
 
             return builder.Build();

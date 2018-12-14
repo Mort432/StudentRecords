@@ -19,6 +19,7 @@ namespace StudentRecordsUI
             this.InitializeComponent();
         }
 
+        //Fetch the view model from Autofac.
         MainPageViewModel ViewModel = App._container.Resolve<MainPageViewModel>();
         
         private void mainNavigationDrawer_Loaded(object sender, RoutedEventArgs e)
@@ -31,9 +32,11 @@ namespace StudentRecordsUI
                     break;
                 }
             }
+            //When the nav bar loads, navigate to Home.
             contentFrame.Navigate(typeof(Home));
         }
 
+        //When a nav item is clicked
         private void mainNavigationDrawer_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {
             var navItem = args.InvokedItem as NavigationMenuItemModel;
@@ -43,11 +46,13 @@ namespace StudentRecordsUI
             }
             if (navItem.Content == "Log Out")
             {
+                //If the nav item was logout, log the user out and navigate back to login
                 ViewModel.LogOut();
                 Frame.Navigate(typeof(Login));
                 return;
             }
 
+            //Navigate to that nav item
             contentFrame.Navigate(navItem.ViewType);
             mainNavigationDrawer.Header = navItem.Content;
         }

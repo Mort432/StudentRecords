@@ -17,6 +17,7 @@ namespace StudentRecordsUI.Views
             this.InitializeComponent();
         }
 
+        //Fetch the view model from Autofac.
         StudentProfileViewModel viewModel = App._container.Resolve<StudentProfileViewModel>();
     }
 }

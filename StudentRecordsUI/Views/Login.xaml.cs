@@ -17,6 +17,7 @@ namespace StudentRecordsUI.Views
             this.InitializeComponent();
         }
 
+        //Fetch the view model from Autofac.
         LoginViewModel viewModel = App._container.Resolve<LoginViewModel>();
 
         private void loginButton_Clicked(object sender, RoutedEventArgs e)

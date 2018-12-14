@@ -9,6 +9,7 @@ using Windows.UI.Xaml.Data;
 
 namespace StudentRecordsUI.Converters
 {
+    //Converts boolean to visibility for UWP rendering
     public class BoolToVisibilityConverter : IValueConverter
     {
         private object GetVisibility(object value)
