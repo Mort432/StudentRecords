@@ -147,8 +147,8 @@ namespace StudentRecordsRepositories.Repos.Oracle
             VALUES
                 (
                     :assignment,
-                    :grade,
-                    :student
+                    :student,
+                    :grade
                 )
         ";
 
