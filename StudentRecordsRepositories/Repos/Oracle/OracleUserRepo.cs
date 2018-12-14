@@ -80,7 +80,7 @@ namespace StudentRecordsRepositories.Repos.Oracle
                     if (studentRunIds.Count > 0)
                     {
                         command.CommandText += "AND MODULERUNID NOT IN (:moduleRunIds)";
-                        AddArrayParametersForEnrollments(command, "runIds", studentRunIds);
+                        AddArrayParametersForEnrollments(command, "moduleRunIds", studentRunIds);
                     }
 
                     await command.ExecuteNonQueryAsync();

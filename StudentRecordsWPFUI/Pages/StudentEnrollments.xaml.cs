@@ -59,7 +59,12 @@ namespace StudentRecordsWPFUI.Pages
 
         private void courseComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (!courseComboBox.IsLoaded) return;
             var item = ((sender as ComboBox).SelectedItem as Identifier);
+            if (item == null)
+            {
+                return;
+            }
 
             viewModel.ChangeUserCourse(item);
         }
