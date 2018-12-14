@@ -12,6 +12,7 @@ namespace StudentRecordsViewModels.ViewModels
     {
         public List<User> AvailableUsers { get; set; }
 
+        //Inject dependancies
         private IUsersService _usersService;
         private IAuthService _authService;
 
@@ -20,6 +21,7 @@ namespace StudentRecordsViewModels.ViewModels
             _usersService = usersService;
             _authService = authService;
 
+            //Populate users to log in as
             AvailableUsers = _usersService.GetAllUsers().Result.ToList();
         }
 

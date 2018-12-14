@@ -12,6 +12,7 @@ namespace StudentRecordsViewModels.ViewModels
     {
         public User selectedLecturer { get; }
 
+        //Inject dependancies
         private IAuthService _authService;
 
         public LecturerProfileViewModel(IAuthService authService)

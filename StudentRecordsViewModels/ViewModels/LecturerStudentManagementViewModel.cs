@@ -13,6 +13,7 @@ namespace StudentRecordsViewModels.ViewModels
         public User selectedLecturer;
         public User selectedStudent { get; set; }
 
+        //Inject dependancies
         private IAuthService _authService;
         private ILecturerService _lecturerService;
         private IUsersService _usersService;
@@ -35,6 +36,7 @@ namespace StudentRecordsViewModels.ViewModels
             return _lecturerService.GetLecturerStudents(selectedLecturer);
         }
 
+        //Exposes lecturerStudents
         public List<User> lecturerStudents
         {
             get
@@ -43,6 +45,7 @@ namespace StudentRecordsViewModels.ViewModels
             }
         }
 
+        //Get the selected student's assignments
         public List<Assignment> GetStudentAssignments
         {
             get
@@ -62,6 +65,8 @@ namespace StudentRecordsViewModels.ViewModels
             }
         }
 
+        //Check if the student is on the lecturer's course.
+        //Only course leaders can graduate a student.
         public bool StudentOnLecturerCourse
         {
             get {
@@ -78,6 +83,7 @@ namespace StudentRecordsViewModels.ViewModels
             _usersService.UpdateUser(selectedStudent);
         }
 
+        //Prepare to assign a new result
         public void NewResult(Assignment assignment, string grade)
         {
             int gradeValue;

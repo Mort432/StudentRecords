@@ -15,6 +15,7 @@ namespace StudentRecordsViewModels.ViewModels
         public List<Identifier> allModuleRuns = new List<Identifier>();
         public List<Identifier> allCourses { get; }
 
+        //Inject dependancies
         private IAuthService _authService;
         private IUsersService _usersService;
         private IModulesService _modulesService;
@@ -32,6 +33,7 @@ namespace StudentRecordsViewModels.ViewModels
             allCourses = _coursesService.GetAllCourses().Result.Select(x => x.ToIdentifier()).ToList();
         }
 
+        //Get module runs the user is not enrolled on
         public List<Identifier> GetAvailableModules
         {
             get
@@ -41,6 +43,7 @@ namespace StudentRecordsViewModels.ViewModels
             }
         }
 
+        //Get module runs the user is enrolled on
         public List<Identifier> GetCurrentModules
         {
             get

@@ -10,6 +10,7 @@ namespace StudentRecordsViewModels.ViewModels
         public int NoOfGraduatedStudents { get; }
         public List<Result> LecturerResults { get; }
 
+        //Inject dependancies
         private IAuthService _authService;
         private ILecturerService _lecturerService;
 
