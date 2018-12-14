@@ -1,4 +1,6 @@
-﻿using MongoDB.Driver;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
+using MongoDB.Driver;
 using StudentRecordsModels.Models;
 using StudentRecordsModels.Models.Enums;
 using System;
@@ -43,7 +45,55 @@ namespace StudentRecordsRepositories.Repos.Mongo
 
         public int CountGraduatedCourseUsers(Course course)
         {
-            return GetUsersFromCourse(course).Where(x => x.Graduated).Count();
+            //return GetUsersFromCourse(course).Where(x => x.Graduated).Count();
+
+
+            // map function
+            var map = new BsonJavaScript(@"
+                function() {
+                    emit(this.course, 1);
+                }
+            ");
+
+            // reduce function
+            var reduce = new BsonJavaScript(@"
+                function(key, values) {
+                    return Array.sum(values);
+                }
+            ");
+
+            // map reduce filters
+            var filter = Builders<User>.Filter.Eq(x => x.Graduated, true) & Builders<User>.Filter.Eq(x => x.Course.Id, course.Id);
+
+            // map reduce finalize
+            var finalize = new BsonJavaScript(@"
+                function(key, value) {
+                    return parseInt(value);
+                }
+            ");
+
+            // map reduce options
+            var options = new MapReduceOptions<User, BsonDocument>
+            {
+                Filter = filter,
+                Finalize = finalize
+            };
+
+            // execute and retrieve
+            var cursor = Collection.MapReduceAsync(map, reduce, options).Result;
+
+            var studentsPassed = cursor.ToList();
+
+            // parse to dictionary
+            var dictionary = studentsPassed.ToDictionary(
+                bson => BsonSerializer.Deserialize<Identifier>(bson.GetValue("_id").ToBsonDocument()),
+                bson => bson.GetValue("value").ToInt32()
+            );
+
+            // get count, or return none
+            var count = dictionary.Select(x => x.Value).SingleOrDefault();
+
+            return count;
         }
 
         public override void Update(User item)

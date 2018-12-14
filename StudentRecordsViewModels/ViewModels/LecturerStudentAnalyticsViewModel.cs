@@ -27,14 +27,6 @@ namespace StudentRecordsViewModels.ViewModels
             LecturerResults = _lecturerService.GetLecturerResults(selectedLecturer);
         }
 
-        public string GetGraduatedStudents()
-        {
-            //Return zero if the lecturer is not a course leader
-            if (selectedLecturer.Course == null) return 0.ToString();
-
-            return _lecturerService.GetGraduatedStudents(selectedLecturer.Course).ToString();
-        }
-
         public List<Result> GetLecturerResults()
         {
             return _lecturerService.GetLecturerResults(selectedLecturer);

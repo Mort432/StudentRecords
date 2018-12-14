@@ -32,7 +32,7 @@
                 Margin="12,0,0,0" 
                 FontSize="32">
                 <Run Text="Graduated Students: "/>
-                <Run Text="{x:Bind viewModel.GetGraduatedStudents()}"/>
+                <Run Text="{x:Bind viewModel.NoOfGraduatedStudents}"/>
             </TextBlock>
             
             <TextBlock Margin="12,48,0,0" FontSize="32">Student Results</TextBlock>
