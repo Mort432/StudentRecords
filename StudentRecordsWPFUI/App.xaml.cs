@@ -42,7 +42,7 @@ namespace StudentRecordsWPFUI
             builder.RegisterType<LecturerStudentAnalyticsViewModel>().InstancePerDependency();
 
             //Repos
-            BuildMockRepos(builder);
+            BuildOracleRepos(builder);
 
             Container = builder.Build();
         }
