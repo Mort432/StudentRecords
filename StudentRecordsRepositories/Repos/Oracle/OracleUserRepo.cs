@@ -17,26 +17,32 @@ namespace StudentRecordsRepositories.Repos.Oracle
         //FUNCTIONS
         public int CountGraduatedCourseUsers(Course course)
         {
+            //Select users on course where Graduated is true, then return count
             return GetUsersFromCourse(course).Where(x => x.Graduated).Count();
         }
 
         public Task<IEnumerable<User>> GetAllLecturers()
         {
+            //Return where role = lecturer
             return Select(x => x.Role == UserRole.Lecturer);
         }
 
         public Task<IEnumerable<User>> GetAllStudents()
         {
+            //Return where role = student
             return Select(x => x.Role == UserRole.Student);
         }
 
         public List<User> GetLecturerStudents(User lecturer)
         {
+            //Get students on lecturer course
             var courseStudents = Select(x => (x.Course != null) && lecturer.Course.Id.Equals(x.Course.Id) && x.Role == UserRole.Student).Result.ToList();
+            //Get students in lecturer modeuls
             var moduleStudents = Select(user => user.Enrollments.Any(userEnrollment => lecturer.Enrollments.Contains(userEnrollment)) && user.Role == UserRole.Student).Result;
             var all = new List<User>();
             all.AddRange(courseStudents);
             all.AddRange(moduleStudents);
+            //Union collected set eliminating duplicates
             var myStudents = all.GroupBy(x => x.Id).Select(g => g.First());
 
             return myStudents.ToList();
@@ -44,6 +50,7 @@ namespace StudentRecordsRepositories.Repos.Oracle
 
         public List<User> GetUsersFromCourse(Course course)
         {
+            //Select where user course = course
             return Select(x => (x.Course != null) && course.Id.Equals(x.Course.Id) && x.Role == UserRole.Student).Result.ToList();
         }
 
@@ -68,6 +75,7 @@ namespace StudentRecordsRepositories.Repos.Oracle
 
                 using (var command = connection.CreateCommand())
                 {
+                    //Delete all this user's enrollments, unless we want to keep them
                     command.BindByName = true;
                     command.CommandText = $@"
                         DELETE FROM
@@ -88,6 +96,7 @@ namespace StudentRecordsRepositories.Repos.Oracle
 
                 var databaseRunIds = new List<object>();
 
+                //Find all enrollments after deletion
                 using (var command = connection.CreateCommand())
                 {
                     command.BindByName = true;
@@ -110,6 +119,7 @@ namespace StudentRecordsRepositories.Repos.Oracle
                     }
                 }
 
+                //Insert all new enrollments
                 studentRunIds.Except(databaseRunIds).ToList().ForEach(async runId =>
                 {
                     using (var command = connection.CreateCommand())
@@ -137,6 +147,8 @@ namespace StudentRecordsRepositories.Repos.Oracle
         }
 
         //OVERRIDES
+
+        //Converts a reader (resultset) to a User model
         public override User ToModel(DbDataReader reader)
         {
             //Remember course is nullable
@@ -177,6 +189,7 @@ namespace StudentRecordsRepositories.Repos.Oracle
             return user;
         }
 
+        //Convert a User model to Oracle parameters for merging with query strings
         public override OracleParameter[] ToOracleParameters(User item)
         {
             return new OracleParameter[]
@@ -193,6 +206,7 @@ namespace StudentRecordsRepositories.Repos.Oracle
             };
         }
 
+        //Convert a result set into a list of Users
         public override async Task<IEnumerable<User>> ToEnumerable(DbDataReader reader)
         {
             var users = new List<User>();
@@ -205,6 +219,7 @@ namespace StudentRecordsRepositories.Repos.Oracle
                 {
                     users.Add(ToModel(reader));
                     index = users.Count - 1;
+                    //Seperate query to find and inject user enrollments
                     users[index].Enrollments.AddRange(await GetEnrollments(reader.GetInt32(0)));
                 }
             }
@@ -212,6 +227,7 @@ namespace StudentRecordsRepositories.Repos.Oracle
             return users;
         }
 
+        //Sub query for getting a particular user's enrollments
         private async Task<IEnumerable<Identifier>> GetEnrollments(object userId)
         {
             var moduleRuns = new List<Identifier>();
@@ -250,6 +266,7 @@ namespace StudentRecordsRepositories.Repos.Oracle
                     {
                         while (await reader.ReadAsync())
                         {
+                            //Compile together all sub objects needed to build the module run identifier
                             var module = new Module
                             {
                                 Id = reader.GetInt32(2),
@@ -278,6 +295,7 @@ namespace StudentRecordsRepositories.Repos.Oracle
             return moduleRuns;
         }
 
+        //Base User Select
         public override string SelectCommandText => $@"
         SELECT
             STUDENTS.Id USR_ID,
@@ -304,6 +322,7 @@ namespace StudentRecordsRepositories.Repos.Oracle
 
         public override string InsertCommandText => throw new NotImplementedException();
 
+        //Base User Update
         public override string UpdateCommandText => $@"
             UPDATE
                 {Users}
@@ -319,6 +338,9 @@ namespace StudentRecordsRepositories.Repos.Oracle
                 COURSE = :course
         ";
 
+        //Private functions.
+        //Because Oracle can't store booleans, the Graduated boolean on the User model is represented by an integer of either 0 or 1.
+        //These allow us to convert back and fore between the two.
         private int convertBoolToInt(bool grad)
         {
             if (grad)
@@ -337,6 +359,7 @@ namespace StudentRecordsRepositories.Repos.Oracle
             return false;
         }
 
+        //Allows for "in" queries by injecting a list of IDs into a single root parameter, creating a series of subparamters.
         private void AddArrayParametersForEnrollments(OracleCommand command, string paramNameRoot, List<object> runIds)
         {
             var parameters = new List<OracleParameter>();

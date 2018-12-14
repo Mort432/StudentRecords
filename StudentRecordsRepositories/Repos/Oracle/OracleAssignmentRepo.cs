@@ -16,10 +16,13 @@ namespace StudentRecordsRepositories.Repos.Oracle
         //FUNCTIONS
         public List<Assignment> GetUserAssignments(User user)
         {
+            //Select where user enrollments matches assignment modulerun
             return Select(x => user.Enrollments.Contains(x.ModuleRun)).Result.ToList();
         }
 
         //OVERRIDES
+
+        //Convert result set to model
         public override Assignment ToModel(DbDataReader reader)
         {
             var module = new Module
@@ -51,6 +54,7 @@ namespace StudentRecordsRepositories.Repos.Oracle
             return assignment;
         }
 
+        //Convert model to params for query injection
         public override OracleParameter[] ToOracleParameters(Assignment item)
         {
             return new OracleParameter[]
@@ -60,6 +64,7 @@ namespace StudentRecordsRepositories.Repos.Oracle
             };
         }
 
+        //Convert result set into list of Assignments
         public override async Task<IEnumerable<Assignment>> ToEnumerable(DbDataReader reader)
         {
             var assignments = new List<Assignment>();
@@ -72,6 +77,7 @@ namespace StudentRecordsRepositories.Repos.Oracle
                 {
                     assignments.Add(ToModel(reader));
                     index = assignments.Count - 1;
+                    //Subquery to get assignment results
                     assignments[index].Results.AddRange(await GetResults(reader.GetInt32(0)));
                 }
             }
@@ -79,6 +85,7 @@ namespace StudentRecordsRepositories.Repos.Oracle
             return assignments;
         }
 
+        //Subquery to get assignment results
         private async Task<IEnumerable<Identifier>> GetResults(object assignmentId)
         {
             var results = new List<Identifier>();
@@ -105,6 +112,7 @@ namespace StudentRecordsRepositories.Repos.Oracle
                     {
                         while (await reader.ReadAsync())
                         {
+                            //Compile result into identifier
                             var result = new Result()
                             {
                                 Id = reader.GetInt32(0),
@@ -119,6 +127,7 @@ namespace StudentRecordsRepositories.Repos.Oracle
             return results;
         }
 
+        //Base Assignment Select String
         public override string SelectCommandText => $@"
             SELECT
                 {Assignments}.ID ID,

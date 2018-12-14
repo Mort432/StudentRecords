@@ -20,6 +20,8 @@ namespace StudentRecordsRepositories.Repos.Oracle
         }
 
         // OVERRIDES
+
+        //Convert result set to model
         public override ModuleRun ToModel(DbDataReader reader)
         {
             var module = new Module
@@ -46,6 +48,7 @@ namespace StudentRecordsRepositories.Repos.Oracle
             return moduleRun;
         }
 
+        //Convert model to oracle parameters for query injection
         public override OracleParameter[] ToOracleParameters(ModuleRun item)
         {
             return new OracleParameter[]
@@ -55,6 +58,7 @@ namespace StudentRecordsRepositories.Repos.Oracle
             };
         }
 
+        //Base ModuleRun Select String
         public override string SelectCommandText => $@"
            SELECT
                 {ModuleRuns}.ID ID,
@@ -72,6 +76,7 @@ namespace StudentRecordsRepositories.Repos.Oracle
                 {Users} ON {Users}.ID = {ModuleRuns}.LECTURER
         ";
 
+        //Convert result set into list of ModuleRuns
         public override async Task<IEnumerable<ModuleRun>> ToEnumerable(DbDataReader reader)
         {
             var moduleRuns = new List<ModuleRun>();
@@ -84,14 +89,17 @@ namespace StudentRecordsRepositories.Repos.Oracle
                 {
                     moduleRuns.Add(ToModel(reader));
                     index = moduleRuns.Count - 1;
+                    //Subquery to get students
                     moduleRuns[index].Students.AddRange(await GetStudents(reader.GetInt32(0)));
+                    //Subquery to get assignments
                     moduleRuns[index].Assignments.AddRange(await GetAssignments(reader.GetInt32(0)));
                 }
             }
 
             return moduleRuns;
         }
-
+        
+        //Subquery to get ModuleRun students
         private async Task<IEnumerable<Identifier>> GetStudents(object moduleRunId)
         {
             var students = new List<Identifier>();
@@ -122,6 +130,7 @@ namespace StudentRecordsRepositories.Repos.Oracle
                     {
                         while (await reader.ReadAsync())
                         {
+                            //Compile user identifier
                             var user = new User
                             {
                                 Id = reader.GetInt32(0),
@@ -138,6 +147,7 @@ namespace StudentRecordsRepositories.Repos.Oracle
             return students;
         }
 
+        //Subquery to get ModuleRun assignments
         private async Task<IEnumerable<Identifier>> GetAssignments(object moduleRunId)
         {
             var assignments = new List<Identifier>();
@@ -177,6 +187,7 @@ namespace StudentRecordsRepositories.Repos.Oracle
                     {
                         while (await reader.ReadAsync())
                         {
+                            //Convert results to assignment identifier
                             var module = new Module
                             {
                                 Id = reader.GetInt32(3),

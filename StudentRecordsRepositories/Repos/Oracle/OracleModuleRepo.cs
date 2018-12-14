@@ -13,6 +13,8 @@ namespace StudentRecordsRepositories.Repos.Oracle
         public override string Table => Modules;
 
         // OVERRIDES
+
+        //Convert result set to model
         public override Module ToModel(DbDataReader reader)
         {
             var module = new Module
@@ -25,6 +27,7 @@ namespace StudentRecordsRepositories.Repos.Oracle
             return module;
         }
 
+        //Convert model to params for query injection
         public override OracleParameter[] ToOracleParameters(Module item)
         {
             return new OracleParameter[]
@@ -34,6 +37,7 @@ namespace StudentRecordsRepositories.Repos.Oracle
             };
         }
 
+        //Convert result set to list of Modules
         public override async Task<IEnumerable<Module>> ToEnumerable(DbDataReader reader)
         {
             var modules = new List<Module>();
@@ -78,6 +82,7 @@ namespace StudentRecordsRepositories.Repos.Oracle
             return modules;
         }
 
+        //Base Module Select String
         public override string SelectCommandText => $@"
             SELECT
                 {Modules}.ID ID,

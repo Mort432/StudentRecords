@@ -33,6 +33,7 @@ namespace StudentRecordsRepositories.Repos.Oracle
             return course;
         }
 
+        // Convert model to params for query injection
         public override OracleParameter[] ToOracleParameters(Course item)
         {
             return new OracleParameter[]
@@ -41,6 +42,7 @@ namespace StudentRecordsRepositories.Repos.Oracle
             };
         }
 
+        //Convert result set to list of models
         public override async Task<IEnumerable<Course>> ToEnumerable(DbDataReader reader)
         {
             var courses = new List<Course>();
@@ -53,7 +55,9 @@ namespace StudentRecordsRepositories.Repos.Oracle
                 {
                     courses.Add(ToModel(reader));
                     index = courses.Count - 1;
+                    //Subquery to get ModuleRuns for courses
                     courses[index].ModuleRuns.AddRange(await GetModuleRuns(reader.GetInt32(0)));
+                    //Subquery to get Students for courses
                     courses[index].Students.AddRange(await GetUsers(reader.GetInt32(0)));
                 }
             }
@@ -61,6 +65,7 @@ namespace StudentRecordsRepositories.Repos.Oracle
             return courses;
         }
 
+        //Subquery to get course ModuleRuns
         private async Task<IEnumerable<Identifier>> GetModuleRuns(object courseId)
         {
             var moduleRuns = new List<Identifier>();
@@ -96,6 +101,7 @@ namespace StudentRecordsRepositories.Repos.Oracle
                     {
                         while (await reader.ReadAsync())
                         {
+                            //Compile result to ModuleRun identifier
                             var module = new Module
                             {
                                 Id = reader.GetInt32(1),
@@ -124,6 +130,7 @@ namespace StudentRecordsRepositories.Repos.Oracle
             return moduleRuns;
         }
 
+        //Subquery to get course Users
         private async Task<IEnumerable<Identifier>> GetUsers(object courseId)
         {
             var users = new List<Identifier>();
@@ -152,6 +159,7 @@ namespace StudentRecordsRepositories.Repos.Oracle
                     {
                         while (await reader.ReadAsync())
                         {
+                            //Compile results into User identifier
                             var user = new User
                             {
                                 Id = reader.GetInt32(0),
@@ -168,6 +176,7 @@ namespace StudentRecordsRepositories.Repos.Oracle
             return users;
         }
 
+        //Base Course Select Text
         public override string SelectCommandText => $@"
             SELECT
                 {Courses}.ID ID,

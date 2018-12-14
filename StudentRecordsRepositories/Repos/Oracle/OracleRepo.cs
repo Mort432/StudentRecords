@@ -34,6 +34,7 @@ namespace StudentRecordsRepositories.Repos.Oracle
         public abstract T ToModel(DbDataReader reader);
         public abstract OracleParameter[] ToOracleParameters(T item);
 
+        //Base select all
         public async Task<IEnumerable<T>> SelectAll()
         {
             using (var connection = new OracleConnection(ConnectionString))
@@ -53,12 +54,14 @@ namespace StudentRecordsRepositories.Repos.Oracle
             }
         }
 
+        //Base select by predicate
         public async Task<IEnumerable<T>> Select(Expression<Func<T, bool>> predicate)
         {
             var items = await SelectAll();
             return items.Where(predicate.Compile());
         }
 
+        //Base delete
         public async void Delete(T item)
         {
             using (var connection = new OracleConnection(ConnectionString))
@@ -76,6 +79,7 @@ namespace StudentRecordsRepositories.Repos.Oracle
             }
         }
 
+        //Base insert
         public async void Insert(T item)
         {
             using (var connection = new OracleConnection(ConnectionString))
@@ -96,11 +100,13 @@ namespace StudentRecordsRepositories.Repos.Oracle
             }
         }
 
+        //Base select by id
         public async Task<T> SelectById(object id)
         {
             return (await SelectAll()).Where(x => x.Id.Equals(id)).ToList().FirstOrDefault();
         }
 
+        //Base update
         public virtual async void Update(T item)
         {
             using (var connection = new OracleConnection(ConnectionString))
@@ -119,6 +125,7 @@ namespace StudentRecordsRepositories.Repos.Oracle
             }
         }
 
+        //Base map reader (result set) to list of models
         public virtual async Task<IEnumerable<T>> ToEnumerable(DbDataReader reader)
         {
             var items = new List<T>();

@@ -16,8 +16,9 @@ namespace StudentRecordsRepositories.Repos.Oracle
         //FUNCTIONS
         public Identifier GetExistingResult(Assignment assignment, User student)
         {
+            //Get all user results
             var results = GetUserResults(student);
-            //Find matches
+            //Find matches to assignment
             var linqQuery =
                 from result1 in assignment.Results
                 join result2 in results on result1.Id equals result2.Id
@@ -28,17 +29,21 @@ namespace StudentRecordsRepositories.Repos.Oracle
 
         public List<Result> GetModuleRunsResults(List<ModuleRun> moduleRuns)
         {
+            //Select assignments from run
             List<Identifier> assignments = moduleRuns.SelectMany(x => x.Assignments).ToList();
+            //Return results from assignments
             return Select(x => assignments.Any(y => y.Id.Equals(x.Assignment.Id))).Result.ToList();
         }
 
         public IEnumerable<Result> GetUserResults(User user)
         {
+            //Return all results with userId
             return Select(x => x.Student.Id.Equals(user.Id)).Result.ToList();
         }
 
         //OVERRIDES
 
+        //Convert reader (data table) to model.
         public override Result ToModel(DbDataReader reader)
         {
             var module = new Module
@@ -82,6 +87,7 @@ namespace StudentRecordsRepositories.Repos.Oracle
             return result;
         }
 
+        //Convert model to parameters for query string injection.
         public override OracleParameter[] ToOracleParameters(Result item)
         {
             return new OracleParameter[]
@@ -92,6 +98,7 @@ namespace StudentRecordsRepositories.Repos.Oracle
             };
         }
 
+        //Convert result set into list of results.
         public override async Task<IEnumerable<Result>> ToEnumerable(DbDataReader reader)
         {
             var results = new List<Result>();
@@ -110,6 +117,7 @@ namespace StudentRecordsRepositories.Repos.Oracle
             return results;
         }
 
+        //Base Result Select String
         public override string SelectCommandText => $@"
             SELECT
                 {Results}.ID RES_ID,
@@ -140,6 +148,7 @@ namespace StudentRecordsRepositories.Repos.Oracle
                 {Users} LECTURERS ON LECTURERS.ID = {ModuleRuns}.LECTURER
         ";
 
+        //Base Result Insert String
         public override string InsertCommandText => $@"
             INSERT INTO
                 {Results}
@@ -152,6 +161,7 @@ namespace StudentRecordsRepositories.Repos.Oracle
                 )
         ";
 
+        //Base Result Update String
         public override string UpdateCommandText => $@"
             UPDATE
                 {Results}
