@@ -140,8 +140,25 @@ namespace StudentRecordsRepositories.Repos.Oracle
                 {Users} LECTURERS ON LECTURERS.ID = {ModuleRuns}.LECTURER
         ";
 
-        public override string InsertCommandText => throw new NotImplementedException();
+        public override string InsertCommandText => $@"
+            INSERT INTO
+                {Results}
+                (ASSIGNMENT, STUDENT, GRADE)
+            VALUES
+                (
+                    :assignment,
+                    :grade,
+                    :student
+                )
+        ";
 
-        public override string UpdateCommandText => throw new NotImplementedException();
+        public override string UpdateCommandText => $@"
+            UPDATE
+                {Results}
+            SET
+                ASSIGNMENT = :assignment,
+                STUDENT = :student,
+                GRADE = :grade
+        ";
     }
 }

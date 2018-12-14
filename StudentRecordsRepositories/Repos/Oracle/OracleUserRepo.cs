@@ -81,7 +81,7 @@ namespace StudentRecordsRepositories.Repos.Oracle
                 DateOfBirth = reader.GetDateTime(4),
                 Email = reader.GetString(5),
                 PhoneNumber = reader.GetString(6),
-                Graduated = reader.GetBoolean(7),
+                Graduated = convertBoolToInt(reader.GetBoolean(7)),
                 Role = (UserRole)reader.GetInt32(8)
             };
 
@@ -98,8 +98,8 @@ namespace StudentRecordsRepositories.Repos.Oracle
                 new OracleParameter("dateOfBirth", item.DateOfBirth),
                 new OracleParameter("email", item.Email),
                 new OracleParameter("phoneNumber", item.PhoneNumber),
-                new OracleParameter("graduated", item.Graduated),
-                new OracleParameter("userRole", item.Role),
+                new OracleParameter("graduated", convertBoolToInt(item.Graduated)),
+                new OracleParameter("userRole", (int)item.Role),
                 new OracleParameter("course", item.Course.Id)
             };
         }
@@ -214,6 +214,37 @@ namespace StudentRecordsRepositories.Repos.Oracle
 
         public override string InsertCommandText => throw new NotImplementedException();
 
-        public override string UpdateCommandText => throw new NotImplementedException();
+        public override string UpdateCommandText => $@"
+            UPDATE
+                {Users}
+            SET
+                UNIVERSITYID = :universityId,
+                FIRSTNAME = :firstName,
+                LASTNAME = :lastName,
+                DATEOFBIRTH = :dateOfBirth,
+                EMAIL = :email,
+                PHONENUMBER = :phoneNumber,
+                GRADUATED = :graduated,
+                USERROLE = :userRole,
+                COURSE = :course
+        ";
+
+        private int convertBoolToInt(bool grad)
+        {
+            if (grad)
+            {
+                return 1;
+            }
+            return 0;
+        }
+
+        private bool convertIntToBool(int grad)
+        {
+            if (grad == 1)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }
