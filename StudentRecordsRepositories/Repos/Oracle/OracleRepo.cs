@@ -101,7 +101,7 @@ namespace StudentRecordsRepositories.Repos.Oracle
             return (await SelectAll()).Where(x => x.Id.Equals(id)).ToList().FirstOrDefault();
         }
 
-        public async void Update(T item)
+        public virtual async void Update(T item)
         {
             using (var connection = new OracleConnection(ConnectionString))
             {

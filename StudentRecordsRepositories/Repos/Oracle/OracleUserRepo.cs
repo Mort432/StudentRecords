@@ -47,7 +47,94 @@ namespace StudentRecordsRepositories.Repos.Oracle
             return Select(x => (x.Course != null) && course.Id.Equals(x.Course.Id) && x.Role == UserRole.Student).Result.ToList();
         }
 
-        // TODO: UPDATES
+        //UPDATES
+
+        public override void Update(User user)
+        {
+            //Update enrollments
+            UpdateUserEnrollments(user);
+
+            //Update base user
+            base.Update(user);
+        }
+
+        public async void UpdateUserEnrollments(User user)
+        {
+            using (var connection = new OracleConnection(ConnectionString))
+            {
+                await connection.OpenAsync();
+
+                var studentRunIds = user.Enrollments.Select(e => e.Id).ToList();
+
+                using (var command = connection.CreateCommand())
+                {
+                    command.BindByName = true;
+                    command.CommandText = $@"
+                        DELETE FROM
+                            {Enrollments}
+                        WHERE
+                            USERID = :userId
+                    ";
+                    command.Parameters.Add(new OracleParameter("userId", user.Id));
+
+                    if (studentRunIds.Count > 0)
+                    {
+                        command.CommandText += "AND MODULERUNID NOT IN (:moduleRunIds)";
+                        AddArrayParametersForEnrollments(command, "runIds", studentRunIds);
+                    }
+
+                    await command.ExecuteNonQueryAsync();
+                }
+
+                var databaseRunIds = new List<object>();
+
+                using (var command = connection.CreateCommand())
+                {
+                    command.BindByName = true;
+                    command.CommandText = $@"
+                        SELECT
+                            {Enrollments}.MODULERUNID MODULERUNID
+                        FROM
+                            {Enrollments}
+                        WHERE
+                            {Enrollments}.USERID = :userId
+                    ";
+                    command.Parameters.Add(new OracleParameter("userId", user.Id));
+
+                    using (var reader = await command.ExecuteReaderAsync())
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            databaseRunIds.Add(reader.GetInt32(0));
+                        }
+                    }
+                }
+
+                studentRunIds.Except(databaseRunIds).ToList().ForEach(async runId =>
+                {
+                    using (var command = connection.CreateCommand())
+                    {
+                        command.BindByName = true;
+                        command.CommandText = $@"
+                            INSERT INTO
+                                {Enrollments}
+                                (USERID,
+                                MODULERUNID)
+                            VALUES
+                                (:userId,
+                                :moduleRunId)
+                        ";
+                        command.Parameters.AddRange(new OracleParameter[]
+                        {
+                            new OracleParameter("userId", user.Id),
+                            new OracleParameter("moduleRunId", runId)
+                        });
+
+                        await command.ExecuteNonQueryAsync();
+                    }
+                });
+            }
+        }
 
         //OVERRIDES
         public override User ToModel(DbDataReader reader)
@@ -81,7 +168,7 @@ namespace StudentRecordsRepositories.Repos.Oracle
                 DateOfBirth = reader.GetDateTime(4),
                 Email = reader.GetString(5),
                 PhoneNumber = reader.GetString(6),
-                Graduated = convertBoolToInt(reader.GetBoolean(7)),
+                Graduated = convertIntToBool(reader.GetInt32(7)),
                 Role = (UserRole)reader.GetInt32(8)
             };
 
@@ -245,6 +332,24 @@ namespace StudentRecordsRepositories.Repos.Oracle
                 return true;
             }
             return false;
+        }
+
+        private void AddArrayParametersForEnrollments(OracleCommand command, string paramNameRoot, List<object> runIds)
+        {
+            var parameters = new List<OracleParameter>();
+            var parameterNames = new List<string>();
+            var paramNum = 1;
+
+            foreach(var id in runIds)
+            {
+                var paramName = string.Format("{0}{1}", paramNameRoot, paramNum++);
+                parameterNames.Add($":{paramName}");
+                var parameter = new OracleParameter(paramName, id);
+                command.Parameters.Add(parameter);
+                parameters.Add(parameter);
+            }
+
+            command.CommandText = command.CommandText.Replace($":{paramNameRoot}", string.Join(",", parameterNames));
         }
     }
 }
