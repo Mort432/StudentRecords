@@ -10,6 +10,7 @@ namespace StudentRecordsServices.Services
 {
     public class AssignmentsService : IAssignmentsService
     {
+        //Inject dependancies
         public IAssignmentRepo _assignmentRepo;
 
         public AssignmentsService(IAssignmentRepo assignmentRepo)
@@ -17,6 +18,7 @@ namespace StudentRecordsServices.Services
             _assignmentRepo = assignmentRepo;
         }
 
+        //Get a user's assignments
         public IEnumerable<Assignment> GetUserAssignments(User user)
         {
             return _assignmentRepo.GetUserAssignments(user);

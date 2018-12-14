@@ -10,6 +10,7 @@ namespace StudentRecordsServices.Services
 {
     public class ResultsService : IResultsService
     {
+        //Inject dependancies
         public IResultRepo _resultRepo;
 
         public ResultsService(IResultRepo resultRepo)
@@ -17,17 +18,20 @@ namespace StudentRecordsServices.Services
             _resultRepo = resultRepo;
         }
 
+        //Get a user's results
         public IEnumerable<Result> GetUserResults(User user)
         {
             return _resultRepo.GetUserResults(user);
         }
 
+        //Delete a result, by it's identifier.
         public void DeleteResultByIdentifier(Identifier result)
         {
             var resultObj = _resultRepo.SelectById(result.Id).Result;
             _resultRepo.Delete(resultObj);
         }
 
+        //Assign somebody a new result
         public void AssignResult(User student, Assignment assignment, int grade)
         {
             //Build new result
@@ -40,14 +44,16 @@ namespace StudentRecordsServices.Services
             var existingResult = GetExistingResult(assignment, student);
             if(existingResult == null)
             {
+                //If they don't already have a result, just insert the new one.
                 _resultRepo.Insert(result);
                 return;
             }
-            //Otherwise, just update the existing one.
+            //If they don't, then we can just update the existing result.
             result.Id = existingResult.Id;
             _resultRepo.Update(result);
         }
 
+        //Get a user's result on an assignment
         public Identifier GetExistingResult(Assignment assignment, User student)
         {
             return _resultRepo.GetExistingResult(assignment, student);

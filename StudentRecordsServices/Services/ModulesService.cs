@@ -10,6 +10,7 @@ namespace StudentRecordsServices.Services
 {
     public class ModulesService : IModulesService
     {
+        //Inject dependancies
         IModuleRepo _moduleRepo;
         IModuleRunRepo _moduleRunRepo;
 
@@ -19,21 +20,25 @@ namespace StudentRecordsServices.Services
             _moduleRunRepo = moduleRunRepo;
         }
 
+        //Get all module runs
         public async Task<IEnumerable<ModuleRun>> GetAllModuleRuns()
         {
             return await _moduleRunRepo.SelectAll();
         }
 
+        //Get all modules
         public async Task<IEnumerable<Module>> GetAllModules()
         {
             return await _moduleRepo.SelectAll();
         }
 
+        //Get module by Id
         public async Task<Module> GetModuleById(object id)
         {
             return await _moduleRepo.SelectById(id);
         }
 
+        //Get module run by Id
         public async Task<ModuleRun> GetModuleRunById(object id)
         {
             return await _moduleRunRepo.SelectById(id);

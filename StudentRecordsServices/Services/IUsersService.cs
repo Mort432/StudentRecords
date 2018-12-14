@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace StudentRecordsServices.Services
 {
+    //Defines the behaviour that must be implemented by a UsersService
     public interface IUsersService
     {
         Task<User> GetUserById(object Id);
