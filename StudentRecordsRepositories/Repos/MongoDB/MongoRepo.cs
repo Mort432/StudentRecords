@@ -11,13 +11,16 @@ using System.Threading.Tasks;
 
 namespace StudentRecordsRepositories.Repos.Mongo
 {
+    //Declares the behaviour any Mongo Repo must implement.
     public abstract class MongoRepo<T> : IRepo<T> where T : Identifiable
     {
         public MongoRepo()
         {
+            //Allows mapping from MongoDB camel case property names to POCO variables
             ConventionRegistry.Register("camelCase", new ConventionPack { new CamelCaseElementNameConvention() }, t => true);
         }
 
+        //Declares connection, database and collections
         private IMongoDatabase Database { get; } = new MongoClient("mongodb://localhost:27017").GetDatabase("student-records");
         protected IMongoCollection<Assignment> Assignments => Database.GetCollection<Assignment>("assignments");
         protected IMongoCollection<Course> Courses => Database.GetCollection<Course>("courses");
@@ -31,21 +34,25 @@ namespace StudentRecordsRepositories.Repos.Mongo
         //Functionality
         public async Task<IEnumerable<T>> Select(Expression<Func<T, bool>> predicate)
         {
+            //Base select from predicate
             return (await SelectAll()).Where(predicate.Compile()).ToList();
         }
 
         public async Task<IEnumerable<T>> SelectAll()
         {
+            //Base select
             return await Task.FromResult(Collection.AsQueryable().ToList());
         }
 
         public async Task<T> SelectById(object id)
         {
+            //Base select by ID
             return (await SelectAll()).Where(x => x.Id.Equals(id)).ToList().FirstOrDefault();
         }
 
         public virtual async void Update(T item)
         {
+            //Base update
             var itemIdFilter = Builders<T>.Filter.Eq(i => i.Id, item.Id);
             var options = new FindOneAndReplaceOptions<T> { ReturnDocument = ReturnDocument.After };
 
@@ -54,6 +61,7 @@ namespace StudentRecordsRepositories.Repos.Mongo
 
         public virtual async void Delete(T item)
         {
+            //Base delete
             var itemIdFilter = Builders<T>.Filter.Eq(i => i.Id, item.Id);
 
             await Collection.DeleteOneAsync(itemIdFilter);
@@ -61,6 +69,7 @@ namespace StudentRecordsRepositories.Repos.Mongo
 
         public virtual async void Insert(T item)
         {
+            //Base insert
             if (item.Id == null) item.Id = ObjectId.GenerateNewId();
 
             await Collection.InsertOneAsync(item);

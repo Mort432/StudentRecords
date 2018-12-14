@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 
 namespace StudentRecordsRepositories.Repos.Mock
 {
+    //This class represents a mock database, in the style of a MongoDB, with relationships expressed as identifiers.
+    //This populates mock data into the base collections.
     public class MockDatabase
     {
 

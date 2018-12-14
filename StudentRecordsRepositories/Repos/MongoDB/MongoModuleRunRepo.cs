@@ -14,6 +14,7 @@ namespace StudentRecordsRepositories.Repos.Mongo
 
         public List<ModuleRun> GetLecturerModuleRuns(User lecturer)
         {
+            //Select module runs where lecturer = lecturer
             return Select(x => x.Lecturer.Id.Equals(lecturer.Id)).Result.ToList();
         }
     }

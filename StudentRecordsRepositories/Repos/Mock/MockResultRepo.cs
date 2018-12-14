@@ -17,24 +17,29 @@ namespace StudentRecordsRepositories.Repos.Mock
 
         public Identifier GetExistingResult(Assignment assignment, User student)
         {
+            //Get a user's results
             var results = GetUserResults(student);
-            //Find matches
+            //Match the results against the assignment
             var linqQuery =
                 from result1 in assignment.Results
                 join result2 in results on result1.Id equals result2.Id
                 select result1;
 
+            //Returns result, or null if no result.
             return linqQuery.FirstOrDefault();
         }
 
         public List<Result> GetModuleRunsResults(List<ModuleRun> moduleRuns)
         {
+            //Select out assignments from module runs
             List<Identifier> assignments = moduleRuns.SelectMany(x => x.Assignments).ToList();
+            //Select out results from assignments
             return Select(x => assignments.Any(z => x.Assignment.Id.Equals(z.Id))).Result.ToList();
         }
 
         public IEnumerable<Result> GetUserResults(User user)
         {
+            //Select results where student
             return Select(x => x.Student.Id.Equals(user.Id)).Result.ToList();
         }
     }

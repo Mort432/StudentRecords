@@ -17,6 +17,7 @@ namespace StudentRecordsRepositories.Repos.Mock
 
         public List<Assignment> GetUserAssignments(User user)
         {
+            //Select where assignment module run matches a user's enrollments
             return Select(x => user.Enrollments.Contains(x.ModuleRun)).Result.ToList();
         }
     }

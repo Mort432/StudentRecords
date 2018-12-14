@@ -17,6 +17,7 @@ namespace StudentRecordsRepositories.Repos.Mock
 
         public List<ModuleRun> GetLecturerModuleRuns(User lecturer)
         {
+            //Select where module run lecturer = lecturer
             return Select(x => x.Lecturer.Id.Equals(lecturer.Id)).Result.ToList();
         }
     }

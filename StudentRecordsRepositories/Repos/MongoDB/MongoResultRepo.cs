@@ -14,8 +14,9 @@ namespace StudentRecordsRepositories.Repos.Mongo
 
         public Identifier GetExistingResult(Assignment assignment, User student)
         {
+            //Get results
             var results = GetUserResults(student);
-            //Find matches
+            //Find matches with assignments
             var linqQuery =
                 from result1 in assignment.Results
                 join result2 in results on result1.Id equals result2.Id
@@ -26,19 +27,22 @@ namespace StudentRecordsRepositories.Repos.Mongo
 
         public List<Result> GetModuleRunsResults(List<ModuleRun> moduleRuns)
         {
+            //Get assignments from module runs
             List<Identifier> assignments = moduleRuns.SelectMany(x => x.Assignments).ToList();
+            //Select out results
             return Select(x => assignments.Any(y => y.Id.Equals(x.Assignment.Id))).Result.ToList();
         }
 
         public IEnumerable<Result> GetUserResults(User user)
         {
+            //Select results where user matches
             return Select(x => x.Student.Id.Equals(user.Id)).Result.ToList();
         }
 
         public override void Delete(Result item)
         {
             var result = item.ToIdentifier();
-
+            //Find and remove result
             var assignmentIdFilter = Builders<Assignment>.Filter.Eq(i => i.Id, item.Assignment.Id);
             var assignmentResultsUpdate = Builders<Assignment>.Update.Pull(a => a.Results, result);
 
@@ -49,7 +53,9 @@ namespace StudentRecordsRepositories.Repos.Mongo
 
         public override void Update(Result item)
         {
+            //Find and delete any existing
             Delete(item);
+            //Insert replacement
             Insert(item);
         }
 

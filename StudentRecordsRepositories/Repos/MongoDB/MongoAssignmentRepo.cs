@@ -14,6 +14,7 @@ namespace StudentRecordsRepositories.Repos.Mongo
 
         public List<Assignment> GetUserAssignments(User user)
         {
+            //Get assignments where user enrollments matches assignment module run
             return Select(x => user.Enrollments.Contains(x.ModuleRun)).Result.ToList();
         }
     }
