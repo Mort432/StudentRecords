@@ -4,6 +4,7 @@ using StudentRecordsModels.Models.Enums;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,28 +17,37 @@ namespace StudentRecordsRepositories.Repos.Oracle
         //FUNCTIONS
         public int CountGraduatedCourseUsers(Course course)
         {
-            throw new NotImplementedException();
+            return GetUsersFromCourse(course).Where(x => x.Graduated).Count();
         }
 
         public Task<IEnumerable<User>> GetAllLecturers()
         {
-            throw new NotImplementedException();
+            return Select(x => x.Role == UserRole.Lecturer);
         }
 
         public Task<IEnumerable<User>> GetAllStudents()
         {
-            throw new NotImplementedException();
+            return Select(x => x.Role == UserRole.Student);
         }
 
         public List<User> GetLecturerStudents(User lecturer)
         {
-            throw new NotImplementedException();
+            var courseStudents = Select(x => (x.Course != null) && lecturer.Course.Id.Equals(x.Course.Id) && x.Role == UserRole.Student).Result.ToList();
+            var moduleStudents = Select(user => user.Enrollments.Any(userEnrollment => lecturer.Enrollments.Contains(userEnrollment)) && user.Role == UserRole.Student).Result;
+            var all = new List<User>();
+            all.AddRange(courseStudents);
+            all.AddRange(moduleStudents);
+            var myStudents = all.GroupBy(x => x.Id).Select(g => g.First());
+
+            return myStudents.ToList();
         }
 
         public List<User> GetUsersFromCourse(Course course)
         {
-            throw new NotImplementedException();
+            return Select(x => (x.Course != null) && course.Id.Equals(x.Course.Id) && x.Role == UserRole.Student).Result.ToList();
         }
+
+        // TODO: UPDATES
 
         //OVERRIDES
         public override User ToModel(DbDataReader reader)

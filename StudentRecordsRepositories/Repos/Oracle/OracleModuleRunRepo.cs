@@ -3,6 +3,7 @@ using StudentRecordsModels.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,7 +16,7 @@ namespace StudentRecordsRepositories.Repos.Oracle
         // FUNCTIONS
         public List<ModuleRun> GetLecturerModuleRuns(User lecturer)
         {
-            throw new NotImplementedException();
+            return Select(x => x.Lecturer.Id.Equals(lecturer.Id)).Result.ToList();
         }
 
         // OVERRIDES

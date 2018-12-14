@@ -3,6 +3,7 @@ using StudentRecordsModels.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,7 +16,7 @@ namespace StudentRecordsRepositories.Repos.Oracle
         //FUNCTIONS
         public List<Assignment> GetUserAssignments(User user)
         {
-            throw new NotImplementedException();
+            return Select(x => user.Enrollments.Contains(x.ModuleRun)).Result.ToList();
         }
 
         //OVERRIDES

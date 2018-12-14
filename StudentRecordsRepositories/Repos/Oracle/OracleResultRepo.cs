@@ -3,6 +3,7 @@ using StudentRecordsModels.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,17 +16,25 @@ namespace StudentRecordsRepositories.Repos.Oracle
         //FUNCTIONS
         public Identifier GetExistingResult(Assignment assignment, User student)
         {
-            throw new NotImplementedException();
+            var results = GetUserResults(student);
+            //Find matches
+            var linqQuery =
+                from result1 in assignment.Results
+                join result2 in results on result1.Id equals result2.Id
+                select result1;
+
+            return linqQuery.FirstOrDefault();
         }
 
         public List<Result> GetModuleRunsResults(List<ModuleRun> moduleRuns)
         {
-            throw new NotImplementedException();
+            List<Identifier> assignments = moduleRuns.SelectMany(x => x.Assignments).ToList();
+            return Select(x => assignments.Any(y => y.Id.Equals(x.Assignment.Id))).Result.ToList();
         }
 
         public IEnumerable<Result> GetUserResults(User user)
         {
-            throw new NotImplementedException();
+            return Select(x => x.Student.Id.Equals(user.Id)).Result.ToList();
         }
 
         //OVERRIDES
