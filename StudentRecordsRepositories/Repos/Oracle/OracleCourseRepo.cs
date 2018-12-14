@@ -12,6 +12,7 @@ namespace StudentRecordsRepositories.Repos.Oracle
     {
         public override string Table => Courses;
 
+        // OVERRIDES
         public override Course ToModel(DbDataReader reader)
         {
             var lecturer = new User
@@ -134,8 +135,8 @@ namespace StudentRecordsRepositories.Repos.Oracle
                     command.CommandText = $@"
                         SELECT
                             {Users}.ID ID,
-                            {Users}.FIRST_NAME FIRST_NAME,
-                            {Users}.LAST_NAME LAST_NAME
+                            {Users}.FIRSTNAME FIRST_NAME,
+                            {Users}.LASTNAME LAST_NAME
                         FROM
                             {Users}
                         WHERE

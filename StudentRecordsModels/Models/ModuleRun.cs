@@ -10,8 +10,8 @@ namespace StudentRecordsModels.Models
     {
         public Identifier Lecturer { get; set; }
         public Identifier Module { get; set; }
-        public IList<Identifier> Students { get; set; }
-        public IEnumerable<Identifier> Assignments { get; set; }
+        public List<Identifier> Students { get; set; }
+        public List<Identifier> Assignments { get; set; }
 
         public override string ToString()
         {
