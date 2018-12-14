@@ -24,7 +24,10 @@ namespace StudentRecordsRepositories.Repos.Oracle
             var course = new Course
             {
                 Id = reader.GetInt32(0),
-                Title = reader.GetString(1)
+                Title = reader.GetString(1),
+                ModuleRuns = new List<Identifier>(),
+                Students = new List<Identifier>(),
+                CourseLeader = lecturer
             };
 
             return course;
@@ -85,7 +88,7 @@ namespace StudentRecordsRepositories.Repos.Oracle
                         LEFT OUTER JOIN
                             {Users} ON {Users}.ID = {ModuleRuns}.LECTURER
                         WHERE
-                            COURSE = :courseId
+                            {ModuleRuns}.COURSE = :courseId
                     ";
                     command.Parameters.Add(new OracleParameter("courseId", courseId));
 
@@ -140,7 +143,7 @@ namespace StudentRecordsRepositories.Repos.Oracle
                         FROM
                             {Users}
                         WHERE
-                            COURSE_ID = :courseId
+                            COURSE = :courseId
                             AND USERROLE = 1
                     ";
                     command.Parameters.Add(new OracleParameter("courseId", courseId));

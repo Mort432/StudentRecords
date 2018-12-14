@@ -44,7 +44,8 @@ namespace StudentRecordsRepositories.Repos.Oracle
             {
                 Id = reader.GetInt32(0),
                 AssignmentName = reader.GetString(1),
-                ModuleRun = moduleRun
+                ModuleRun = moduleRun,
+                Results = new List<Identifier>()
             };
 
             return assignment;
