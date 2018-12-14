@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace StudentRecordsModels.Models
 {
+    // Represents users.
     public class User : Identifiable
     {
         public string UniversityId { get; set; }
@@ -19,6 +20,7 @@ namespace StudentRecordsModels.Models
 
         //Represents modules taken as a student, or modules taught as a lecturer
         public List<Identifier> Enrollments { get; set; }
+        //Represents the course if you're a student, or offers a two-way relationship between lecturers and courses
         public Identifier Course { get; set; }
         public bool Graduated { get; set; }
         

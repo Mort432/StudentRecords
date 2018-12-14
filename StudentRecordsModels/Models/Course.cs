@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace StudentRecordsModels.Models
 {
+    // Represents a course.
     public class Course : Identifiable
     {
         public string Title { get; set; }

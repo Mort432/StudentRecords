@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace StudentRecordsModels.Models
 {
+    // Represents a module.
     public class Module : Identifiable
     {
         public string ModuleTitle { get; set; }
         public string ModuleCode { get; set; }
+        // List of runs.
         public List<Identifier> ModuleRuns { get; set; }
 
         public string GetCodeAndName()

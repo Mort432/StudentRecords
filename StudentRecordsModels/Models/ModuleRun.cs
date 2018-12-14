@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace StudentRecordsModels.Models
 {
+    // Represents the run of a module.
     public class ModuleRun : Identifiable
     {
         public Identifier Lecturer { get; set; }
