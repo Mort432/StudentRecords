@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace StudentRecordsRepositories.Repos.Oracle
 {
@@ -11,6 +12,7 @@ namespace StudentRecordsRepositories.Repos.Oracle
     {
         public override string Table => Results;
 
+        //FUNCTIONS
         public Identifier GetExistingResult(Assignment assignment, User student)
         {
             throw new NotImplementedException();
@@ -26,17 +28,108 @@ namespace StudentRecordsRepositories.Repos.Oracle
             throw new NotImplementedException();
         }
 
+        //OVERRIDES
+
         public override Result ToModel(DbDataReader reader)
         {
-            throw new NotImplementedException();
+            var module = new Module
+            {
+                Id = reader.GetInt32(8),
+                ModuleTitle = reader.GetString(9),
+                ModuleCode = reader.GetString(10)
+            }.ToIdentifier();
+            var lecturer = new User
+            {
+                Id = reader.GetInt32(11),
+                FirstName = reader.GetString(12),
+                LastName = reader.GetString(13)
+            }.ToIdentifier();
+            var moduleRun = new ModuleRun
+            {
+                Id = reader.GetInt32(7),
+                Lecturer = lecturer,
+                Module = module
+            }.ToIdentifier();
+            var student = new User
+            {
+                Id = reader.GetInt32(2),
+                FirstName = reader.GetString(3),
+                LastName = reader.GetString(4)
+            }.ToIdentifier();
+            var assignment = new Assignment
+            {
+                Id = reader.GetInt32(5),
+                AssignmentName = reader.GetString(6),
+                ModuleRun = moduleRun
+            }.ToIdentifier();
+            var result = new Result
+            {
+                Id = reader.GetInt32(0),
+                Grade = reader.GetInt32(1),
+                Student = student,
+                Assignment = assignment
+            };
+
+            return result;
         }
 
         public override OracleParameter[] ToOracleParameters(Result item)
         {
-            throw new NotImplementedException();
+            return new OracleParameter[]
+            {
+                new OracleParameter("grade", item.Grade),
+                new OracleParameter("student", item.Student.Id),
+                new OracleParameter("assignment", item.Assignment.Id)
+            };
         }
 
-        public override string SelectCommandText => throw new NotImplementedException();
+        public override async Task<IEnumerable<Result>> ToEnumerable(DbDataReader reader)
+        {
+            var results = new List<Result>();
+
+            while (await reader.ReadAsync())
+            {
+                var index = results.FindIndex(c => c.Id.Equals(reader.GetInt32(0)));
+
+                if (index < 0)
+                {
+                    results.Add(ToModel(reader));
+                    index = results.Count - 1;
+                }
+            }
+
+            return results;
+        }
+
+        public override string SelectCommandText => $@"
+            SELECT
+                {Results}.ID RES_ID,
+                {Results}.GRADE RES_GRADE,
+                {Results}.STUDENT RES_STUDENTID,
+                STUDENTS.FIRSTNAME RES_STUDENT_FIRSTNAME,
+                STUDENTS.LASTNAME RES_STUDENT_LASTNAME,
+                {Assignments}.ID ASSIGNMENTID,
+                {Assignments}.ASSIGNMENTNAME ASS_NAME,
+                {ModuleRuns}.ID MODRUN_ID,
+                {Modules}.ID MODULE_ID,
+                {Modules}.MODULETITLE MODULE_TITLE,
+                {Modules}.MODULECODE MODULE_CODE,
+                LECTURERS.ID LECTURER_ID,
+                LECTURERS.FIRSTNAME LEC_FIRSTNAME,
+                LECTURERS.LASTNAME LEC_LASTNAME
+            FROM
+                {Results}
+            LEFT OUTER JOIN
+                {Users} STUDENTS ON STUDENTS.ID = {Results}.STUDENT
+            LEFT OUTER JOIN
+                {Assignments} ON {Assignments}.ID = {Results}.ASSIGNMENT
+            LEFT OUTER JOIN
+                {ModuleRuns} ON {ModuleRuns}.ID = {Assignments}.MODULERUN
+            LEFT OUTER JOIN
+                {Modules} ON {Modules}.ID = {ModuleRuns}.MODULE
+            LEFT OUTER JOIN
+                {Users} LECTURERS ON LECTURERS.ID = {ModuleRuns}.LECTURER
+        ";
 
         public override string InsertCommandText => throw new NotImplementedException();
 

@@ -12,6 +12,7 @@ namespace StudentRecordsRepositories.Repos.Oracle
     {
         public override string Table => Assignments;
 
+        //FUNCTIONS
         public List<Assignment> GetUserAssignments(User user)
         {
             throw new NotImplementedException();

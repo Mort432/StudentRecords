@@ -12,6 +12,7 @@ namespace StudentRecordsRepositories.Repos.Oracle
     {
         public override string Table => Users;
 
+        //FUNCTIONS
         public int CountGraduatedCourseUsers(Course course)
         {
             throw new NotImplementedException();
@@ -37,6 +38,7 @@ namespace StudentRecordsRepositories.Repos.Oracle
             throw new NotImplementedException();
         }
 
+        //OVERRIDES
         public override User ToModel(DbDataReader reader)
         {
             throw new NotImplementedException();
