@@ -142,19 +142,19 @@ namespace StudentRecordsRepositories.Repos.Oracle
             //Remember course is nullable
             Identifier lecturer = null;
             Identifier course = null;
-            if (!reader.IsDBNull(8))
+            if (!reader.IsDBNull(9))
             {
                 lecturer = new User()
                 {
-                    Id = reader.GetInt32(10),
-                    FirstName = reader.GetString(11),
-                    LastName = reader.GetString(12)
+                    Id = reader.GetInt32(11),
+                    FirstName = reader.GetString(12),
+                    LastName = reader.GetString(13)
                 }.ToIdentifier();
 
                 course = new Course()
                 {
-                    Id = reader.GetInt32(8),
-                    Title = reader.GetString(9),
+                    Id = reader.GetInt32(9),
+                    Title = reader.GetString(10),
                     CourseLeader = lecturer
                 }.ToIdentifier();
             }
@@ -169,7 +169,9 @@ namespace StudentRecordsRepositories.Repos.Oracle
                 Email = reader.GetString(5),
                 PhoneNumber = reader.GetString(6),
                 Graduated = convertIntToBool(reader.GetInt32(7)),
-                Role = (UserRole)reader.GetInt32(8)
+                Role = (UserRole)reader.GetInt32(8),
+                Course = course,
+                Enrollments = new List<Identifier>()
             };
 
             return user;
@@ -267,7 +269,7 @@ namespace StudentRecordsRepositories.Repos.Oracle
                                 Lecturer = lecturer
                             }.ToIdentifier();
 
-                            moduleRuns.Add(module);
+                            moduleRuns.Add(moduleRun);
                         }
                     }
                 }
@@ -277,8 +279,9 @@ namespace StudentRecordsRepositories.Repos.Oracle
         }
 
         public override string SelectCommandText => $@"
-            SELECT
+        SELECT
             STUDENTS.Id USR_ID,
+            STUDENTS.UniversityId USR_UNI_ID,
             STUDENTS.FirstName USR_FIRSTNAME,
             STUDENTS.LastName USR_LASTNAME,
             STUDENTS.DateOfBirth USR_DOB,

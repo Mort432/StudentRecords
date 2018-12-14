@@ -13,7 +13,7 @@ namespace StudentRecordsRepositories.Repos.Oracle
     public abstract class OracleRepo<T> : IRepo<T> where T : Identifiable
     {
         //Connection string
-        public string ConnectionString { get; } = "User Id=s1502752;Password=s1502752!;Data Source=apollo01.glos.ac.uk:1521/orcl";
+        public string ConnectionString { get; } = "User Id=s1509508;Password=s1509508!;Data Source=apollo01.glos.ac.uk:1521/orcl";
 
         //Tables
         public string Assignments { get; } = "ASSIGNMENTS";

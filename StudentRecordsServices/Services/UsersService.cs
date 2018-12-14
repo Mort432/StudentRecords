@@ -20,7 +20,8 @@ namespace StudentRecordsServices.Services
 
         public async Task<IEnumerable<User>> GetAllUsers()
         {
-            return await _userRepo.SelectAll();
+            var allUsers = await _userRepo.SelectAll();
+            return allUsers;
         }
 
         public async Task<IEnumerable<User>> GetAllStudents(){
