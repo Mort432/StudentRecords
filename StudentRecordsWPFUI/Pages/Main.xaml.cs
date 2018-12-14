@@ -14,6 +14,7 @@ namespace StudentRecordsWPFUI.Pages
             InitializeComponent();
         }
 
+        //Inject ViewModel from Autofac
         private MainPageViewModel ViewModel = App.Container.Resolve<MainPageViewModel>();
 
         protected override void OnInitialized(EventArgs e)
@@ -23,18 +24,22 @@ namespace StudentRecordsWPFUI.Pages
             base.OnInitialized(e);
         }
 
+        //If a nav menu item is selected
         private void HamburgerMenu_ItemInvoked(object sender, HamburgerMenuItemInvokedEventArgs e)
         {
+            //Get the nav item
             var navItem = e.InvokedItem as NavigationMenuItemModel;
 
             if (navItem.Content == "Log Out")
             {
+                //If it was the logout option...
                 ViewModel.LogOut();
 
                 MainWindow.WindowFrame.Navigate(new Login());
             }
             else
             {
+                //Navigate to that page
                 ContentFrame.Navigate(Activator.CreateInstance(navItem.ViewType));
             }
         }

@@ -19,6 +19,7 @@ namespace StudentRecordsWPFUI
             BuildContainer();
         }
 
+        //Sets up Autofac depenency injection.
         private void BuildContainer()
         {
             var builder = new ContainerBuilder();
@@ -42,6 +43,8 @@ namespace StudentRecordsWPFUI
             builder.RegisterType<LecturerStudentAnalyticsViewModel>().InstancePerDependency();
 
             //Repos
+            //If you'd like to try the WPF app with a different database, switch this function to one of the other three below.
+            //This app will support BuildMockRepos, BuildMongoRepos, and BuildOracleRepos!
             BuildOracleRepos(builder);
 
             Container = builder.Build();

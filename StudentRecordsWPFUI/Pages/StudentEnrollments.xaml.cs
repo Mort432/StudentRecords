@@ -28,6 +28,7 @@ namespace StudentRecordsWPFUI.Pages
             InitializeComponent();
         }
 
+        //Inject ViewModel from Autofac
         private StudentEnrollmentsViewModel viewModel = App.Container.Resolve<StudentEnrollmentsViewModel>();
 
         protected override void OnInitialized(EventArgs e)
@@ -37,28 +38,39 @@ namespace StudentRecordsWPFUI.Pages
             base.OnInitialized(e);
         }
 
+        //If the user clicks to enroll
         private void enrollButton_Click(object sender, RoutedEventArgs e)
         {
+            //Get the module
             var item = (sender as FrameworkElement).Tag as Identifier;
 
+            //Enroll them
             viewModel.EnrollUserToModule(item);
 
+            //Refresh the bindings
             DataContext = null;
             DataContext = viewModel;
         }
 
+        //If the user clicks to unenroll
         private void unenrollButton_Click(object sender, RoutedEventArgs e)
         {
+            //Get the module
             var item = (sender as FrameworkElement).Tag as Identifier;
 
+            //Unenroll them
             viewModel.UnenrollUserFromModule(item);
 
+            //Refresh the bindings
             DataContext = null;
             DataContext = viewModel;
         }
 
+        //If the user changes the course combo box
         private void courseComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            //Get the course.
+            //Make sure to ignore this event if it was triggered by the pageload.
             if (!courseComboBox.IsLoaded) return;
             var item = ((sender as ComboBox).SelectedItem as Identifier);
             if (item == null)
@@ -66,6 +78,7 @@ namespace StudentRecordsWPFUI.Pages
                 return;
             }
 
+            //Change to that course.
             viewModel.ChangeUserCourse(item);
         }
     }

@@ -5,6 +5,7 @@ using System.Windows.Data;
 
 namespace StudentRecordsWPFUI.Converters
 {
+    //Converts booleans to visibility for WPF rendering
     public class BoolToVisibilityConverter : IValueConverter
     {
         private object GetVisibility(object value)

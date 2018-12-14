@@ -17,6 +17,7 @@ namespace StudentRecordsWPFUI.Controls
     /// <summary>
     /// Interaction logic for GradeDialog.xaml
     /// </summary>
+    // A dialog box for grading
     public partial class GradeDialog : Window
     {
         public GradeDialog(string question, string defaultAnswer = "")

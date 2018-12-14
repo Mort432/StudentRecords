@@ -12,6 +12,7 @@ namespace StudentRecordsWPFUI.Pages
             InitializeComponent();
         }
 
+        //Inject ViewModel from Autofac
         private LecturerStudentAnalyticsViewModel ViewModel = App.Container.Resolve<LecturerStudentAnalyticsViewModel>();
 
         protected override void OnInitialized(EventArgs e)

@@ -10,6 +10,7 @@ namespace StudentRecordsWPFUI.ViewModels
     {
         public IEnumerable<NavigationMenuItemModel> MenuItems => GetMenuItems();
 
+        //Inject dependencies
         private IAuthService _authService;
 
         public MainPageViewModel(IAuthService authService)
@@ -17,6 +18,7 @@ namespace StudentRecordsWPFUI.ViewModels
             _authService = authService;
         }
 
+        //Set up the menu items, choosing based on the authorised user's role.
         public IEnumerable<NavigationMenuItemModel> GetMenuItems()
         {
             User currentUser = _authService.authorisedUser;
